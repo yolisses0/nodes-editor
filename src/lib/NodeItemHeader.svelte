@@ -8,7 +8,6 @@
 	interface Props {
 		node: Node;
 		space: Space;
-		editor: Editor;
 	}
 
 	let { node, space, editor }: Props = $props();

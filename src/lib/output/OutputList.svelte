@@ -5,7 +5,6 @@
 
 	interface Props {
 		space: Space;
-		editor: Editor;
 		outputs: Output[];
 	}
 

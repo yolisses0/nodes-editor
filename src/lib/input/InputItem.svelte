@@ -9,7 +9,6 @@
 	interface Props {
 		space: Space;
 		input: Input;
-		editor: Editor;
 	}
 	let { space, input, editor }: Props = $props();
 
