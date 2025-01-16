@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte.js';
 	import type { Space } from '$lib/space/Space.js';
 	import InputList from './input/InputList.svelte';
 	import { Node } from './Node.svelte.js';
