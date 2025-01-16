@@ -1,7 +1,7 @@
-import { Vector } from '$lib/space/Vector';
-import { Input } from './input/Input.svelte';
-import type { NodeData } from './NodeData';
-import { Output } from './output/Output.svelte';
+import { Vector } from '$lib/space/Vector.js';
+import { Input } from './input/Input.svelte.js';
+import type { NodeData } from './NodeData.js';
+import { Output } from './output/Output.svelte.js';
 
 // TODO check if it makes sense to keep data as a
 // froze object instead of copying its values
@@ -48,7 +48,7 @@ export class Node {
 			extras: this.extras,
 			position: this.position,
 			inputs: this.inputs.map((input) => input.getData()),
-			outputs: this.outputs.map((output) => output.getData()),
+			outputs: this.outputs.map((output) => output.getData())
 		};
 	}
 }

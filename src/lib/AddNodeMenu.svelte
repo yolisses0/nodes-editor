@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
-	import { Vector } from '$lib/space/Vector';
-	import { devNodeTypes } from './devNodeTypes';
+	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import type { Space } from '$lib/space/Space.js';
+	import { Vector } from '$lib/space/Vector.js';
+	import { devNodeTypes } from './devNodeTypes.js';
 	import NodeTypeList from './NodeTypeList.svelte';
 
 	interface Props {

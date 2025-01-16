@@ -1,5 +1,5 @@
-import { getElementPosition } from './getElementPosition';
-import { getPointerPosition } from './getPointerPosition';
+import { getElementPosition } from './getElementPosition.js';
+import { getPointerPosition } from './getPointerPosition.js';
 
 export function getPointerScreenPosition(e: PointerEvent, element: Element) {
 	const pointerPosition = getPointerPosition(e);

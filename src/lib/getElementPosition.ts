@@ -1,4 +1,4 @@
-import { Vector } from '$lib/space/Vector';
+import { Vector } from '$lib/space/Vector.js';
 
 export function getElementPosition(element: Element): Vector {
 	const boundingRectangle = element.getBoundingClientRect();

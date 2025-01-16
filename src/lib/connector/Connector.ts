@@ -1,4 +1,4 @@
-import type { Vector } from '$lib/space/Vector';
+import type { Vector } from '$lib/space/Vector.js';
 
 export interface Connector {
 	id: string;

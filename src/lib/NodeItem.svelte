@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
+	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import type { Space } from '$lib/space/Space.js';
 	import InputList from './input/InputList.svelte';
-	import { Node } from './Node.svelte';
+	import { Node } from './Node.svelte.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 	import OutputList from './output/OutputList.svelte';
 

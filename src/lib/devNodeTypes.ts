@@ -1,28 +1,28 @@
-import type { NodeType } from './NodeType';
+import type { NodeType } from './NodeType.js';
 
 export const devNodeTypes: NodeType[] = [
 	{
 		id: 'add',
 		name: 'Add',
 		inputNames: ['input1', 'input2'],
-		outputNames: ['sum'],
+		outputNames: ['sum']
 	},
 	{
 		id: 'subtract',
 		name: 'Subtract',
 		inputNames: ['input1', 'input2'],
-		outputNames: ['difference'],
+		outputNames: ['difference']
 	},
 	{
 		id: 'multiply',
 		name: 'Multiply',
 		inputNames: ['input1', 'input2'],
-		outputNames: ['product'],
+		outputNames: ['product']
 	},
 	{
 		id: 'divide',
 		name: 'Divide',
 		inputNames: ['input1', 'input2'],
-		outputNames: ['quotient'],
-	},
+		outputNames: ['quotient']
+	}
 ];

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Space } from '$lib/space/Space';
+	import { Space } from '$lib/space/Space.js';
 	import Wire from '$lib/wire/Wire.svelte';
-	import type { Output } from '../output/Output.svelte';
-	import type { Input } from './Input.svelte';
+	import type { Output } from '../output/Output.svelte.js';
+	import type { Input } from './Input.svelte.js';
 
 	interface Props {
 		space: Space;

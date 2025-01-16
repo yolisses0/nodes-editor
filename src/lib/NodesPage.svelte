@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { devEditorData } from '$lib/editor/dev/devEditorData';
-	import { Editor } from '$lib/editor/Editor.svelte';
+	import { devEditorData } from '$lib/editor/dev/devEditorData.js';
+	import { Editor } from '$lib/editor/Editor.svelte.js';
 	import RedoButton from '$lib/editor/RedoButton.svelte';
 	import UndoButton from '$lib/editor/UndoButton.svelte';
-	import { OffsetConverter } from '$lib/space/OffsetConverter';
-	import { Space } from '$lib/space/Space';
-	import { Vector } from '$lib/space/Vector';
-	import { ZoomConverter } from '$lib/space/ZoomConverter';
+	import { OffsetConverter } from '$lib/space/OffsetConverter.js';
+	import { Space } from '$lib/space/Space.js';
+	import { Vector } from '$lib/space/Vector.js';
+	import { ZoomConverter } from '$lib/space/ZoomConverter.js';
 	import NodeList from './NodeList.svelte';
 	import ZoomInButton from './zoom/ZoomInButton.svelte';
 	import ZoomOutButton from './zoom/ZoomOutButton.svelte';
