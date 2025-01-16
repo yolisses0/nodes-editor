@@ -22,5 +22,5 @@
 >
 	<div class="p-2">Add Node</div>
 	<hr class="opacity-50" />
-	<NodeTypeList {space} {editor} nodeTypes={devNodeTypes} {closeModal} />
+	<NodeTypeList {space} nodeTypes={devNodeTypes} {closeModal} />
 </div>
