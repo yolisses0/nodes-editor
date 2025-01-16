@@ -1,3 +1,7 @@
 // Reexport your entry components here
-import { NodeData } from './NodeData.js';
-import NodeItem from '$lib/NodeItem.svelte';
+// Reexport your entry components here
+import type { NodeData } from './NodeData.js';
+import NodeItem from './NodeItem.svelte';
+
+export { NodeItem };
+export type { NodeData };
