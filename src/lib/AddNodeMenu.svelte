@@ -10,7 +10,7 @@
 		screenPosition: Vector;
 	}
 
-	const { space, editor, closeModal, screenPosition: screenInitialPosition }: Props = $props();
+	const { space, closeModal, screenPosition: screenInitialPosition }: Props = $props();
 	const screenOffset = new Vector(2, 56);
 	const screenPosition = $derived(screenInitialPosition.subtract(screenOffset));
 </script>

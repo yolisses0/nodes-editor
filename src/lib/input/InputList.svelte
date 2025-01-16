@@ -8,7 +8,7 @@
 		inputs: Input[];
 	}
 
-	let { space, inputs, editor }: Props = $props();
+	let { space, inputs }: Props = $props();
 </script>
 
 {#each inputs as input (input.id)}

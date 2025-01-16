@@ -10,7 +10,7 @@
 		space: Space;
 		input: Input;
 	}
-	let { space, input, editor }: Props = $props();
+	let { space, input }: Props = $props();
 
 	function handlePreviewEnd(previewConnection: PreviewConnection) {
 		const { endConnector } = previewConnection;

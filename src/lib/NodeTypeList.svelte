@@ -9,7 +9,7 @@
 		closeModal: () => void;
 	}
 
-	const { space, editor, nodeTypes, closeModal }: Props = $props();
+	const { space, nodeTypes, closeModal }: Props = $props();
 </script>
 
 {#each nodeTypes as nodeType (nodeType.id)}

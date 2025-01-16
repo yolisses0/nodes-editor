@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { NodeData } from './NodeData.js';
+	import { getContainerContext } from './containerContext.js';
 	import type { NodeType } from './NodeType.js';
 	import type { Space } from './space/Space.js';
+	import { getDataPointerPosition } from './utils/getDataPointerPosition.js';
 
 	interface Props {
 		space: Space;
@@ -9,7 +10,7 @@
 		closeModal: () => void;
 	}
 
-	const { space, editor, nodeType, closeModal }: Props = $props();
+	const { space, nodeType, closeModal }: Props = $props();
 
 	const containerWrapper = getContainerContext();
 
@@ -18,19 +19,6 @@
 		closeModal();
 
 		const dataPosition = getDataPointerPosition(e, space, containerWrapper.container);
-
-		const nodeData: NodeData = {
-			extras: {},
-			id: createId(),
-			position: dataPosition,
-			type: nodeType.name + 'Node',
-			inputs: nodeType.inputNames.map((inputName) => {
-				return { id: createId(), name: inputName };
-			}),
-			outputs: nodeType.outputNames.map((outputName) => {
-				return { id: createId(), name: outputName };
-			})
-		};
 
 		// TODO
 	}
