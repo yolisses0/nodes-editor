@@ -23,7 +23,7 @@
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-700"
+	class="absolute flex w-fit flex-col break-words bg-zinc-600 outline outline-zinc-700"
 >
 	<NodeItemHeader {node} {space} />
 	<OutputList {space} outputs={node.outputs} />

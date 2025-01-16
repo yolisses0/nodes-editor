@@ -99,7 +99,7 @@
 	<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events
  by mouse events  -->
-	<div class="pointer-events-none w-full flex-row items-center whitespace-nowrap {className}">
+	<div class="pointer-events-none flex w-full flex-row items-center whitespace-nowrap {className}">
 		<JointCircle />
 		<div>{connector.name}</div>
 	</div>
