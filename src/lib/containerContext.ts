@@ -1,4 +1,4 @@
-import { getContext, setContext } from 'svelte.js';
+import { getContext, setContext } from 'svelte';
 import type { ContainerWrapper } from './ContainerWrapper.js';
 
 const containerKey = Symbol('container');
