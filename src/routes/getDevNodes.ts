@@ -9,7 +9,7 @@ export function getDevNodes() {
 		extras: {},
 		inputs: [],
 		outputs: [],
-		position: Vector.one(),
+		position: new Vector(2, 5),
 		type: 'dev1'
 	});
 
