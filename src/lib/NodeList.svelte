@@ -67,7 +67,7 @@
 	}
 </script>
 
-<div class="relative flex-1">
+<div class="relative flex flex-1 flex-col">
 	<!-- This element should not have border -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -78,7 +78,7 @@
 		bind:this={containerWrapper.container}
 		style:font-size={getScreenFontSize(space) + 'px'}
 		style:line-height={getScreenLineHeight(space) + 'px'}
-		class="dotted-grid absolute min-h-full min-w-full"
+		class="dotted-grid absolute flex min-h-full min-w-full flex-col"
 	>
 		{#each nodes as node (node.id)}
 			<NodeItem {node} {space} />

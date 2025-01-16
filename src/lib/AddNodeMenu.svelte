@@ -18,9 +18,9 @@
 <div
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute rounded bg-zinc-600"
+	class="absolute flex flex-col rounded bg-zinc-600"
 >
-	<div class="p-2">Add Node</div>
+	<div class="flex flex-col p-2">Add Node</div>
 	<hr class="opacity-50" />
 	<NodeTypeList {space} nodeTypes={devNodeTypes} {closeModal} />
 </div>
