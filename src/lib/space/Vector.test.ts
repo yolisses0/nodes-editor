@@ -1,4 +1,4 @@
-import { expect, test } from 'vitest.js';
+import { expect, test } from 'vitest';
 import { Vector } from './Vector.js';
 import type { VectorData } from './VectorData.js';
 
