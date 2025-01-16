@@ -1,6 +1,6 @@
-import { getElementPosition } from '$lib/node/getElementPosition';
-import { getPointerPosition } from '$lib/node/getPointerPosition';
-import type { Space } from '$lib/space/Space';
+import { getElementPosition } from '$lib/getElementPosition.js';
+import { getPointerPosition } from '$lib/getPointerPosition.js';
+import type { Space } from '$lib/space/Space.js';
 
 export function getDataPointerPosition(e: MouseEvent, space: Space, container: Element) {
 	const containerPosition = getElementPosition(container);
