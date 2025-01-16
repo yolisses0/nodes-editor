@@ -10,7 +10,7 @@
 		space: Space;
 	}
 
-	let { node, space, editor }: Props = $props();
+	let { node, space }: Props = $props();
 
 	let element: HTMLElement;
 	let pointerId = $state<number>();

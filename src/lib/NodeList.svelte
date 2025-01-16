@@ -11,13 +11,15 @@
 	import type { Node } from './Node.svelte.js';
 	import type { Space } from './space/Space.js';
 	import { Vector } from './space/Vector.js';
+	import { getScreenFontSize } from './utils/getScreenFontSize.js';
+	import { getScreenLineHeight } from './utils/getScreenLineHeight.js';
 
 	interface Props {
 		space: Space;
 		nodes: Node[];
 	}
 
-	let { space }: Props = $props();
+	let { space, nodes }: Props = $props();
 
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
