@@ -8,11 +8,13 @@
 	import { setPreviewConnectionContext } from './input/previewConnectionContext.js';
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper.js';
 	import PreviewWire from './input/PreviewWire.svelte';
+	import type { Node } from './Node.svelte.js';
 	import type { Space } from './space/Space.js';
 	import { Vector } from './space/Vector.js';
 
 	interface Props {
 		space: Space;
+		nodes: Node[];
 	}
 
 	let { space }: Props = $props();
