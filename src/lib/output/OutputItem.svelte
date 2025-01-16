@@ -22,7 +22,7 @@
 
 <!-- This div forces the offset to be given by the 
  input position instead of the node position -->
-<div class="relative">
+<div class="relative flex flex-col">
 	<ConnectorItem
 		onPreviewEnd={handlePreviewEnd}
 		{space}

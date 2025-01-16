@@ -101,6 +101,6 @@
  by mouse events  -->
 	<div class="pointer-events-none flex w-full flex-row items-center whitespace-nowrap {className}">
 		<JointCircle />
-		<div>{connector.name}</div>
+		<div class="flex flex-col">{connector.name}</div>
 	</div>
 </button>

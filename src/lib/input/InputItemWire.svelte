@@ -20,7 +20,7 @@
 
 <!-- Prevents input offset -->
 <div
-	class="absolute"
+	class="absolute flex flex-col"
 	style:top={-screenInputPosition.y + 'px'}
 	style:left={-screenInputPosition.x + 'px'}
 >
