@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space.js';
+	import Wire from '$lib/wire/Wire.svelte';
 	import { Output } from '../output/Output.svelte.js';
 	import type { PreviewConnection } from './PreviewConnection.js';
 
