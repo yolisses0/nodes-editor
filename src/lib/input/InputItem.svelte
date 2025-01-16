@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { Editor } from '$lib/editor/Editor.svelte';
 	import type { Space } from '$lib/space/Space';
-	import { createId } from '$lib/utils/createId';
-	import { SetInputConnectedOutput } from '../commands/SetInputConnectedOutput';
 	import ConnectorItem from '../connector/ConnectorItem.svelte';
 	import { Output } from '../output/Output.svelte';
 	import type { Input } from './Input.svelte';
@@ -22,12 +20,7 @@
 			input.connectedOutput !== endConnector &&
 			(endConnector instanceof Output || endConnector === undefined)
 		) {
-			const command = new SetInputConnectedOutput({
-				id: createId(),
-				type: 'SetInputConnectedOutput',
-				details: { inputId: input.id, outputId: endConnector?.id },
-			});
-			editor.execute(command);
+			// TODO
 		}
 	}
 </script>
