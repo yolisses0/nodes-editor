@@ -6,7 +6,6 @@
 
 	interface Props {
 		space: Space;
-		editor: Editor;
 		closeModal: () => void;
 		screenPosition: Vector;
 	}
