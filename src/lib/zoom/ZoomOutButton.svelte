@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { faMagnifyingGlassMinus } from '@fortawesome/free-solid-svg-icons';
+	import { faMagnifyingGlassMinus } from '@fortawesome/free-solid-svg-icons.js';
 	import Fa from 'svelte-fa';
 
 	let { zoom = $bindable() }: { zoom: number } = $props();

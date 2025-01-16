@@ -1,8 +1,8 @@
-import { Vector } from '$lib/space/Vector';
-import type { Connector } from '../connector/Connector';
-import type { Input } from '../input/Input.svelte';
-import type { Node } from '../Node.svelte';
-import type { OutputData } from './OutputData';
+import { Vector } from '$lib/space/Vector.js';
+import type { Connector } from '../connector/Connector.js';
+import type { Input } from '../input/Input.svelte.js';
+import type { Node } from '../Node.svelte.js';
+import type { OutputData } from './OutputData.js';
 
 export class Output implements Connector {
 	id: string;
@@ -12,7 +12,7 @@ export class Output implements Connector {
 	constructor(
 		outputData: OutputData,
 		public node: Node,
-		private offset: number,
+		private offset: number
 	) {
 		const { id, name } = outputData;
 		this.id = id;
@@ -33,7 +33,7 @@ export class Output implements Connector {
 	getData(): OutputData {
 		return {
 			id: this.id,
-			name: this.name,
+			name: this.name
 		};
 	}
 }

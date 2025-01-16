@@ -1,7 +1,7 @@
-import { Vector } from '$lib/space/Vector';
-import { createId } from '$lib/utils/createId';
-import { defaultNodeSize } from './defaultNodeSize';
-import type { NodeData } from './NodeData';
+import { Vector } from '$lib/space/Vector.js';
+import { createId } from '$lib/utils/createId.js';
+import { defaultNodeSize } from './defaultNodeSize.js';
+import type { NodeData } from './NodeData.js';
 
 export function createNodeData(position: Vector): NodeData {
 	return {
@@ -11,7 +11,7 @@ export function createNodeData(position: Vector): NodeData {
 		inputs: [
 			{ id: createId(), name: 'input1' },
 			{ id: createId(), name: 'input2' },
-			{ id: createId(), name: 'input3' },
-		],
+			{ id: createId(), name: 'input3' }
+		]
 	};
 }

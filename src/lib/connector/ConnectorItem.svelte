@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { Space } from '$lib/space/Space';
-	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
+	import type { Space } from '$lib/space/Space.js';
+	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition.js';
 	import JointCircle from '../connector/JointCircle.svelte';
-	import { getContainerContext } from '../containerContext';
-	import { getElementPosition } from '../getElementPosition';
-	import { getPointerPosition } from '../getPointerPosition';
-	import type { PreviewConnection } from '../input/PreviewConnection';
-	import { getPreviewConnectionContext } from '../input/previewConnectionContext';
-	import type { Connector } from './Connector';
+	import { getContainerContext } from '../containerContext.js';
+	import { getElementPosition } from '../getElementPosition.js';
+	import { getPointerPosition } from '../getPointerPosition.js';
+	import type { PreviewConnection } from '../input/PreviewConnection.js';
+	import { getPreviewConnectionContext } from '../input/previewConnectionContext.js';
+	import type { Connector } from './Connector.js';
 
 	interface Props {
 		space: Space;
@@ -34,7 +34,7 @@
 
 		previewConnectionWrapper.previewConnection = {
 			startConnector: connector,
-			dataPointerPosition: dataPosition,
+			dataPointerPosition: dataPosition
 		};
 
 		containerWrapper.container.addEventListener('pointermove', handleContainerPointerMove as any);
@@ -63,7 +63,7 @@
 		if (containerWrapper.container) {
 			containerWrapper.container.removeEventListener(
 				'pointermove',
-				handleContainerPointerMove as any,
+				handleContainerPointerMove as any
 			);
 			containerWrapper.container.removeEventListener('pointerup', handleContainerPointerUp as any);
 		}

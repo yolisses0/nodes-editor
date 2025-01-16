@@ -1,6 +1,6 @@
-import { expect, test } from 'vitest';
-import { Vector } from './Vector';
-import type { VectorData } from './VectorData';
+import { expect, test } from 'vitest.js';
+import { Vector } from './Vector.js';
+import type { VectorData } from './VectorData.js';
 
 test('Vector.getData', () => {
 	const vector = new Vector(1, 2);

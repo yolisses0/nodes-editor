@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
+	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import type { Space } from '$lib/space/Space.js';
 	import ConnectorItem from '../connector/ConnectorItem.svelte';
-	import { Input } from '../input/Input.svelte';
-	import type { PreviewConnection } from '../input/PreviewConnection';
-	import type { Output } from './Output.svelte';
+	import { Input } from '../input/Input.svelte.js';
+	import type { PreviewConnection } from '../input/PreviewConnection.js';
+	import type { Output } from './Output.svelte.js';
 
 	interface Props {
 		space: Space;

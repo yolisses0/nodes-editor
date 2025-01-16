@@ -1,5 +1,5 @@
-import { getContext, setContext } from 'svelte';
-import type { PreviewConnectionWrapper } from './PreviewConnectionWrapper';
+import { getContext, setContext } from 'svelte.js';
+import type { PreviewConnectionWrapper } from './PreviewConnectionWrapper.js';
 
 const previewConnectionKey = Symbol('previewConnection');
 

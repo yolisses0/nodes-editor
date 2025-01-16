@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
-	import type { Input } from './Input.svelte';
+	import type { Editor } from '$lib/editor/Editor.svelte.js';
+	import type { Space } from '$lib/space/Space.js';
+	import type { Input } from './Input.svelte.js';
 	import InputItem from './InputItem.svelte';
 
 	interface Props {

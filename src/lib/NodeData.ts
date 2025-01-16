@@ -1,6 +1,6 @@
-import type { VectorData } from '$lib/space/VectorData';
-import type { InputData } from './input/InputData';
-import type { OutputData } from './output/OutputData';
+import type { VectorData } from '$lib/space/VectorData.js';
+import type { InputData } from './input/InputData.js';
+import type { OutputData } from './output/OutputData.js';
 
 export type NodeData = {
 	id: string;
