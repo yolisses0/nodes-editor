@@ -34,18 +34,6 @@
 
 		// TODO
 	}
-
-	function getContainerContext() {
-		throw new Error('Function not implemented.');
-	}
-
-	function getDataPointerPosition(e: MouseEvent, space: Space, container: any) {
-		throw new Error('Function not implemented.');
-	}
-
-	function createId() {
-		throw new Error('Function not implemented.');
-	}
 </script>
 
 <button onclick={handleClick} class="common-button">
