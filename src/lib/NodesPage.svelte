@@ -21,12 +21,12 @@
 </script>
 
 <div class="flex-row border-b border-b-white/10">
-	<UndoButton {editor} />
-	<RedoButton {editor} />
+	<UndoButton />
+	<RedoButton />
 	<ZoomInButton bind:zoom />
 	<ZoomOutButton bind:zoom />
-	<!-- <DevButton {editor} /> -->
+	<!-- <DevButton  /> -->
 </div>
 <div class="flex-1 overflow-auto">
-	<NodeList {editor} {space} />
+	<NodeList {space} />
 </div>

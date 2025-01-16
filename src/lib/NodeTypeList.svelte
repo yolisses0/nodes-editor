@@ -13,5 +13,5 @@
 </script>
 
 {#each nodeTypes as nodeType (nodeType.id)}
-	<NodeTypeItem {space} {editor} {nodeType} {closeModal} />
+	<NodeTypeItem {space} {nodeType} {closeModal} />
 {/each}

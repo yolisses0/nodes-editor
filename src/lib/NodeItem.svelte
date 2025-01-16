@@ -25,7 +25,7 @@
 	style:left={screenPosition.x + 'px'}
 	class="absolute w-fit break-words bg-zinc-600 outline outline-zinc-700"
 >
-	<NodeItemHeader {editor} {node} {space} />
-	<OutputList {editor} {space} outputs={node.outputs} />
-	<InputList {editor} {space} inputs={node.inputs} />
+	<NodeItemHeader {node} {space} />
+	<OutputList {space} outputs={node.outputs} />
+	<InputList {space} inputs={node.inputs} />
 </div>

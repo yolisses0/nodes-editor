@@ -12,5 +12,5 @@
 </script>
 
 {#each outputs as output (output.id)}
-	<OutputItem {editor} {space} {output} />
+	<OutputItem {space} {output} />
 {/each}
