@@ -1,25 +1,21 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
-	import { Space } from '$lib/space/Space';
-	import { Vector } from '$lib/space/Vector';
-	import { getScreenFontSize } from '$lib/utils/getScreenFontSize';
-	import { getScreenLineHeight } from '$lib/utils/getScreenLineHeight';
 	import AddNodeMenu from './AddNodeMenu.svelte';
-	import { setContainerContext } from './containerContext';
-	import type { ContainerWrapper } from './ContainerWrapper';
-	import { getElementPosition } from './getElementPosition';
-	import { getPointerPosition } from './getPointerPosition';
-	import { setPreviewConnectionContext } from './input/previewConnectionContext';
-	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper';
+	import { setContainerContext } from './containerContext.js';
+	import type { ContainerWrapper } from './ContainerWrapper.js';
+	import { getElementPosition } from './getElementPosition.js';
+	import { getPointerPosition } from './getPointerPosition.js';
+	import { NodeItem } from './index.js';
+	import { setPreviewConnectionContext } from './input/previewConnectionContext.js';
+	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper.js';
 	import PreviewWire from './input/PreviewWire.svelte';
-	import NodeItem from './NodeItem.svelte';
+	import type { Space } from './space/Space.js';
+	import { Vector } from './space/Vector.js';
 
 	interface Props {
-		editor: Editor;
 		space: Space;
 	}
 
-	let { space, editor }: Props = $props();
+	let { space }: Props = $props();
 
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
@@ -48,12 +44,7 @@
 
 		screenMenuPosition = dataPosition;
 
-		// const addNodeCommand = new AddNodeCommand({
-		// 	id: createId(),
-		// 	type: 'AddNodeCommand',
-		// 	details: { node: createNodeData(dataPosition) },
-		// });
-		// editor.execute(addNodeCommand);
+		// TODO
 	}
 
 	function handleClick(e: MouseEvent) {
@@ -85,15 +76,15 @@
 		style:line-height={getScreenLineHeight(space) + 'px'}
 		class="dotted-grid absolute min-h-full min-w-full"
 	>
-		{#each editor.nodes as node (node.id)}
-			<NodeItem {node} {space} {editor} />
+		{#each nodes as node (node.id)}
+			<NodeItem {node} {space} />
 		{/each}
 		{#if previewConnectionWrapper.previewConnection}
 			<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
 		{/if}
 	</div>
 	{#if screenMenuPosition}
-		<AddNodeMenu {editor} {space} screenPosition={screenMenuPosition} closeModal={closeMenu} />
+		<AddNodeMenu {space} screenPosition={screenMenuPosition} closeModal={closeMenu} />
 	{/if}
 </div>
 

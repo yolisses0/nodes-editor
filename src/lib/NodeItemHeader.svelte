@@ -3,9 +3,6 @@
 	import { RoundConverter } from '$lib/space/RoundConverter';
 	import type { Space } from '$lib/space/Space';
 	import { Vector } from '$lib/space/Vector';
-	import { createId } from '$lib/utils/createId';
-	import { MoveNodeCommand } from './commands/MoveNodeCommand';
-	import { RemoveNodeCommand } from './commands/RemoveNodeCommand';
 	import { getPointerPosition } from './getPointerPosition';
 	import type { Node } from './Node.svelte';
 
@@ -29,14 +26,7 @@
 	function handleClick(e: MouseEvent) {}
 
 	function handleContextMenu(e: MouseEvent) {
-		e.preventDefault();
-		const removeNodeCommand = new RemoveNodeCommand({
-			id: createId(),
-			type: 'RemoveNodeCommand',
-			details: { nodeId: node.id },
-		});
-		editor.execute(removeNodeCommand);
-		return false;
+		// TODO
 	}
 
 	function handlePointerDown(e: PointerEvent) {
@@ -75,12 +65,7 @@
 
 		const dataPosition = getPointerDataPosition(e);
 		if (initialDataPosition && dataPosition.notEquals(initialDataPosition)) {
-			const moveNodeCommand = new MoveNodeCommand({
-				id: createId(),
-				type: 'MoveNodeCommand',
-				details: { nodeId: node.id, position: dataPosition },
-			});
-			editor.execute(moveNodeCommand);
+			// TODO
 		}
 	}
 </script>

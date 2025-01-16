@@ -1,16 +1,10 @@
 <script lang="ts">
-	import type { Editor } from '$lib/editor/Editor.svelte';
-	import type { Space } from '$lib/space/Space';
-	import { createId } from '$lib/utils/createId';
-	import { getDataPointerPosition } from '$lib/utils/getDataPointerPosition';
-	import { AddNodeCommand } from './commands/AddNodeCommand';
-	import { getContainerContext } from './containerContext';
-	import type { NodeData } from './NodeData';
-	import type { NodeType } from './NodeType';
+	import type { NodeData } from './NodeData.js';
+	import type { NodeType } from './NodeType.js';
+	import type { Space } from './space/Space.js';
 
 	interface Props {
 		space: Space;
-		editor: Editor;
 		nodeType: NodeType;
 		closeModal: () => void;
 	}
@@ -35,15 +29,22 @@
 			}),
 			outputs: nodeType.outputNames.map((outputName) => {
 				return { id: createId(), name: outputName };
-			}),
+			})
 		};
 
-		const command = new AddNodeCommand({
-			id: createId(),
-			type: 'AddNodeCommand',
-			details: { node: nodeData },
-		});
-		editor.execute(command);
+		// TODO
+	}
+
+	function getContainerContext() {
+		throw new Error('Function not implemented.');
+	}
+
+	function getDataPointerPosition(e: MouseEvent, space: Space, container: any) {
+		throw new Error('Function not implemented.');
+	}
+
+	function createId() {
+		throw new Error('Function not implemented.');
 	}
 </script>
 
