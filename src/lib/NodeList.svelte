@@ -1,19 +1,22 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { Node } from './Node.js';
-	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
 		nodes: Node[];
+		content: Snippet<[{ node: Node }]>;
 	}
 
-	const { nodes }: Props = $props();
+	const { nodes, content }: Props = $props();
 </script>
 
-<div class="node-list">
+{@render content({ node: nodes[0] })}
+
+<!-- <div class="node-list">
 	{#each nodes as node (node.id)}
 		<NodeItem {node} />
 	{/each}
-</div>
+</div> -->
 
 <style>
 	.node-list {
