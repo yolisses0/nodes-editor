@@ -88,16 +88,20 @@
 </script>
 
 <button
+	class="connector-item"
 	onpointerout={handlePointerOut}
 	onpointerdown={handlePointerDown}
 	onpointerenter={handlePointerEnter}
-	class="w-full"
 >
-	<!-- TODO consider using some other approach to prevent
- children events of pointer out. E.g.: replace pointer events
- by mouse events  -->
-	<div class="pointer-events-none flex w-full flex-row items-center whitespace-nowrap {className}">
-		<JointCircle />
-		<div class="flex flex-col">{connector.name}</div>
-	</div>
+	<JointCircle />
+	<div class="flex flex-col">{connector.name}</div>
 </button>
+
+<style>
+	.connector-item {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+</style>
