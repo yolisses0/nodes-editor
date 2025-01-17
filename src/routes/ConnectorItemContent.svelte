@@ -9,6 +9,7 @@
 
 <style>
 	.connector-item-content {
+		gap: 10px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
