@@ -24,6 +24,6 @@
 	}
 </script>
 
-<button onclick={handleClick} class="common-button">
+<button onclick={handleClick}>
 	{nodeType.name}
 </button>

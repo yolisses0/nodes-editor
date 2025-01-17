@@ -9,18 +9,25 @@
 	import type { PreviewConnectionWrapper } from './input/PreviewConnectionWrapper.js';
 	import PreviewWire from './input/PreviewWire.svelte';
 	import type { Node } from './Node.js';
-	import type { Space } from './space/Space.js';
+	import { OffsetConverter } from './space/OffsetConverter.js';
+	import { Space } from './space/Space.js';
 	import { Vector } from './space/Vector.js';
+	import { ZoomConverter } from './space/ZoomConverter.js';
 	import { getScreenFontSize } from './utils/getScreenFontSize.js';
 	import { getScreenLineHeight } from './utils/getScreenLineHeight.js';
 
 	interface Props {
-		space: Space;
+		zoom: number;
 		nodes: Node[];
 		changeNodePosition(node: Node, position: Vector): void;
 	}
 
-	let { space, nodes, changeNodePosition }: Props = $props();
+	let { nodes, zoom, changeNodePosition }: Props = $props();
+
+	// TODO consider removing this from code from here
+	const space = $derived(
+		new Space([new OffsetConverter(new Vector(3, 2)), new ZoomConverter(zoom)])
+	);
 
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
