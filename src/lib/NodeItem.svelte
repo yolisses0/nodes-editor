@@ -16,7 +16,8 @@
 
 <style>
 	.node-item {
-		position: relative;
+		position: absolute;
+		width: fit-content;
 		border: solid 1px red;
 	}
 </style>
