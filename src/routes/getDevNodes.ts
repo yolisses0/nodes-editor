@@ -1,17 +1,18 @@
 import { Input } from '$lib/input/Input.svelte.js';
-import { Node } from '$lib/Node.svelte.js';
+import type { Node } from '$lib/Node.js';
 import { Output } from '$lib/output/Output.svelte.js';
 import { Vector } from '$lib/space/Vector.js';
 
 export function getDevNodes() {
-	const node1 = new Node({
+	const node1: Node = {
 		id: 'dev1',
 		extras: {},
 		inputs: [],
 		outputs: [],
 		position: new Vector(2, 5),
+		size: new Vector(6, 5),
 		type: 'dev1'
-	});
+	};
 
 	const input1 = new Input(
 		{
