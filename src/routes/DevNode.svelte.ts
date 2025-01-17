@@ -1,4 +1,4 @@
-import type { Input } from '$lib/input/Input.svelte.js';
+import type { Input } from '$lib/input/Input.js';
 import type { Node } from '$lib/Node.js';
 import type { Output } from '$lib/output/Output.svelte.js';
 import { Vector } from '$lib/space/Vector.js';

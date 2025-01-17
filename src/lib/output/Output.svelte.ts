@@ -1,6 +1,6 @@
 import { Vector } from '$lib/space/Vector.js';
 import type { Connector } from '../connector/Connector.js';
-import type { Input } from '../input/Input.svelte.js';
+import type { Input } from '../input/Input.js';
 import type { Node } from '../Node.js';
 import type { OutputData } from './OutputData.js';
 

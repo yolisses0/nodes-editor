@@ -2,7 +2,7 @@
 	import type { Space } from '$lib/space/Space.js';
 	import ConnectorItem from '../connector/ConnectorItem.svelte';
 	import { Output } from '../output/Output.svelte.js';
-	import type { Input } from './Input.svelte.js';
+	import type { Input } from './Input.js';
 	import InputItemWire from './InputItemWire.svelte';
 	import type { PreviewConnection } from './PreviewConnection.js';
 
@@ -29,5 +29,5 @@
 	{#if input.connectedOutput}
 		<InputItemWire {input} {space} output={input.connectedOutput} />
 	{/if}
-	<ConnectorItem onPreviewEnd={handlePreviewEnd} {space} connector={input} targetClass={Output} />
+	<ConnectorItem onPreviewEnd={handlePreviewEnd} {space} connector={input} />
 </div>
