@@ -25,8 +25,9 @@
 <style>
 	.node-item-content {
 		color: white;
-		background-color: gray;
 		max-width: 200px;
+		user-select: none;
+		background-color: gray;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}
 </style>
