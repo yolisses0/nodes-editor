@@ -2,7 +2,7 @@ import { Input } from '$lib/input/Input.svelte.js';
 import type { Node } from '$lib/Node.js';
 import { Output } from '$lib/output/Output.svelte.js';
 import { Vector } from '$lib/space/Vector.js';
-import { DevNode } from './devNode.svelte.js';
+import { DevNode } from './DevNode.svelte.js';
 
 export function getDevNodes() {
 	const node1: Node = new DevNode('dev1', new Vector(6, 5), 'dev1', {});
