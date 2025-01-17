@@ -17,9 +17,10 @@
 	interface Props {
 		space: Space;
 		nodes: Node[];
+		changeNodePosition(node: Node, position: Vector): void;
 	}
 
-	let { space, nodes }: Props = $props();
+	let { space, nodes, changeNodePosition }: Props = $props();
 
 	let containerWrapper = $state<ContainerWrapper>({});
 	setContainerContext(containerWrapper);
@@ -81,7 +82,7 @@
 		class="dotted-grid absolute flex min-h-full min-w-full flex-col"
 	>
 		{#each nodes as node (node.id)}
-			<NodeItem {node} {space} />
+			<NodeItem {node} {space} {changeNodePosition} />
 		{/each}
 		{#if previewConnectionWrapper.previewConnection}
 			<PreviewWire {space} previewConnection={previewConnectionWrapper.previewConnection} />
