@@ -1,6 +1,6 @@
 <script lang="ts">
-	import NodeItem from '$lib/NodeItem.svelte';
-	import { devNode } from './devNode.js';
+	import NodeList from '$lib/NodeList.svelte';
+	import { devNodes } from './devNodes.js';
 </script>
 
-<NodeItem node={devNode} />
+<NodeList nodes={devNodes} />
