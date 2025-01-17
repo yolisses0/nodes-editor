@@ -8,9 +8,10 @@
 	interface Props {
 		node: Node;
 		space: Space;
+		changeNodePosition(node: Node, position: Vector): void;
 	}
 
-	let { node, space }: Props = $props();
+	let { node, space, changeNodePosition }: Props = $props();
 
 	let element: HTMLElement;
 	let pointerId = $state<number>();
@@ -51,7 +52,8 @@
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!pointerId) return;
 
-		node.position = getPointerDataPosition(e);
+		const dataPosition = getPointerDataPosition(e);
+		changeNodePosition(node, dataPosition);
 	}
 
 	function handlePointerUp(e: PointerEvent) {
