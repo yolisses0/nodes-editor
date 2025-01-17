@@ -18,11 +18,7 @@
 	}
 </script>
 
-<!-- This div forces the offset to be given by the 
- input position instead of the node position -->
-<div class="relative flex flex-col">
-	{#if input.connectedOutput}
-		<InputItemWire {input} {space} output={input.connectedOutput} />
-	{/if}
-	<ConnectorItem onPreviewEnd={handlePreviewEnd} {space} connector={input} />
-</div>
+{#if input.connectedOutput}
+	<InputItemWire {input} {space} output={input.connectedOutput} />
+{/if}
+<ConnectorItem onPreviewEnd={handlePreviewEnd} {space} connector={input} />

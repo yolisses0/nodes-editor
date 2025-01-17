@@ -27,7 +27,7 @@
 
 <!-- style:background-color="#f008" -->
 <svg
-	class="pointer-events-none absolute"
+	class="wire"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
@@ -36,3 +36,9 @@
 >
 	<WirePath {startPosition} {endPosition} />
 </svg>
+
+<style>
+	.wire {
+		position: absolute;
+	}
+</style>

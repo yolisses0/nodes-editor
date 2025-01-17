@@ -5,7 +5,14 @@ import { DevNode } from './DevNode.svelte.js';
 import { DevOutput } from './DevOutput.svelte.js';
 
 export function getDevNodes() {
-	const node1: Node = new DevNode('dev1', new Vector(6, 5), 'dev1', {});
+	const node1: Node = new DevNode({
+		id: 'devNode1',
+		extras: {},
+		inputs: [],
+		outputs: [],
+		position: new Vector(4, 6),
+		type: 'DevNode'
+	});
 	const input1 = new DevInput(
 		{
 			id: 'devInput1',
@@ -38,7 +45,16 @@ export function getDevNodes() {
 
 	node1.outputs.push(output1);
 
-	const nodes: Node[] = [node1];
+	const node2: Node = new DevNode({
+		id: 'devNode2',
+		extras: {},
+		inputs: [],
+		outputs: [],
+		position: new Vector(10, 6),
+		type: 'DevNode'
+	});
+
+	const nodes: Node[] = [node1, node2];
 
 	return nodes;
 }

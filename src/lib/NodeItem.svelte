@@ -20,7 +20,6 @@
 
 <div
 	class="node-item"
-	style:outline-width="0.1lh"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
@@ -38,6 +37,6 @@
 		display: flex;
 		position: absolute;
 		flex-direction: column;
-		outline: solid 1px red;
+		background-color: blue;
 	}
 </style>
