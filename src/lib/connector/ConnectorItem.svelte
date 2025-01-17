@@ -91,7 +91,7 @@
 	onpointerout={handlePointerOut}
 	onpointerdown={handlePointerDown}
 	onpointerenter={handlePointerEnter}
-	class="hover-bg w-full"
+	class="w-full"
 >
 	<!-- TODO consider using some other approach to prevent
  children events of pointer out. E.g.: replace pointer events

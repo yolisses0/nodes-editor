@@ -19,19 +19,25 @@
 </script>
 
 <div
+	class="node-item"
 	style:outline-width="0.1lh"
 	style:width={screenSize.x + 'px'}
 	style:height={screenSize.y + 'px'}
 	style:top={screenPosition.y + 'px'}
 	style:left={screenPosition.x + 'px'}
-	class="absolute flex flex-col"
 >
-	<div
-		style:border-radius="0.4lh"
-		class="absolute flex flex-col break-words bg-zinc-600 outline outline-zinc-700"
-	>
+	<div style:border-radius="0.4lh">
 		<NodeItemHeader {node} {space} {changeNodePosition} />
 		<OutputList {space} outputs={node.outputs} />
 		<InputList {space} inputs={node.inputs} />
 	</div>
 </div>
+
+<style>
+	.node-item {
+		display: flex;
+		position: absolute;
+		flex-direction: column;
+		outline: solid 1px red;
+	}
+</style>

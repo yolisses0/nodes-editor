@@ -71,7 +71,6 @@
 </script>
 
 <button
-	class="hover-bg"
 	bind:this={element}
 	onclick={handleClick}
 	style:padding-inline="0.5lh"
