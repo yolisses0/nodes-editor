@@ -3,7 +3,7 @@
 	import type { Space } from '$lib/space/Space.js';
 	import { Vector } from '$lib/space/Vector.js';
 	import { getPointerPosition } from './getPointerPosition.js';
-	import type { Node } from './Node.svelte.js';
+	import type { Node } from './Node.js';
 
 	interface Props {
 		node: Node;

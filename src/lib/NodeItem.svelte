@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space.js';
 	import InputList from './input/InputList.svelte';
-	import { Node } from './Node.svelte.js';
+	import type { Node } from './Node.js';
 	import NodeItemHeader from './NodeItemHeader.svelte';
 	import OutputList from './output/OutputList.svelte';
 
