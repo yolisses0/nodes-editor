@@ -1,5 +1,5 @@
 import { Vector } from '$lib/space/Vector.js';
-import { Input } from './input/Input.svelte.js';
+import type { Input } from './input/Input.js';
 import { Output } from './output/Output.svelte.js';
 
 export interface Node {

@@ -1,10 +1,10 @@
+import type { Connector } from '$lib/connector/Connector.js';
+import type { InputData } from '$lib/input/InputData.js';
+import type { Node } from '$lib/Node.js';
+import type { Output } from '$lib/output/Output.svelte.js';
 import { Vector } from '$lib/space/Vector.js';
-import type { Connector } from '../connector/Connector.js';
-import type { Node } from '../Node.js';
-import type { Output } from '../output/Output.svelte.js';
-import type { InputData } from './InputData.js';
 
-export class Input implements Connector {
+export class DevInput implements Connector {
 	id: string;
 	name: string;
 	connectedOutput?: Output;

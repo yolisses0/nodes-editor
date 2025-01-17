@@ -9,14 +9,14 @@
 	import { getPreviewConnectionContext } from '../input/previewConnectionContext.js';
 	import type { Connector } from './Connector.js';
 
+	// TODO create a callback to `shouldPreviewConnect`
 	interface Props {
 		space: Space;
 		class?: string;
 		connector: Connector;
-		targetClass: any; // TODO use the real type
 		onPreviewEnd: (previewConnection: PreviewConnection) => void;
 	}
-	let { space, connector, targetClass, onPreviewEnd, class: className }: Props = $props();
+	let { space, connector, onPreviewEnd, class: className }: Props = $props();
 
 	let containerWrapper = getContainerContext();
 
@@ -74,9 +74,7 @@
 
 		const { startConnector } = previewConnectionWrapper.previewConnection;
 
-		if (startConnector instanceof targetClass) {
-			previewConnectionWrapper.previewConnection.endConnector = connector;
-		}
+		previewConnectionWrapper.previewConnection.endConnector = connector;
 	}
 
 	function handlePointerOut(e: PointerEvent) {
@@ -84,9 +82,8 @@
 
 		const { startConnector, endConnector } = previewConnectionWrapper.previewConnection;
 
-		if (startConnector instanceof targetClass && endConnector === connector) {
-			previewConnectionWrapper.previewConnection.endConnector = undefined;
-		}
+		// TODO add condition callback
+		previewConnectionWrapper.previewConnection.endConnector = undefined;
 	}
 </script>
 

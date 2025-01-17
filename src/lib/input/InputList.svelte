@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Space } from '$lib/space/Space.js';
-	import type { Input } from './Input.svelte.js';
+	import type { Input } from './Input.js';
 	import InputItem from './InputItem.svelte';
 
 	interface Props {
