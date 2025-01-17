@@ -9,7 +9,10 @@
 </script>
 
 <div class="node-item-content">
-	{node.id}
+	<div>
+		{node.id}
+	</div>
+	<div>some options not related to the core node structure</div>
 </div>
 
 <style>
