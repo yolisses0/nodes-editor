@@ -14,4 +14,8 @@
 		flex-direction: row;
 		align-items: center;
 	}
+
+	.connector-item-content:hover {
+		background-color: #fff4;
+	}
 </style>
