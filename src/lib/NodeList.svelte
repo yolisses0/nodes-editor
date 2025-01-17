@@ -9,8 +9,14 @@
 	const { nodes }: Props = $props();
 </script>
 
-<div>
+<div class="node-list">
 	{#each nodes as node (node.id)}
 		<NodeItem {node} />
 	{/each}
 </div>
+
+<style>
+	.node-list {
+		position: relative;
+	}
+</style>
