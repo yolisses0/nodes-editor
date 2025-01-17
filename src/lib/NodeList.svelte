@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { Node } from './Node.js';
+	import NodeItem from './NodeItem.svelte';
 
 	interface Props {
 		nodes: Node[];
@@ -10,13 +11,11 @@
 	const { nodes, content }: Props = $props();
 </script>
 
-{@render content({ node: nodes[0] })}
-
-<!-- <div class="node-list">
+<div class="node-list">
 	{#each nodes as node (node.id)}
-		<NodeItem {node} />
+		<NodeItem {node} {content} />
 	{/each}
-</div> -->
+</div>
 
 <style>
 	.node-list {
