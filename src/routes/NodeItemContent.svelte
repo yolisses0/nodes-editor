@@ -1,17 +1,14 @@
 <script lang="ts">
 	import ConnectorItem from '$lib/ConnectorItem.svelte';
-	import type { Node } from '$lib/Node.js';
+	import type { ConnectorItemContentProps } from '$lib/ConnectorItemContentProps.js';
+	import type { NodeItemContentProps } from '$lib/NodeItemContentProps.js';
 	import ConnectorItemContent from './ConnectorItemContent.svelte';
 
-	interface Props {
-		node: Node;
-	}
-
-	const { node }: Props = $props();
+	const { node, updateConnectorPosition }: NodeItemContentProps = $props();
 </script>
 
-{#snippet connectorContent()}
-	<ConnectorItemContent />
+{#snippet connectorContent({ updateConnectorPosition }: ConnectorItemContentProps)}
+	<ConnectorItemContent {updateConnectorPosition} />
 {/snippet}
 
 <div class="node-item-content">
@@ -19,7 +16,7 @@
 		{node.id}
 	</div>
 	<div>some options not related to the core node structure</div>
-	<ConnectorItem content={connectorContent} />
+	<ConnectorItem content={connectorContent} {updateConnectorPosition} />
 </div>
 
 <style>
