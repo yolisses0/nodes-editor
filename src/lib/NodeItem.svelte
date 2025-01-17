@@ -4,14 +4,14 @@
 
 	interface Props {
 		node: Node;
-		component: Snippet<{ node: Node }>;
+		content: Snippet<[{ node: Node }]>;
 	}
 
-	const { node, component }: Props = $props();
+	const { node, content }: Props = $props();
 </script>
 
 <div class="node-item" style:left={node.position.x + 'px'} style:top={node.position.y + 'px'}>
-	{@render component?.({ node })}
+	{@render content({ node })}
 </div>
 
 <style>

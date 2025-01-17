@@ -8,6 +8,14 @@
 	const { node }: Props = $props();
 </script>
 
-<div>
+<div class="node-item-content">
 	{node.id}
 </div>
+
+<style>
+	.node-item-content {
+		color: white;
+		background-color: gray;
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
+</style>
