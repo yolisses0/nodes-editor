@@ -24,6 +24,14 @@ export class MoveObserver {
 		overlay.style.left = targetRect.left - rootRect.left + 'px';
 
 		this.options.root.appendChild(overlay);
+
+		const intersectionObserver = new IntersectionObserver(
+			(entries) => {
+				console.log(entries);
+			},
+			{ root: target },
+		);
+		intersectionObserver.observe(overlay);
 	}
 
 	unobserve(target: Element) {}

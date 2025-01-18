@@ -45,9 +45,9 @@
 
 <style>
 	div {
-		outline: 2px solid blue;
-		position: absolute;
-		width: min-content;
 		user-select: none;
+		width: min-content;
+		position: absolute;
+		outline: 2px solid blue;
 	}
 </style>
