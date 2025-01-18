@@ -6,8 +6,8 @@
 	import NodeItemContent from './NodeItemContent.svelte';
 </script>
 
-{#snippet content({ node, updateConnectorPosition }: NodeItemContentProps)}
-	<NodeItemContent {node} {updateConnectorPosition} />
+{#snippet content({ node }: NodeItemContentProps)}
+	<NodeItemContent {node} />
 {/snippet}
 
 <NodeList {content} nodes={devNodes} connections={devConnections} />

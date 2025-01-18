@@ -2,20 +2,18 @@
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
 	import type { ConnectorItemContentProps } from './ConnectorItemContentProps.js';
-	import type { Vector } from './Vector.js';
 	import { connectorElementPrefix } from './connectorElementPrefix.js';
 
 	interface Props {
 		connector: Connector;
 		content: Snippet<[ConnectorItemContentProps]>;
-		updateConnectorPosition(id: string, position: Vector): void;
 	}
 
-	const { content, connector, updateConnectorPosition }: Props = $props();
+	const { content, connector }: Props = $props();
 </script>
 
 <div class="connector-item" id={connectorElementPrefix + connector.id}>
-	{@render content({ connector, updateConnectorPosition })}
+	{@render content({ connector })}
 </div>
 
 <style>
