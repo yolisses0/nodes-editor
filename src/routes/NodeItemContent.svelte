@@ -7,8 +7,8 @@
 	const { node, updateConnectorPosition }: NodeItemContentProps = $props();
 </script>
 
-{#snippet connectorContent({ updateConnectorPosition }: ConnectorItemContentProps)}
-	<ConnectorItemContent {updateConnectorPosition} />
+{#snippet connectorContent({ connector, updateConnectorPosition }: ConnectorItemContentProps)}
+	<ConnectorItemContent {connector} {updateConnectorPosition} />
 {/snippet}
 
 <div class="node-item-content">
@@ -16,7 +16,9 @@
 		{node.id}
 	</div>
 	<div>some options not related to the core node structure</div>
-	<ConnectorItem content={connectorContent} {updateConnectorPosition} />
+	{#each node.connectors as connector (connector.id)}
+		<ConnectorItem {connector} content={connectorContent} {updateConnectorPosition} />
+	{/each}
 </div>
 
 <style>

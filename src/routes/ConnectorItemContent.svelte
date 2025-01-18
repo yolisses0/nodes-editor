@@ -4,7 +4,7 @@
 
 	let element = $state<Element>();
 
-	const { updateConnectorPosition }: ConnectorItemContentProps = $props();
+	const { connector, updateConnectorPosition }: ConnectorItemContentProps = $props();
 
 	$effect(() => {
 		if (!element) return;
@@ -18,7 +18,7 @@
 
 <div class="connector-item-content">
 	<div class="joint-circle" bind:this={element}></div>
-	<div>Some connector</div>
+	<div>{connector.id}</div>
 </div>
 
 <style>
