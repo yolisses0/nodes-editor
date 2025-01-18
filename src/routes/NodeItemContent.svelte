@@ -3,6 +3,7 @@
 	import type { ConnectorItemContentProps } from '$lib/ConnectorItemContentProps.js';
 	import type { NodeItemContentProps } from '$lib/NodeItemContentProps.js';
 	import ConnectorItemContent from './ConnectorItemContent.svelte';
+	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
 	const { node, updateConnectorPosition }: NodeItemContentProps = $props();
 </script>
@@ -15,7 +16,10 @@
 	<div>
 		{node.id}
 	</div>
-	<div>some options not related to the core node structure</div>
+	<VariableSizeComponent />
+	{#if node.id !== 'devNode3'}
+		<div>some options not related to the core node structure</div>
+	{/if}
 	{#each node.connectors as connector (connector.id)}
 		<ConnectorItem {connector} content={connectorContent} {updateConnectorPosition} />
 	{/each}
