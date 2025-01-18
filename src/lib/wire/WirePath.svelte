@@ -12,6 +12,7 @@
 
 	const pathD = $derived(getPathD(startPosition, endPosition));
 
+	// TODO adjust these hard coded values
 	function getPathD(start: Vector, end: Vector) {
 		let offsetX = (end.x - start.x) / 2;
 		if (offsetX < 0) {

@@ -21,7 +21,6 @@
 	style:height={size.y + 'px'}
 	style:top={position.y + 'px'}
 	style:left={position.x + 'px'}
-	style="background-color: red;"
 	viewBox={getVectorsString([position, size])}
 >
 	<WirePath {startPosition} {endPosition} />
