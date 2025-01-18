@@ -9,7 +9,8 @@
 	$effect(() => {
 		if (!element) return;
 		var rect = element.getBoundingClientRect();
-		updateConnectorPosition(connector.id, new Vector(rect.left, rect.top));
+		const centerPosition = new Vector((rect.left + rect.right) / 2, (rect.top + rect.bottom) / 2);
+		updateConnectorPosition(connector.id, centerPosition);
 	});
 </script>
 
