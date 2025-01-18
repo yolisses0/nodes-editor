@@ -2,6 +2,8 @@
 	import MovableComponent from './MovableComponent.svelte';
 
 	let content = $state<Element>();
+
+	ResizeObserver;
 </script>
 
 <MovableComponent bind:element={content} />
