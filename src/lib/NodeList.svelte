@@ -5,7 +5,7 @@
 	import NodeItem from './NodeItem.svelte';
 	import type { NodeItemContentProps } from './NodeItemContentProps.js';
 	import { Vector } from './Vector.js';
-	import Wire from './Wire.svelte';
+	import Wire from './wire/Wire.svelte';
 
 	interface Props {
 		nodes: Node[];

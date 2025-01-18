@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { Vector } from '$lib/Vector.js';
 	import { clamp } from './clamp.js';
-	import { Vector } from './Vector.js';
+	import { getVectorsString } from './getVectorsString.js';
+	import { getVectorString } from './getVectorString.js';
 
 	interface Props {
 		startPosition: Vector;
@@ -28,4 +30,4 @@
 	}
 </script>
 
-<path d={pathD} class="wire-path" stroke="green" fill="transparent" stroke-width="10px" />
+<path d={pathD} class="wire-path" stroke="green" fill="transparent" stroke-width="5px" />
