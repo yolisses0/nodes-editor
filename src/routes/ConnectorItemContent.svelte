@@ -8,11 +8,8 @@
 
 	$effect(() => {
 		if (!element) return;
-
 		var rect = element.getBoundingClientRect();
-
-		const devId = '' + Math.random();
-		updateConnectorPosition(devId, new Vector(rect.left, rect.top));
+		updateConnectorPosition(connector.id, new Vector(rect.left, rect.top));
 	});
 </script>
 
