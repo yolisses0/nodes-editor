@@ -3,6 +3,7 @@
 	import type { Connector } from './Connector.js';
 	import type { ConnectorItemContentProps } from './ConnectorItemContentProps.js';
 	import type { Vector } from './Vector.js';
+	import { connectorElementPrefix } from './connectorElementPrefix.js';
 
 	interface Props {
 		connector: Connector;
@@ -13,7 +14,7 @@
 	const { content, connector, updateConnectorPosition }: Props = $props();
 </script>
 
-<div class="connector-item">
+<div class="connector-item" id={connectorElementPrefix + connector.id}>
 	{@render content({ connector, updateConnectorPosition })}
 </div>
 
