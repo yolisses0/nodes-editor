@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { ZOOM } from '../routes/ZOOM.js';
 	import type { Node } from './Node.js';
 	import NodeItem from './NodeItem.svelte';
 	import type { NodeItemContentProps } from './NodeItemContentProps.js';
-	import type { Vector } from './Vector.js';
+	import { Vector } from './Vector.js';
+	import Wire from './Wire.svelte';
 
 	interface Props {
 		nodes: Node[];
@@ -25,6 +27,10 @@
 	{#each nodes as node (node.id)}
 		<NodeItem {node} {content} {updateConnectorPosition} />
 	{/each}
+	<Wire
+		startPosition={new Vector(0 * ZOOM, 0 * ZOOM)}
+		endPosition={new Vector(1 * ZOOM, 1 * ZOOM)}
+	/>
 </div>
 
 <style>
