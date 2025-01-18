@@ -9,7 +9,22 @@ export class MoveObserver {
 		public options: MoveObserverInit,
 	) {}
 
-	observe(target: Element) {}
+	observe(target: Element) {
+		const overlay = document.createElement('div');
+		overlay.style.position = 'absolute';
+
+		const rootRect = this.options.root.getBoundingClientRect();
+		const targetRect = target.getBoundingClientRect();
+
+		overlay.style.background = '#f008';
+		overlay.style.pointerEvents = 'none';
+		overlay.style.width = targetRect.width + 'px';
+		overlay.style.height = targetRect.height + 'px';
+		overlay.style.top = targetRect.top - rootRect.top + 'px';
+		overlay.style.left = targetRect.left - rootRect.left + 'px';
+
+		this.options.root.appendChild(overlay);
+	}
 
 	unobserve(target: Element) {}
 
