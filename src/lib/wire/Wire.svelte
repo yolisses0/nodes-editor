@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Vector } from './Vector.js';
+	import { Vector } from '../Vector.js';
+	import { getVectorsString } from './getVectorsString.js';
 	import WirePath from './WirePath.svelte';
 
 	interface Props {
@@ -9,8 +10,9 @@
 
 	const { startPosition, endPosition }: Props = $props();
 
-	const position = startPosition.min(endPosition);
-	const size = endPosition.subtract(startPosition).absolute();
+	const margin = new Vector(10, 10);
+	const position = startPosition.min(endPosition).subtract(margin);
+	const size = endPosition.subtract(startPosition).absolute().add(margin.multiplyNumber(2));
 </script>
 
 <svg
@@ -20,6 +22,7 @@
 	style:top={position.y + 'px'}
 	style:left={position.x + 'px'}
 	style="background-color: red;"
+	viewBox={getVectorsString([position, size])}
 >
 	<WirePath {startPosition} {endPosition} />
 </svg>

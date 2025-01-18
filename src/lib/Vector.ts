@@ -17,7 +17,15 @@ export class Vector {
 		return new Vector(this.x < vector.x ? this.x : vector.x, this.y < vector.y ? this.y : vector.y);
 	}
 
+	add(vector: Vector) {
+		return new Vector(this.x + vector.x, this.y + vector.y);
+	}
+
 	subtract(vector: Vector) {
 		return new Vector(this.x - vector.x, this.y - vector.y);
+	}
+
+	multiplyNumber(number: number) {
+		return new Vector(this.x * number, this.y * number);
 	}
 }
