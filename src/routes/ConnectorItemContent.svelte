@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ConnectorItemContentProps } from '$lib/ConnectorItemContentProps.js';
+	import { connectorJointElementPrefix } from '$lib/connectorJointElementPrefix.js';
 	import { Vector } from '$lib/Vector.js';
 
 	let element = $state<Element>();
@@ -15,7 +16,11 @@
 </script>
 
 <div class="connector-item-content">
-	<div class="joint-circle" bind:this={element}></div>
+	<div
+		bind:this={element}
+		class="joint-circle"
+		id={connectorJointElementPrefix + connector.id}
+	></div>
 	<div>{connector.id}</div>
 </div>
 
