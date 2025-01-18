@@ -5,11 +5,11 @@
 	import ConnectorItemContent from './ConnectorItemContent.svelte';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
-	const { node, updateConnectorPosition }: NodeItemContentProps = $props();
+	const { node }: NodeItemContentProps = $props();
 </script>
 
-{#snippet connectorContent({ connector, updateConnectorPosition }: ConnectorItemContentProps)}
-	<ConnectorItemContent {connector} {updateConnectorPosition} />
+{#snippet connectorContent({ connector }: ConnectorItemContentProps)}
+	<ConnectorItemContent {connector} />
 {/snippet}
 
 <div class="node-item-content">
@@ -21,7 +21,7 @@
 		<div>some options not related to the core node structure</div>
 	{/if}
 	{#each node.connectors as connector (connector.id)}
-		<ConnectorItem {connector} content={connectorContent} {updateConnectorPosition} />
+		<ConnectorItem {connector} content={connectorContent} />
 	{/each}
 </div>
 
