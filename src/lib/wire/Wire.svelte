@@ -29,6 +29,6 @@
 <style>
 	.wire {
 		position: absolute;
-		user-select: none;
+		pointer-events: none;
 	}
 </style>
