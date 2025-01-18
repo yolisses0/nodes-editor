@@ -1,22 +1,21 @@
 import { Vector } from '$lib/Vector.js';
 import type { Node } from '../lib/Node.js';
-
-const zoom = 20;
+import { ZOOM } from './ZOOM.js';
 
 export const devNodes: Node[] = [
 	{
 		id: 'devNode1',
-		position: new Vector(0 * zoom, 0 * zoom),
+		position: new Vector(0 * ZOOM, 0 * ZOOM),
 		connectors: [{ id: 'connector1.1' }, { id: 'connector1.2' }, { id: 'connector1.3' }],
 	},
 	{
 		id: 'devNode2',
-		position: new Vector(3 * zoom, 4 * zoom),
+		position: new Vector(3 * ZOOM, 4 * ZOOM),
 		connectors: [{ id: 'connector2.1' }],
 	},
 	{
 		id: 'devNode3',
-		position: new Vector(15 * zoom, 3 * zoom),
+		position: new Vector(15 * ZOOM, 3 * ZOOM),
 		connectors: [{ id: 'connector3.1' }, { id: 'connector3.2' }],
 	},
 ];
