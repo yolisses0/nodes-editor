@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Vector } from './Vector.js';
+	import WirePath from './WirePath.svelte';
 
 	interface Props {
 		startPosition: Vector;
@@ -19,7 +20,9 @@
 	style:top={position.y + 'px'}
 	style:left={position.x + 'px'}
 	style="background-color: red;"
-/>
+>
+	<WirePath {startPosition} {endPosition} />
+</svg>
 
 <style>
 	.wire {
