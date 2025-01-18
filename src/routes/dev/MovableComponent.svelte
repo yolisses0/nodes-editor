@@ -1,10 +1,13 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+
 	interface Props {
-		element?: Element;
+		children: Snippet;
 	}
 
-	let { element = $bindable() }: Props = $props();
+	let { children }: Props = $props();
 
+	let element: Element;
 	let top = $state(10);
 	let left = $state(10);
 	let isSliding = false;
@@ -37,7 +40,7 @@
 	onpointerdown={handlePointerDown}
 	onpointermove={handlePointerMove}
 >
-	content
+	{@render children()}
 </div>
 
 <style>
