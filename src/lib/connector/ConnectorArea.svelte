@@ -12,15 +12,26 @@
 
 	const previewConnection = getPreviewConnectionContext();
 
-	function handleMouseDown(e: MouseEvent) {
+	function handleMouseDown() {
 		previewConnection.startConnectorId = connector.id;
 	}
 
-	function handleMouseEnter(e: MouseEvent) {
+	function handleMouseEnter() {
 		previewConnection.endConnectorId = connector.id;
+	}
+
+	function handleMouseLeave() {
+		if (previewConnection.endConnectorId === connector.id) {
+			previewConnection.endConnectorId = undefined;
+		}
 	}
 </script>
 
-<button onmousedown={handleMouseDown} onmouseenter={handleMouseEnter}>
+<button
+	onblur={handleMouseLeave}
+	onmousedown={handleMouseDown}
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
+>
 	{@render children()}
 </button>
