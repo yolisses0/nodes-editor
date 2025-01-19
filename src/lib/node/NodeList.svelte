@@ -1,4 +1,8 @@
 <script lang="ts">
+	import {
+		setPreviewConnectionContext,
+		type PreviewConnectionContext,
+	} from '$lib/connection/previewConnectionContext.js';
 	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import type { Snippet } from 'svelte';
@@ -12,10 +16,11 @@
 	const connectorPositions: ConnectorPositions = $state({});
 	setConnectorPositionsContext(connectorPositions);
 
-	const nodeListContext: NodeListContext = $state({
-		nodeList: undefined,
-	});
+	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
 	setNodeListContext(nodeListContext);
+
+	const previewConnection: PreviewConnectionContext = $state({});
+	setPreviewConnectionContext(previewConnection);
 </script>
 
 <div class="node-list" bind:this={nodeListContext.nodeList}>
