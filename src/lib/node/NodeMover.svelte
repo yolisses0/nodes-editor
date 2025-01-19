@@ -4,13 +4,7 @@
 	import type { Snippet } from 'svelte';
 	import type { Node } from './Node.js';
 	import { getNodeListContext } from './nodeListContext.js';
-
-	type OnMoveCallbackParams = {
-		node: Node;
-		position: Vector;
-	};
-
-	type OnMoveCallback = (params: OnMoveCallbackParams) => void;
+	import type { OnMoveCallback } from './OnMoveCallback.js';
 
 	interface Props {
 		node: Node;
@@ -20,20 +14,28 @@
 
 	let isMoving = false;
 	let element: Element;
+	let initialNodeOffset: Vector;
+	let initialNodePosition: Vector;
+	let initialMousePosition: Vector;
 	const nodeListContext = getNodeListContext();
 	const { children, onMove, node }: Props = $props();
 
 	function handlePointerDown(e: PointerEvent) {
+		if (!nodeListContext.nodeList) return;
 		element.setPointerCapture(e.pointerId);
 		isMoving = true;
+		initialNodePosition = node.position;
+		initialMousePosition = new Vector(e.clientX, e.clientY);
+		initialNodeOffset = initialMousePosition.subtract(getElementPosition(nodeListContext.nodeList));
 	}
 
 	function handlePointerMove(e: PointerEvent) {
+		if (!isMoving) return;
 		if (!nodeListContext.nodeList) return;
 		const position = new Vector(e.clientX, e.clientY).subtract(
 			getElementPosition(nodeListContext.nodeList),
 		);
-		onMove({ position, node });
+		onMove({ position, node, initialNodePosition, initialNodeOffset, initialMousePosition });
 	}
 
 	function handlePointerUp(e: PointerEvent) {
@@ -42,6 +44,11 @@
 	}
 </script>
 
-<button bind:this={element} onpointerdown={handlePointerDown} onpointerup={handlePointerUp}>
+<button
+	bind:this={element}
+	onpointerup={handlePointerUp}
+	onpointermove={handlePointerMove}
+	onpointerdown={handlePointerDown}
+>
 	{@render children()}
 </button>
