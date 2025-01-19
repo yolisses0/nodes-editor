@@ -1,21 +1,29 @@
 <script lang="ts">
-	import type { Node } from '$lib/node/Node.js';
 	import NodeItem from '$lib/node/NodeItem.svelte';
+	import NodeMover from '$lib/node/NodeMover.svelte';
+	import type { OnMoveCallbackParams } from '$lib/node/OnMoveCallbackParams.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
+	import type { DevNode } from './DevNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
 	interface Props {
-		node: Node;
+		node: DevNode;
 	}
 
 	const { node }: Props = $props();
+
+	function onMove({ node, position, initialNodeOffset }: OnMoveCallbackParams) {
+		node.position = position.subtract(initialNodeOffset);
+	}
 </script>
 
 <NodeItem {node}>
 	<div class="custom-node-item">
-		<div>
-			{node.id}
-		</div>
+		<NodeMover {node} {onMove}>
+			<div>
+				{node.id}
+			</div>
+		</NodeMover>
 		<VariableSizeComponent />
 		{#if node.id !== 'devNode3'}
 			<div>some options not related to the core node structure</div>
