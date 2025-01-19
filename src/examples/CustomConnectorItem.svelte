@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { Connector } from '$lib/connector/Connector.js';
-	import ConnectorArea from '$lib/connector/ConnectorArea.svelte';
-	import ConnectorItem from '$lib/connector/ConnectorItem.svelte';
+	import { type Connector, ConnectorArea, ConnectorItem } from '$lib/index.js';
 
 	interface Props {
 		connector: Connector;

@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type { Connection } from '$lib/connection/Connection.js';
-	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
-	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
-	import NodeList from '$lib/node/NodeList.svelte';
+	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
 
@@ -11,11 +8,11 @@
 		connections: Connection[];
 	}
 
-	const { customNodes: nodes, connections }: Props = $props();
+	const { customNodes, connections }: Props = $props();
 </script>
 
 <NodeList>
-	{#each nodes as node (node.id)}
+	{#each customNodes as node (node.id)}
 		<CustomNodeItem {node} />
 	{/each}
 	{#each connections as connection (connection.id)}

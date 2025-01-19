@@ -1,7 +1,5 @@
 <script lang="ts">
-	import NodeItem from '$lib/node/NodeItem.svelte';
-	import NodeMover from '$lib/node/NodeMover.svelte';
-	import type { OnMoveCallbackParams } from '$lib/node/OnMoveCallbackParams.js';
+	import { NodeItem, NodeMover, type OnMoveCallbackParams } from '$lib/index.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';

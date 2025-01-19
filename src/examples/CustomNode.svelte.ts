@@ -1,6 +1,4 @@
-import type { Connector } from '$lib/connector/Connector.js';
-import type { Node } from '$lib/node/Node.js';
-import { Vector } from '$lib/space/Vector.js';
+import { Vector, type Connector, type Node } from '$lib/index.js';
 
 export class CustomNode implements Node {
 	position = $state(new Vector(0, 0));
