@@ -37,6 +37,10 @@
 	}
 
 	function handlePointerMove(e: PointerEvent) {
+		// For performance reasons the values are updated in every mouse
+		// movement. Remove this optimization if needed
+		if (!previewConnection.startConnectorId) return;
+
 		if (!nodeListContext.nodeList) return;
 
 		const rect = nodeListContext.nodeList.getBoundingClientRect();
