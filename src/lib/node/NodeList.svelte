@@ -2,21 +2,19 @@
 	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import type { Snippet } from 'svelte';
-	import { setNodeListContext } from './nodeListContext.js';
+	import { setNodeListContext } from './nodeListContext.svelte.js';
 
 	interface Props {
 		children: Snippet;
 	}
+	const { children }: Props = $props();
+
+	const connectorPositions: ConnectorPositions = $state({});
+	setConnectorPositionsContext(connectorPositions);
 
 	let element = $state<Element>();
-	const { children }: Props = $props();
-	const connectorPositions: ConnectorPositions = $state({});
-
-	$inspect(element);
-
-	setConnectorPositionsContext(connectorPositions);
 	$effect(() => {
-		setNodeListContext({ nodeList: element });
+		setNodeListContext(element);
 	});
 </script>
 
