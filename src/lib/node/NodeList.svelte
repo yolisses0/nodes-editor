@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { Connection } from './Connection.js';
-	import ConnectionItem from './ConnectionItem.svelte';
+	import type { Connection } from '../connection/Connection.js';
+	import ConnectionItem from '../connection/ConnectionItem.svelte';
 	import type { Node } from './Node.js';
 	import NodeItem from './NodeItem.svelte';
 	import type { NodeItemContentProps } from './NodeItemContentProps.js';

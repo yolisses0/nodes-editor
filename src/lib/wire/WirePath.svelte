@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Vector } from '$lib/Vector.js';
+	import { Vector } from '$lib/space/Vector.js';
 	import { clamp } from './clamp.js';
 	import { getVectorsString } from './getVectorsString.js';
 	import { getVectorString } from './getVectorString.js';

@@ -1,4 +1,4 @@
-import type { Vector } from '$lib/Vector.js';
+import type { Vector } from '$lib/space/Vector.js';
 import { getVectorString } from './getVectorString.js';
 
 export function getVectorsString(vectors: Vector[]) {

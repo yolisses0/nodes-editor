@@ -1,5 +1,5 @@
-import { Vector } from '$lib/Vector.js';
-import type { Node } from '../lib/Node.js';
+import type { Node } from '$lib/node/Node.js';
+import { Vector } from '$lib/space/Vector.js';
 import { ZOOM } from './ZOOM.js';
 
 export const devNodes: Node[] = [
