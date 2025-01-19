@@ -1,1 +1,3 @@
-export class MoveObserverEntry {}
+export class MoveObserverEntry {
+	// TODO implement it
+}

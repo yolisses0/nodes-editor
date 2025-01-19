@@ -1,76 +1,23 @@
 <script lang="ts">
+	import { MoveObserver } from '$lib/position/MoveObserver.js';
 	import VariableSizeComponent from '../VariableSizeComponent.svelte';
 	import MovableComponent from './MovableComponent.svelte';
 
-	let counter = $state(0);
 	let content: Element;
 	let container: Element;
-	let savedObserver: IntersectionObserver;
-
-	function getRootMargin(content: Element, container: Element) {
-		const contentRect = content.getBoundingClientRect();
-		const containerRect = container.getBoundingClientRect();
-
-		/* top | right | bottom | left */
-		let leftMargin = 1 + containerRect.left - contentRect.left;
-		let topMargin = 1 + containerRect.top - contentRect.top;
-		let rightMargin = 1 + contentRect.right - containerRect.right;
-		let bottomMargin = 1 + contentRect.bottom - containerRect.bottom;
-
-		if (!Number.isInteger(leftMargin)) {
-			leftMargin++;
-		}
-		if (!Number.isInteger(topMargin)) {
-			topMargin++;
-		}
-		if (!Number.isInteger(rightMargin)) {
-			rightMargin++;
-		}
-		if (!Number.isInteger(bottomMargin)) {
-			bottomMargin++;
-		}
-
-		console.log({ topMargin, rightMargin, bottomMargin, leftMargin });
-
-		const rootMargin = [topMargin, rightMargin, bottomMargin, leftMargin].join('px ') + 'px';
-		console.log(rootMargin);
-		return rootMargin;
-	}
-
-	function createIntersectionObserver(content: Element, container: Element) {
-		return new IntersectionObserver(
-			(entries, observer) => {
-				counter++;
-				const [entry] = entries;
-
-				console.log(entry.intersectionRatio);
-				console.log('content', content.getBoundingClientRect());
-				console.log('container', container.getBoundingClientRect());
-
-				if (!entry.isIntersecting) {
-					observer.disconnect();
-					const newObserver = createIntersectionObserver(content, container);
-					newObserver.observe(content);
-					savedObserver = newObserver;
-				}
-			},
-			{
-				root: container,
-				threshold: 1,
-				rootMargin: getRootMargin(content, container),
-			},
-		);
-	}
+	let counter = $state(0);
 
 	$effect(() => {
-		const observer = createIntersectionObserver(content, container);
+		const observer = new MoveObserver(
+			(entries) => {
+				console.log(entries);
+				counter++;
+			},
+			{ root: container },
+		);
 		observer.observe(content);
 
-		return () => {
-			if (savedObserver) {
-				savedObserver.disconnect();
-			}
-		};
+		return () => observer.disconnect();
 	});
 </script>
 
