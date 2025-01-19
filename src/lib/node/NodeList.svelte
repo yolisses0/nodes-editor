@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
+	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import type { Snippet } from 'svelte';
 	import type { Connection } from '../connection/Connection.js';
 	import ConnectionItem from '../connection/ConnectionItem.svelte';
@@ -13,6 +15,9 @@
 	}
 
 	const { nodes, content, connections }: Props = $props();
+
+	const connectorPositions: ConnectorPositions = $state({});
+	setConnectorPositionsContext(connectorPositions);
 </script>
 
 <div class="node-list">

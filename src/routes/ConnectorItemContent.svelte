@@ -1,12 +1,21 @@
 <script lang="ts">
 	import type { ConnectorItemContentProps } from '$lib/connector/ConnectorItemContentProps.js';
-	import { connectorJointElementPrefix } from '$lib/connector/connectorJointElementPrefix.js';
+	import { getConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
+	import { getElementCenter } from '$lib/connector/getElementCenter.js';
 
 	const { connector }: ConnectorItemContentProps = $props();
+
+	let element: Element;
+
+	const connectorPositions = getConnectorPositionsContext();
+
+	$effect(() => {
+		connectorPositions[connector.id] = getElementCenter(element);
+	});
 </script>
 
 <div class="connector-item-content">
-	<div class="joint-circle" id={connectorJointElementPrefix + connector.id}></div>
+	<div class="joint-circle" bind:this={element}></div>
 	<div>{connector.id}</div>
 </div>
 

@@ -8,5 +8,5 @@ export function setConnectorPositionsContext(connectorPositions: ConnectorPositi
 }
 
 export function getConnectorPositionsContext() {
-	return getContext(connectorPositionsKey);
+	return getContext(connectorPositionsKey) as ConnectorPositions;
 }
