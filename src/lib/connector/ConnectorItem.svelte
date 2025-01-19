@@ -24,7 +24,6 @@
 
 <style>
 	.connector-item {
-		display: contents;
 		border: solid 1px blue;
 	}
 </style>
