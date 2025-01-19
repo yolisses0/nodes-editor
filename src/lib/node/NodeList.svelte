@@ -25,20 +25,39 @@
 	});
 	setPreviewConnectionContext(previewConnection);
 
+	function endPreview() {
+		previewConnection.startConnectorId = undefined;
+	}
+
 	function handlePointerMove(e: PointerEvent) {
 		previewConnection.mousePosition = new Vector(e.clientX, e.clientY);
 	}
 
-	function handlePointerUp() {
-		previewConnection.startConnectorId = undefined;
+	function handlePointerUp(e: PointerEvent) {
+		nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
+		endPreview();
 	}
 
+	let isOutside = false;
+
 	function handlePointerEnter(e: PointerEvent) {
-		nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
+		if (isOutside) {
+			isOutside = false;
+			return;
+		} else {
+			e.stopPropagation();
+			nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
+		}
 	}
 
 	function handlePointerLeave(e: PointerEvent) {
+		e.stopPropagation();
+		isOutside = true;
 		nodeListContext.nodeList?.setPointerCapture(e.pointerId);
+	}
+
+	function handleContextMenu() {
+		endPreview();
 	}
 </script>
 
@@ -46,7 +65,7 @@
 <div
 	class="node-list"
 	onpointerup={handlePointerUp}
-	oncontextmenu={handlePointerUp}
+	oncontextmenu={handleContextMenu}
 	onpointermove={handlePointerMove}
 	onpointerleave={handlePointerLeave}
 	onpointerenter={handlePointerEnter}
