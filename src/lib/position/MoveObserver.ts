@@ -16,11 +16,14 @@ export class MoveObserver {
 		const contentRect = target.getBoundingClientRect();
 		const containerRect = root.getBoundingClientRect();
 
-		let topMargin = 1 + containerRect.top - contentRect.top;
-		let leftMargin = 1 + containerRect.left - contentRect.left;
-		let rightMargin = 1 + contentRect.right - containerRect.right;
-		let bottomMargin = 1 + contentRect.bottom - containerRect.bottom;
+		let topMargin = containerRect.top - contentRect.top;
+		let leftMargin = containerRect.left - contentRect.left;
+		let rightMargin = contentRect.right - containerRect.right;
+		let bottomMargin = contentRect.bottom - containerRect.bottom;
 
+		// This part ensures that the intersection rect is big enough in
+		// fractional displays, where the positions are given by floats, which
+		// have precision errors
 		if (!Number.isInteger(topMargin)) {
 			topMargin++;
 		}
@@ -50,10 +53,7 @@ export class MoveObserver {
 					this.intersectionObserver.observe(target);
 				}
 
-				console.log('update');
-				if (entry.isIntersecting) {
-					this.callback([], this);
-				}
+				this.callback([], this);
 			},
 			{
 				root: root,
