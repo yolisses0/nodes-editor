@@ -1,12 +1,15 @@
 import { getContext, setContext } from 'svelte';
 
-const nodeListKey = Symbol('nodeList');
+export type NodeListContext = {
+	nodeList: Element | undefined;
+};
 
-export function setNodeListContext(nodeList: Element | undefined) {
-	console.log('setNodeListContext', nodeList);
-	setContext(nodeListKey, nodeList);
+const nodeListContextKey = Symbol('nodeListContextKey');
+
+export function setNodeListContext(nodeListContext: NodeListContext) {
+	setContext(nodeListContextKey, nodeListContext);
 }
 
 export function getNodeListContext() {
-	return getContext(nodeListKey) as Element | undefined;
+	return getContext(nodeListContextKey) as NodeListContext;
 }

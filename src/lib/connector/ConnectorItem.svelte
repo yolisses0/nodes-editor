@@ -26,11 +26,10 @@
 		return observer;
 	}
 
-	const nodeList = getNodeListContext();
-	$inspect(nodeList);
+	const nodeListContext = getNodeListContext();
 	$effect(() => {
-		if (nodeList) {
-			const observer = createObserver(nodeList, element);
+		if (nodeListContext.nodeList) {
+			const observer = createObserver(nodeListContext.nodeList, element);
 			return () => observer.disconnect();
 		}
 	});
