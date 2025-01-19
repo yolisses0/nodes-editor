@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Vector } from '../Vector.js';
+	import { Vector } from '../space/Vector.js';
 	import { getVectorsString } from './getVectorsString.js';
 	import WirePath from './WirePath.svelte';
 

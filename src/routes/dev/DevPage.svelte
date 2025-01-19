@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { add, MoveObserver } from 'rect-observer';
+	import { add, RectObserver } from 'rect-observer';
 	import VariableSizeComponent from '../VariableSizeComponent.svelte';
 	import MovableComponent from './MovableComponent.svelte';
 
@@ -10,7 +10,7 @@
 	console.log(add(1, 2));
 
 	$effect(() => {
-		const observer = new MoveObserver(
+		const observer = new RectObserver(
 			(entries) => {
 				console.log(entries);
 				counter++;

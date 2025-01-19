@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ConnectorItemContentProps } from '$lib/ConnectorItemContentProps.js';
-	import { connectorJointElementPrefix } from '$lib/connectorJointElementPrefix.js';
+	import type { ConnectorItemContentProps } from '$lib/connector/ConnectorItemContentProps.js';
+	import { connectorJointElementPrefix } from '$lib/connector/connectorJointElementPrefix.js';
 
 	const { connector }: ConnectorItemContentProps = $props();
 </script>

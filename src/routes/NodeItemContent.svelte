@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ConnectorItem from '$lib/ConnectorItem.svelte';
-	import type { ConnectorItemContentProps } from '$lib/ConnectorItemContentProps.js';
-	import type { NodeItemContentProps } from '$lib/NodeItemContentProps.js';
+	import ConnectorItem from '$lib/connector/ConnectorItem.svelte';
+	import type { ConnectorItemContentProps } from '$lib/connector/ConnectorItemContentProps.js';
+	import type { NodeItemContentProps } from '$lib/node/NodeItemContentProps.js';
 	import ConnectorItemContent from './ConnectorItemContent.svelte';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 

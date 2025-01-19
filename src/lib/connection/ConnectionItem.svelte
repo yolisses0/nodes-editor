@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { connectorJointElementPrefix } from '../connector/connectorJointElementPrefix.js';
+	import { getElementCenter } from '../connector/getElementCenter.js';
+	import { Vector } from '../space/Vector.js';
+	import Wire from '../wire/Wire.svelte';
 	import type { Connection } from './Connection.js';
-	import { connectorJointElementPrefix } from './connectorJointElementPrefix.js';
-	import { getElementCenter } from './getElementCenter.js';
-	import { Vector } from './Vector.js';
-	import Wire from './wire/Wire.svelte';
 
 	interface Props {
 		connection: Connection;
