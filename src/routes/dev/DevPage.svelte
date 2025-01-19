@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { MoveObserver } from '$lib/position/MoveObserver.js';
-	import { add } from 'rect-observer';
+	import { add, MoveObserver } from 'rect-observer';
 	import VariableSizeComponent from '../VariableSizeComponent.svelte';
 	import MovableComponent from './MovableComponent.svelte';
 
