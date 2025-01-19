@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Connector } from '$lib/connector/Connector.js';
+	import ConnectorArea from '$lib/connector/ConnectorArea.svelte';
 	import ConnectorItem from '$lib/connector/ConnectorItem.svelte';
 
 	interface Props {
@@ -9,12 +10,14 @@
 	const { connector }: Props = $props();
 </script>
 
-<div class="custom-connector-item">
-	<ConnectorItem {connector}>
-		<div class="joint-circle"></div>
-	</ConnectorItem>
-	<div>{connector.id}</div>
-</div>
+<ConnectorArea>
+	<div class="custom-connector-item">
+		<ConnectorItem {connector}>
+			<div class="joint-circle"></div>
+		</ConnectorItem>
+		<div>{connector.id}</div>
+	</div>
+</ConnectorArea>
 
 <style>
 	.joint-circle {
