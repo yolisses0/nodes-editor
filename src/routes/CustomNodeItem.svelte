@@ -1,17 +1,11 @@
 <script lang="ts">
-	import ConnectorItem from '$lib/connector/ConnectorItem.svelte';
-	import type { ConnectorItemContentProps } from '$lib/connector/ConnectorItemContentProps.js';
 	import NodeItem from '$lib/node/NodeItem.svelte';
 	import type { NodeItemContentProps } from '$lib/node/NodeItemContentProps.js';
-	import ConnectorItemContent from './ConnectorItemContent.svelte';
+	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
 	const { node }: NodeItemContentProps = $props();
 </script>
-
-{#snippet connectorContent({ connector }: ConnectorItemContentProps)}
-	<ConnectorItemContent {connector} />
-{/snippet}
 
 <NodeItem {node}>
 	<div class="node-item-content">
@@ -23,7 +17,7 @@
 			<div>some options not related to the core node structure</div>
 		{/if}
 		{#each node.connectors as connector (connector.id)}
-			<ConnectorItem {connector} content={connectorContent} />
+			<CustomConnectorItem {connector} />
 		{/each}
 	</div>
 </NodeItem>

@@ -1,22 +1,30 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
-	import type { ConnectorItemContentProps } from './ConnectorItemContentProps.js';
+	import { getConnectorPositionsContext } from './connectorPositionsContext.js';
+	import { getElementCenter } from './getElementCenter.js';
 
 	interface Props {
 		connector: Connector;
-		content: Snippet<[ConnectorItemContentProps]>;
+		children: Snippet;
 	}
 
-	const { content, connector }: Props = $props();
+	let element: Element;
+	const { children, connector }: Props = $props();
+	const connectorPositions = getConnectorPositionsContext();
+
+	$effect(() => {
+		connectorPositions[connector.id] = getElementCenter(element);
+	});
 </script>
 
-<div class="connector-item">
-	{@render content({ connector })}
+<div class="connector-item" bind:this={element}>
+	{@render children()}
 </div>
 
 <style>
 	.connector-item {
+		display: contents;
 		border: solid 1px blue;
 	}
 </style>

@@ -1,9 +1,14 @@
 <script lang="ts">
-	import type { ConnectorItemContentProps } from '$lib/connector/ConnectorItemContentProps.js';
+	import type { Connector } from '$lib/connector/Connector.js';
+	import ConnectorItem from '$lib/connector/ConnectorItem.svelte';
 	import { getConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import { getElementCenter } from '$lib/connector/getElementCenter.js';
 
-	const { connector }: ConnectorItemContentProps = $props();
+	interface Props {
+		connector: Connector;
+	}
+
+	const { connector }: Props = $props();
 
 	let element: Element;
 
@@ -15,7 +20,9 @@
 </script>
 
 <div class="connector-item-content">
-	<div class="joint-circle" bind:this={element}></div>
+	<ConnectorItem {connector}>
+		<div class="joint-circle" bind:this={element}></div>
+	</ConnectorItem>
 	<div>{connector.id}</div>
 </div>
 
