@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import VariableSizeComponent from '../VariableSizeComponent.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -41,7 +40,6 @@
 	onpointerdown={handlePointerDown}
 	onpointermove={handlePointerMove}
 >
-	<VariableSizeComponent />
 	{@render children()}
 </div>
 

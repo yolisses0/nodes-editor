@@ -1,4 +1,5 @@
 <script lang="ts">
+	import VariableSizeComponent from '../VariableSizeComponent.svelte';
 	import MovableComponent from './MovableComponent.svelte';
 
 	let counter = $state(0);
@@ -78,6 +79,7 @@
 <div class="container" bind:this={container}>
 	<div class="initial-marker"></div>
 	<MovableComponent>
+		<VariableSizeComponent />
 		<div bind:this={content} class="content">content</div>
 	</MovableComponent>
 </div>
