@@ -27,10 +27,30 @@
 
 	function endPreview() {
 		previewConnection.startConnectorId = undefined;
+		isOutside = false;
+	}
+
+	function getRectContainsPoint(rect: DOMRect, point: Vector) {
+		return (
+			rect.top <= point.y && point.y <= rect.bottom && rect.left <= point.x && point.x <= rect.right
+		);
 	}
 
 	function handlePointerMove(e: PointerEvent) {
-		previewConnection.mousePosition = new Vector(e.clientX, e.clientY);
+		const mousePosition = new Vector(e.clientX, e.clientY);
+		previewConnection.mousePosition = mousePosition;
+
+		// If isOutside, but still fires onpointermove, check if the cursor
+		// entered the node list area. If it does, change isOutside and release
+		// the pointer capture
+		if (isOutside && nodeListContext.nodeList) {
+			const rect = nodeListContext.nodeList.getBoundingClientRect();
+
+			if (getRectContainsPoint(rect, mousePosition)) {
+				isOutside = false;
+				nodeListContext.nodeList.releasePointerCapture(e.pointerId);
+			}
+		}
 	}
 
 	function handlePointerUp(e: PointerEvent) {
@@ -38,20 +58,13 @@
 		endPreview();
 	}
 
-	let isOutside = false;
-
-	function handlePointerEnter(e: PointerEvent) {
-		if (isOutside) {
-			isOutside = false;
-			return;
-		} else {
-			e.stopPropagation();
-			nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
-		}
+	function handlePointerDown(e: PointerEvent) {
+		isOutside = false;
 	}
 
+	let isOutside = $state(true);
+
 	function handlePointerLeave(e: PointerEvent) {
-		e.stopPropagation();
 		isOutside = true;
 		nodeListContext.nodeList?.setPointerCapture(e.pointerId);
 	}
@@ -61,14 +74,16 @@
 	}
 </script>
 
+{isOutside}
+
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="node-list"
 	onpointerup={handlePointerUp}
+	onpointerdown={handlePointerDown}
 	oncontextmenu={handleContextMenu}
 	onpointermove={handlePointerMove}
 	onpointerleave={handlePointerLeave}
-	onpointerenter={handlePointerEnter}
 	bind:this={nodeListContext.nodeList}
 >
 	{@render children()}
