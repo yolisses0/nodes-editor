@@ -37,15 +37,18 @@
 	}
 
 	function handlePointerMove(e: PointerEvent) {
-		const mousePosition = new Vector(e.clientX, e.clientY);
+		if (!nodeListContext.nodeList) return;
+
+		const rect = nodeListContext.nodeList.getBoundingClientRect();
+		const mousePosition = new Vector(e.clientX, e.clientY).subtract(
+			new Vector(rect.left, rect.top),
+		);
 		previewConnection.mousePosition = mousePosition;
 
 		// If isOutside, but still fires onpointermove, check if the cursor
 		// entered the node list area. If it does, change isOutside and release
 		// the pointer capture
-		if (isOutside && nodeListContext.nodeList) {
-			const rect = nodeListContext.nodeList.getBoundingClientRect();
-
+		if (isOutside) {
 			if (getRectContainsPoint(rect, mousePosition)) {
 				isOutside = false;
 				nodeListContext.nodeList.releasePointerCapture(e.pointerId);
