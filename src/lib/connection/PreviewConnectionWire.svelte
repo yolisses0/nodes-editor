@@ -13,7 +13,7 @@
 	const endPosition = $derived(
 		previewConnection.endConnectorId
 			? connectorPositions[previewConnection.endConnectorId]
-			: undefined,
+			: previewConnection.mousePosition,
 	);
 </script>
 
