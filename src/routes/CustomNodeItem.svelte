@@ -12,7 +12,7 @@
 </script>
 
 <NodeItem {node}>
-	<div class="node-item-content">
+	<div class="custom-node-item">
 		<div>
 			{node.id}
 		</div>
@@ -27,7 +27,7 @@
 </NodeItem>
 
 <style>
-	.node-item-content {
+	.custom-node-item {
 		color: white;
 		max-width: 200px;
 		user-select: none;

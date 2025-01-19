@@ -9,7 +9,7 @@
 	const { connector }: Props = $props();
 </script>
 
-<div class="connector-item-content">
+<div class="custom-connector-item">
 	<ConnectorItem {connector}>
 		<div class="joint-circle"></div>
 	</ConnectorItem>
@@ -24,14 +24,14 @@
 		width: 10px;
 	}
 
-	.connector-item-content {
+	.custom-connector-item {
 		gap: 10px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 	}
 
-	.connector-item-content:hover {
+	.custom-connector-item:hover {
 		background-color: #fff4;
 	}
 </style>
