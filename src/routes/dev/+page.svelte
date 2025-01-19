@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DevPage from './DevPage.svelte';
+	import DevPage from '$dev/DevPage.svelte';
 </script>
 
 <DevPage />
