@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { MoveObserver } from '$lib/position/MoveObserver.js';
+	import { add } from 'rect-observer';
 	import VariableSizeComponent from '../VariableSizeComponent.svelte';
 	import MovableComponent from './MovableComponent.svelte';
 
 	let content: Element;
 	let container: Element;
 	let counter = $state(0);
+
+	console.log(add(1, 2));
 
 	$effect(() => {
 		const observer = new MoveObserver(
