@@ -2,7 +2,7 @@
 	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import type { Snippet } from 'svelte';
-	import { setNodeListContext, type NodeListContext } from './nodeListContext.svelte.js';
+	import { setNodeListContext, type NodeListContext } from './nodeListContext.js';
 
 	interface Props {
 		children: Snippet;

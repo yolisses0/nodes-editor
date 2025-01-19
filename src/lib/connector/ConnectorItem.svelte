@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getNodeListContext } from '$lib/node/nodeListContext.svelte.js';
+	import { getNodeListContext } from '$lib/node/nodeListContext.js';
 	import { RectObserver } from 'rect-observer';
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
