@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Connection } from '$lib/connection/Connection.js';
 	import ConnectionItem from '$lib/connection/ConnectionItem.svelte';
+	import PreviewConnectionWire from '$lib/connection/PreviewConnectionWire.svelte';
 	import type { Node } from '$lib/node/Node.js';
 	import NodeList from '$lib/node/NodeList.svelte';
 	import CustomNodeItem from './CustomNodeItem.svelte';
@@ -20,4 +21,5 @@
 	{#each connections as connection (connection.id)}
 		<ConnectionItem {connection} />
 	{/each}
+	<PreviewConnectionWire />
 </NodeList>
