@@ -10,7 +10,7 @@
 	const { connector }: Props = $props();
 </script>
 
-<ConnectorArea>
+<ConnectorArea {connector}>
 	<div class="custom-connector-item">
 		<ConnectorItem {connector}>
 			<div class="joint-circle"></div>
