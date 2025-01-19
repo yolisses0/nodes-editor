@@ -5,6 +5,7 @@
 	import type { Connector } from './Connector.js';
 	import { getConnectorPositionsContext } from './connectorPositionsContext.js';
 	import { getElementCenter } from './getElementCenter.js';
+	import { getElementPosition } from './getElementPosition.js';
 
 	interface Props {
 		connector: Connector;
@@ -12,13 +13,16 @@
 	}
 
 	let element: Element;
+	const nodeListContext = getNodeListContext();
 	const { children, connector }: Props = $props();
 	const connectorPositions = getConnectorPositionsContext();
 
 	function createObserver(nodeList: Element, element: Element) {
 		const observer = new RectObserver(
 			() => {
-				connectorPositions[connector.id] = getElementCenter(element);
+				if (!nodeListContext.nodeList) return;
+				const rootPosition = getElementPosition(nodeListContext.nodeList);
+				connectorPositions[connector.id] = getElementCenter(element).subtract(rootPosition);
 			},
 			{ root: nodeList },
 		);
@@ -26,7 +30,6 @@
 		return observer;
 	}
 
-	const nodeListContext = getNodeListContext();
 	$effect(() => {
 		if (nodeListContext.nodeList) {
 			const observer = createObserver(nodeListContext.nodeList, element);
