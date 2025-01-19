@@ -4,4 +4,15 @@
 	import { devNodes } from './devNodes.js';
 </script>
 
-<CustomNodeList nodes={devNodes} connections={devConnections} />
+<div class="container">
+	<CustomNodeList customNodes={devNodes} connections={devConnections} />
+</div>
+
+<style>
+	.container {
+		height: 500px;
+		display: flex;
+		flex-direction: column;
+		background-color: black;
+	}
+</style>

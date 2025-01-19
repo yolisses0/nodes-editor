@@ -3,11 +3,11 @@
 	import NodeMover from '$lib/node/NodeMover.svelte';
 	import type { OnMoveCallbackParams } from '$lib/node/OnMoveCallbackParams.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
-	import type { DevNode } from './DevNode.svelte.js';
+	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
 	interface Props {
-		node: DevNode;
+		node: CustomNode;
 	}
 
 	const { node }: Props = $props();

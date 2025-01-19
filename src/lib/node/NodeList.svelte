@@ -81,8 +81,6 @@
 	}
 </script>
 
-{isOutside}
-
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="node-list"
@@ -98,9 +96,9 @@
 
 <style>
 	.node-list {
+		flex: 1;
+		display: flex;
+		overflow: hidden;
 		position: relative;
-		background-color: brown;
-		width: 500px;
-		height: 500px;
 	}
 </style>
