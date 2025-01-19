@@ -12,8 +12,13 @@
 
 	const { node }: Props = $props();
 
-	function onMove({ node, position, initialNodeOffset }: OnMoveCallbackParams) {
-		node.position = position.subtract(initialNodeOffset);
+	function onMove({
+		node,
+		initialMousePosition,
+		initialNodePosition,
+		mousePosition,
+	}: OnMoveCallbackParams) {
+		node.position = initialNodePosition.add(mousePosition).subtract(initialMousePosition);
 	}
 </script>
 
