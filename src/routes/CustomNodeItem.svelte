@@ -1,10 +1,14 @@
 <script lang="ts">
+	import type { Node } from '$lib/node/Node.js';
 	import NodeItem from '$lib/node/NodeItem.svelte';
-	import type { NodeItemContentProps } from '$lib/node/NodeItemContentProps.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
-	const { node }: NodeItemContentProps = $props();
+	interface Props {
+		node: Node;
+	}
+
+	const { node }: Props = $props();
 </script>
 
 <NodeItem {node}>
