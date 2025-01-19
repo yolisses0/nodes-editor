@@ -11,8 +11,10 @@
 	const { startPosition, endPosition }: Props = $props();
 
 	const margin = new Vector(10, 10);
-	const position = startPosition.min(endPosition).subtract(margin);
-	const size = endPosition.subtract(startPosition).absolute().add(margin.multiplyNumber(2));
+	const position = $derived(startPosition.min(endPosition).subtract(margin));
+	const size = $derived(
+		endPosition.subtract(startPosition).absolute().add(margin.multiplyNumber(2)),
+	);
 </script>
 
 <svg
