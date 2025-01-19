@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
 	import type { ConnectorItemContentProps } from './ConnectorItemContentProps.js';
-	import { connectorElementPrefix } from './connectorElementPrefix.js';
 
 	interface Props {
 		connector: Connector;
@@ -12,7 +11,7 @@
 	const { content, connector }: Props = $props();
 </script>
 
-<div class="connector-item" id={connectorElementPrefix + connector.id}>
+<div class="connector-item">
 	{@render content({ connector })}
 </div>
 
