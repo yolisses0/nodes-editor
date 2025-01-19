@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
-	import { Vector } from '$lib/space/Vector.js';
 	import Wire from '$lib/wire/Wire.svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext.js';
 
@@ -11,8 +10,13 @@
 			? connectorPositions[previewConnection.startConnectorId]
 			: undefined,
 	);
+	const endPosition = $derived(
+		previewConnection.endConnectorId
+			? connectorPositions[previewConnection.endConnectorId]
+			: undefined,
+	);
 </script>
 
-{#if startPosition}
-	<Wire {startPosition} endPosition={startPosition.add(new Vector(50, 40))}></Wire>
+{#if startPosition && endPosition}
+	<Wire {startPosition} {endPosition}></Wire>
 {/if}

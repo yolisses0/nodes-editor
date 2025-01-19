@@ -17,7 +17,7 @@
 	}
 
 	function handleMouseEnter(e: MouseEvent) {
-		console.log('mouse enter');
+		previewConnection.endConnectorId = connector.id;
 	}
 </script>
 
