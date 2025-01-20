@@ -26,7 +26,7 @@
 	setPreviewConnectionContext(previewConnection);
 
 	function endPreview() {
-		previewConnection.startConnectorId = undefined;
+		previewConnection.startConnector = undefined;
 		isOutside = false;
 	}
 
@@ -39,7 +39,7 @@
 	function handlePointerMove(e: PointerEvent) {
 		// For performance reasons the values are updated in every mouse
 		// movement. Remove this optimization if needed
-		if (!previewConnection.startConnectorId) return;
+		if (!previewConnection.startConnector) return;
 
 		if (!nodeListContext.nodeList) return;
 

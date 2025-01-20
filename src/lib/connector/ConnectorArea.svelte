@@ -13,16 +13,16 @@
 	const previewConnection = getPreviewConnectionContext();
 
 	function handleMouseDown() {
-		previewConnection.startConnectorId = connector.id;
+		previewConnection.startConnector = connector;
 	}
 
 	function handleMouseEnter() {
-		previewConnection.endConnectorId = connector.id;
+		previewConnection.endConnector = connector;
 	}
 
 	function handleMouseLeave() {
-		if (previewConnection.endConnectorId === connector.id) {
-			previewConnection.endConnectorId = undefined;
+		if (previewConnection.endConnector?.id === connector.id) {
+			previewConnection.endConnector = undefined;
 		}
 	}
 </script>
