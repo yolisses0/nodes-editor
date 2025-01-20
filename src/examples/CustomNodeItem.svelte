@@ -20,7 +20,7 @@
 	}
 </script>
 
-<NodeItem {node}>
+<NodeItem position={node.position}>
 	<div class="custom-node-item">
 		<NodeMover {node} {onMove}>
 			<div>
