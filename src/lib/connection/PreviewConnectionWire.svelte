@@ -13,13 +13,13 @@
 	const previewConnection = getPreviewConnectionContext();
 	const connectorPositions = getConnectorPositionsContext();
 	const startPosition = $derived(
-		previewConnection.startConnectorId
-			? connectorPositions[previewConnection.startConnectorId]
+		previewConnection.startConnector?.id
+			? connectorPositions[previewConnection.startConnector.id]
 			: undefined,
 	);
 	const endPosition = $derived(
-		previewConnection.endConnectorId
-			? connectorPositions[previewConnection.endConnectorId]
+		previewConnection.endConnector?.id
+			? connectorPositions[previewConnection.endConnector.id]
 			: previewConnection.mousePosition,
 	);
 </script>
