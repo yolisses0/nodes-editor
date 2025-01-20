@@ -8,8 +8,8 @@
 	import { getElementPosition } from './getElementPosition.js';
 
 	interface Props {
+		children?: Snippet;
 		connector: Connector;
-		children: Snippet;
 	}
 
 	let element: Element;
@@ -39,5 +39,5 @@
 </script>
 
 <div class="connector-item" bind:this={element}>
-	{@render children()}
+	{@render children?.()}
 </div>
