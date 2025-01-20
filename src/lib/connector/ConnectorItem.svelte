@@ -41,9 +41,3 @@
 <div class="connector-item" bind:this={element}>
 	{@render children()}
 </div>
-
-<style>
-	.connector-item {
-		border: solid 1px blue;
-	}
-</style>

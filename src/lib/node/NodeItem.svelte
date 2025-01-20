@@ -18,6 +18,5 @@
 	.node-item {
 		position: absolute;
 		width: fit-content;
-		border: solid 1px red;
 	}
 </style>
