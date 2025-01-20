@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { getConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
-	import Wire from '$lib/wire/Wire.svelte';
+	import type { Vector } from '$lib/space/Vector.js';
+	import type { Snippet } from 'svelte';
 	import { getPreviewConnectionContext } from './previewConnectionContext.js';
+
+	interface Props {
+		children: Snippet<[{ endPosition: Vector; startPosition: Vector }]>;
+	}
+
+	const { children }: Props = $props();
 
 	const previewConnection = getPreviewConnectionContext();
 	const connectorPositions = getConnectorPositionsContext();
@@ -18,5 +25,5 @@
 </script>
 
 {#if startPosition && endPosition}
-	<Wire {startPosition} {endPosition}></Wire>
+	{@render children({ startPosition, endPosition })}
 {/if}

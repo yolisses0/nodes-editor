@@ -1,16 +1,17 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import { Vector } from '../space/Vector.js';
 	import { getVectorsString } from './getVectorsString.js';
-	import WirePath from './WirePath.svelte';
 
 	interface Props {
-		startPosition: Vector;
+		margin: Vector;
+		children: Snippet;
 		endPosition: Vector;
+		startPosition: Vector;
 	}
 
-	const { startPosition, endPosition }: Props = $props();
+	const { margin, children, endPosition, startPosition }: Props = $props();
 
-	const margin = new Vector(10, 10);
 	const position = $derived(startPosition.min(endPosition).subtract(margin));
 	const size = $derived(
 		endPosition.subtract(startPosition).absolute().add(margin.multiplyByNumber(2)),
@@ -25,7 +26,7 @@
 	style:left={position.x + 'px'}
 	viewBox={getVectorsString([position, size])}
 >
-	<WirePath {startPosition} {endPosition} />
+	{@render children()}
 </svg>
 
 <style>

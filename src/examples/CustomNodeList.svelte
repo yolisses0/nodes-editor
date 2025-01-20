@@ -2,6 +2,7 @@
 	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
+	import CustomWire from './CustomWire.svelte';
 
 	interface Props {
 		customNodes: CustomNode[];
@@ -16,7 +17,15 @@
 		<CustomNodeItem {node} />
 	{/each}
 	{#each connections as connection (connection.id)}
-		<ConnectionItem {connection} />
+		<ConnectionItem {connection}>
+			{#snippet children({ startPosition, endPosition })}
+				<CustomWire {startPosition} {endPosition} />
+			{/snippet}
+		</ConnectionItem>
 	{/each}
-	<PreviewConnectionWire />
+	<PreviewConnectionWire>
+		{#snippet children({ startPosition, endPosition })}
+			<CustomWire {startPosition} {endPosition} />
+		{/snippet}
+	</PreviewConnectionWire>
 </NodeList>
