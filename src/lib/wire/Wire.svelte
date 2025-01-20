@@ -13,7 +13,7 @@
 	const margin = new Vector(10, 10);
 	const position = $derived(startPosition.min(endPosition).subtract(margin));
 	const size = $derived(
-		endPosition.subtract(startPosition).absolute().add(margin.multiplyNumber(2)),
+		endPosition.subtract(startPosition).absolute().add(margin.multiplyByNumber(2)),
 	);
 </script>
 
