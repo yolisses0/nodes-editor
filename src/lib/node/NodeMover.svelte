@@ -49,6 +49,7 @@
 </script>
 
 <button
+	class="node-mover"
 	bind:this={element}
 	onpointerup={handlePointerUp}
 	onpointermove={handlePointerMove}
@@ -56,3 +57,9 @@
 >
 	{@render children()}
 </button>
+
+<style>
+	.node-mover {
+		display: contents;
+	}
+</style>
