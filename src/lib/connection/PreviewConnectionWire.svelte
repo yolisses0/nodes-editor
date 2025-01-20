@@ -2,28 +2,39 @@
 	import { getConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import type { Vector } from '$lib/space/Vector.js';
 	import type { Snippet } from 'svelte';
-	import { getPreviewConnectionContext } from './previewConnectionContext.js';
+	import {
+		getPreviewConnectionContext,
+		type PreviewConnectionContext,
+	} from './previewConnectionContext.js';
 
 	interface Props {
-		children: Snippet<[{ endPosition: Vector; startPosition: Vector }]>;
+		children: Snippet<
+			[
+				{
+					endPosition: Vector;
+					startPosition: Vector;
+					previewConnectionContext: PreviewConnectionContext;
+				},
+			]
+		>;
 	}
 
 	const { children }: Props = $props();
 
-	const previewConnection = getPreviewConnectionContext();
+	const previewConnectionContext = getPreviewConnectionContext();
 	const connectorPositions = getConnectorPositionsContext();
 	const startPosition = $derived(
-		previewConnection.startConnector?.id
-			? connectorPositions[previewConnection.startConnector.id]
+		previewConnectionContext.startConnector?.id
+			? connectorPositions[previewConnectionContext.startConnector.id]
 			: undefined,
 	);
 	const endPosition = $derived(
-		previewConnection.endConnector?.id
-			? connectorPositions[previewConnection.endConnector.id]
-			: previewConnection.mousePosition,
+		previewConnectionContext.endConnector?.id
+			? connectorPositions[previewConnectionContext.endConnector.id]
+			: previewConnectionContext.mousePosition,
 	);
 </script>
 
 {#if startPosition && endPosition}
-	{@render children({ startPosition, endPosition })}
+	{@render children({ startPosition, endPosition, previewConnectionContext })}
 {/if}
