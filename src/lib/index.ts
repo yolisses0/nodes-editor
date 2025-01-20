@@ -11,6 +11,8 @@ import NodeMover from './node/NodeMover.svelte';
 import type { OnMoveCallbackParams } from './node/OnMoveCallbackParams.js';
 import { Vector } from './space/Vector.js';
 import { getLinePathD } from './wire/getLinePath.js';
+import { getVectorsString } from './wire/getVectorsString.js';
+import { getVectorString } from './wire/getVectorString.js';
 import WirePath from './wire/WirePath.svelte';
 import WireSvg from './wire/WireSvg.svelte';
 
@@ -19,6 +21,8 @@ export {
 	ConnectorArea,
 	ConnectorItem,
 	getLinePathD,
+	getVectorsString,
+	getVectorString,
 	NodeItem,
 	NodeList,
 	NodeMover,
