@@ -1,7 +1,7 @@
 import type { Vector } from '$lib/space/Vector.js';
-import type { Node } from './Node.js';
+import type { Node } from '../Node.js';
 
-export type OnMoveCallbackParams = {
+export type MoveNodeEvent = {
 	node: Node;
 	position: Vector;
 	mousePosition: Vector;

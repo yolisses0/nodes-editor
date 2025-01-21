@@ -2,15 +2,15 @@
 	import { Vector } from '$lib/space/Vector.js';
 	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import type { Snippet } from 'svelte';
+	import type { MoveNodeEvent } from './events/MoveNodeEvent.js';
 	import type { Node } from './Node.js';
 	import { getNodeListContext } from './nodeListContext.js';
-	import type { OnMoveCallback } from './OnMoveCallback.js';
 
 	interface Props {
 		node: Node;
 		children: Snippet;
-		onMove: OnMoveCallback;
-		onEndMove: OnMoveCallback;
+		onMove?: (e: MoveNodeEvent) => void;
+		onEndMove?: (e: MoveNodeEvent) => void;
 	}
 
 	let element: Element;
@@ -34,7 +34,7 @@
 		if (!nodeListContext.nodeList) return;
 		const mousePosition = new Vector(e.clientX, e.clientY);
 		const position = mousePosition.subtract(getElementPosition(nodeListContext.nodeList));
-		onMove({
+		onMove?.({
 			node,
 			position,
 			mousePosition,
@@ -51,7 +51,7 @@
 		if (!nodeListContext.nodeList) return;
 		const mousePosition = new Vector(e.clientX, e.clientY);
 		const position = mousePosition.subtract(getElementPosition(nodeListContext.nodeList));
-		onEndMove({
+		onEndMove?.({
 			node,
 			position,
 			mousePosition,

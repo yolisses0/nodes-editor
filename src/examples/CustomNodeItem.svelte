@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { NodeItem, NodeMover, type OnMoveCallbackParams } from '$lib/index.js';
+	import { NodeItem, NodeMover } from '$lib/index.js';
+	import type { MoveNodeEvent } from '$lib/node/events/MoveNodeEvent.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
@@ -12,10 +13,10 @@
 
 	function onMove({
 		node,
-		initialMousePosition,
-		initialNodePosition,
 		mousePosition,
-	}: OnMoveCallbackParams) {
+		initialNodePosition,
+		initialMousePosition,
+	}: MoveNodeEvent) {
 		node.position = initialNodePosition.add(mousePosition).subtract(initialMousePosition);
 	}
 </script>
