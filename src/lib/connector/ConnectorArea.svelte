@@ -20,11 +20,14 @@
 
 	function handleMouseEnter() {
 		if (!previewConnection.startConnector) return;
+
 		if (
 			endConnectorCondition &&
 			!endConnectorCondition(connector, previewConnection.startConnector)
-		)
+		) {
 			return;
+		}
+
 		previewConnection.endConnector = connector;
 	}
 
