@@ -7,6 +7,7 @@
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import { Vector } from '$lib/space/Vector.js';
 	import type { Snippet } from 'svelte';
+	import { getRectContainsPoint } from './getRectContainsPoint.js';
 	import { setNodeListContext, type NodeListContext } from './nodeListContext.js';
 
 	interface Props {
@@ -28,12 +29,6 @@
 	function endPreview() {
 		previewConnection.startConnector = undefined;
 		isOutside = false;
-	}
-
-	function getRectContainsPoint(rect: DOMRect, point: Vector) {
-		return (
-			rect.top <= point.y && point.y <= rect.bottom && rect.left <= point.x && point.x <= rect.right
-		);
 	}
 
 	function handlePointerMove(e: PointerEvent) {
