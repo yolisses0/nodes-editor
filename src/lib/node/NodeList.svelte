@@ -8,15 +8,17 @@
 	import { Vector } from '$lib/space/Vector.js';
 	import { getMousePosition } from '$lib/ui/getMousePosition.js';
 	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
 	import { getRectContainsPoint } from './getRectContainsPoint.js';
 	import { setNodeListContext, type NodeListContext } from './nodeListContext.js';
 
-	interface Props {
+	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
 		onEndPreview?: (e: EndPreviewConnectionEvent) => void;
 	}
-	const { children, onEndPreview }: Props = $props();
+	const props: Props = $props();
+	const { children, onEndPreview } = props;
 
 	const connectorPositions: ConnectorPositions = $state({});
 	setConnectorPositionsContext(connectorPositions);
@@ -96,13 +98,14 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="node-list"
+	class:node-list={true}
 	onpointerup={handlePointerUp}
 	onpointerdown={handlePointerDown}
 	oncontextmenu={handleContextMenu}
 	onpointermove={handlePointerMove}
 	onpointerleave={handlePointerLeave}
 	bind:this={nodeListContext.nodeList}
+	{...props}
 >
 	{@render children()}
 </div>
