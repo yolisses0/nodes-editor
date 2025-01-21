@@ -15,7 +15,10 @@ import ConnectorArea from './connector/ConnectorArea.svelte';
 import ConnectorItem from './connector/ConnectorItem.svelte';
 import NodeItem from './node/NodeItem.svelte';
 import NodeList from './node/NodeList.svelte';
+import { getNodeListContext, setNodeListContext } from './node/nodeListContext.js';
 import NodeMover from './node/NodeMover.svelte';
+import { getElementPosition } from './ui/getElementPosition.js';
+import { getMousePosition } from './ui/getMousePosition.js';
 import WirePath from './wire/WirePath.svelte';
 import WireSvg from './wire/WireSvg.svelte';
 
@@ -23,13 +26,17 @@ export {
 	ConnectionItem,
 	ConnectorArea,
 	ConnectorItem,
+	getElementPosition,
 	getLinePathD,
+	getMousePosition,
+	getNodeListContext,
 	getVectorsString,
 	getVectorString,
 	NodeItem,
 	NodeList,
 	NodeMover,
 	PreviewConnectionWire,
+	setNodeListContext,
 	Vector,
 	WirePath,
 	WireSvg,
