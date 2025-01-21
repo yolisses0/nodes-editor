@@ -6,6 +6,7 @@
 	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import { Vector } from '$lib/space/Vector.js';
+	import { getMousePosition } from '$lib/ui/getMousePosition.js';
 	import type { Snippet } from 'svelte';
 	import { getRectContainsPoint } from './getRectContainsPoint.js';
 	import { setNodeListContext, type NodeListContext } from './nodeListContext.js';
@@ -61,7 +62,12 @@
 	}
 
 	function handlePointerDown(e: PointerEvent) {
+		if (!nodeListContext.nodeList) return;
+
 		isOutside = false;
+
+		// Prevents connection from starting with the previous mouse position
+		previewConnection.mousePosition = getMousePosition(e, nodeListContext.nodeList);
 	}
 
 	let isOutside = $state(true);

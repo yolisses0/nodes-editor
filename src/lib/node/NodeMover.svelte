@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getElementPosition } from '$lib/connector/getElementPosition.js';
 	import { Vector } from '$lib/space/Vector.js';
+	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import type { Snippet } from 'svelte';
 	import type { Node } from './Node.js';
 	import { getNodeListContext } from './nodeListContext.js';

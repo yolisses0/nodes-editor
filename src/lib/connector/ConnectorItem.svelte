@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { getNodeListContext } from '$lib/node/nodeListContext.js';
+	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import { RectObserver } from 'rect-observer';
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
 	import { getConnectorPositionsContext } from './connectorPositionsContext.js';
 	import { getElementCenter } from './getElementCenter.js';
-	import { getElementPosition } from './getElementPosition.js';
 
 	interface Props {
 		children?: Snippet;
