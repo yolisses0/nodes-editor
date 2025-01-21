@@ -8,13 +8,15 @@
 	import { Vector } from '$lib/space/Vector.js';
 	import { getMousePosition } from '$lib/ui/getMousePosition.js';
 	import type { Snippet } from 'svelte';
+	import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
 	import { getRectContainsPoint } from './getRectContainsPoint.js';
 	import { setNodeListContext, type NodeListContext } from './nodeListContext.js';
 
 	interface Props {
 		children: Snippet;
+		onEndPreview?: (e: EndPreviewConnectionEvent) => void;
 	}
-	const { children }: Props = $props();
+	const { children, onEndPreview }: Props = $props();
 
 	const connectorPositions: ConnectorPositions = $state({});
 	setConnectorPositionsContext(connectorPositions);
@@ -28,6 +30,16 @@
 	setPreviewConnectionContext(previewConnection);
 
 	function endPreview() {
+		if (!previewConnection.startConnector) return;
+
+		if (onEndPreview) {
+			onEndPreview({
+				endConnector: previewConnection.endConnector,
+				mousePosition: previewConnection.mousePosition,
+				startConnector: previewConnection.startConnector,
+			});
+		}
+
 		previewConnection.startConnector = undefined;
 		isOutside = false;
 	}
