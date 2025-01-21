@@ -39,6 +39,7 @@
 </script>
 
 <button
+	style:display="contents"
 	onblur={handleMouseLeave}
 	onmousedown={handleMouseDown}
 	onmouseenter={handleMouseEnter}
