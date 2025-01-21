@@ -2,13 +2,15 @@
 	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
+	import type { EndConnectorCondition } from './EndConnectorCondition.js';
 
 	interface Props {
 		children: Snippet;
 		connector: Connector;
+		endConnectorCondition?: EndConnectorCondition;
 	}
 
-	const { children, connector }: Props = $props();
+	const { children, connector, endConnectorCondition }: Props = $props();
 
 	const previewConnection = getPreviewConnectionContext();
 
@@ -17,6 +19,12 @@
 	}
 
 	function handleMouseEnter() {
+		if (!previewConnection.startConnector) return;
+		if (
+			endConnectorCondition &&
+			!endConnectorCondition(connector, previewConnection.startConnector)
+		)
+			return;
 		previewConnection.endConnector = connector;
 	}
 
