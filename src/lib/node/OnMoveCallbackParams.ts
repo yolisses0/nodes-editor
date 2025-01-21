@@ -3,8 +3,9 @@ import type { Node } from './Node.js';
 
 export type OnMoveCallbackParams = {
 	node: Node;
+	position: Vector;
 	mousePosition: Vector;
-	initialNodeOffset: Vector;
+	initialPosition: Vector;
 	initialNodePosition: Vector;
 	initialMousePosition: Vector;
 };

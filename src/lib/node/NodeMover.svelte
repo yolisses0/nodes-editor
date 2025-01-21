@@ -12,9 +12,9 @@
 		onMove: OnMoveCallback;
 	}
 
-	let isMoving = false;
 	let element: Element;
-	let initialNodeOffset: Vector;
+	let initialPosition: Vector;
+	let isMoving = $state(false);
 	let initialNodePosition: Vector;
 	let initialMousePosition: Vector;
 	const nodeListContext = getNodeListContext();
@@ -26,17 +26,19 @@
 		isMoving = true;
 		initialNodePosition = node.position;
 		initialMousePosition = new Vector(e.clientX, e.clientY);
-		initialNodeOffset = initialMousePosition.subtract(getElementPosition(nodeListContext.nodeList));
+		initialPosition = initialMousePosition.subtract(getElementPosition(nodeListContext.nodeList));
 	}
 
 	function handlePointerMove(e: PointerEvent) {
-		if (!isMoving) return;
 		if (!nodeListContext.nodeList) return;
 		const mousePosition = new Vector(e.clientX, e.clientY);
+		console.log(mousePosition);
+		const position = mousePosition.subtract(getElementPosition(nodeListContext.nodeList));
 		onMove({
 			node,
+			position,
 			mousePosition,
-			initialNodeOffset,
+			initialPosition,
 			initialNodePosition,
 			initialMousePosition,
 		});
@@ -52,8 +54,8 @@
 	class="node-mover"
 	bind:this={element}
 	onpointerup={handlePointerUp}
-	onpointermove={handlePointerMove}
 	onpointerdown={handlePointerDown}
+	onpointermove={isMoving ? handlePointerMove : undefined}
 >
 	{@render children()}
 </button>
