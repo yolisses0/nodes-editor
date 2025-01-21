@@ -32,7 +32,6 @@
 	function handlePointerMove(e: PointerEvent) {
 		if (!nodeListContext.nodeList) return;
 		const mousePosition = new Vector(e.clientX, e.clientY);
-		console.log(mousePosition);
 		const position = mousePosition.subtract(getElementPosition(nodeListContext.nodeList));
 		onMove({
 			node,
