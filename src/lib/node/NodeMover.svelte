@@ -10,6 +10,7 @@
 		node: Node;
 		children: Snippet;
 		onMove: OnMoveCallback;
+		onEndMove: OnMoveCallback;
 	}
 
 	let element: Element;
@@ -18,7 +19,7 @@
 	let initialNodePosition: Vector;
 	let initialMousePosition: Vector;
 	const nodeListContext = getNodeListContext();
-	const { children, onMove, node }: Props = $props();
+	const { children, onMove, node, onEndMove }: Props = $props();
 
 	function handlePointerDown(e: PointerEvent) {
 		if (!nodeListContext.nodeList) return;
@@ -46,6 +47,18 @@
 	function handlePointerUp(e: PointerEvent) {
 		isMoving = false;
 		element.releasePointerCapture(e.pointerId);
+
+		if (!nodeListContext.nodeList) return;
+		const mousePosition = new Vector(e.clientX, e.clientY);
+		const position = mousePosition.subtract(getElementPosition(nodeListContext.nodeList));
+		onEndMove({
+			node,
+			position,
+			mousePosition,
+			initialPosition,
+			initialNodePosition,
+			initialMousePosition,
+		});
 	}
 </script>
 
