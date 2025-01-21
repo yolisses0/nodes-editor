@@ -33,7 +33,10 @@
 	$effect(() => {
 		if (nodeListContext.nodeList) {
 			const observer = createObserver(nodeListContext.nodeList, element);
-			return () => observer.disconnect();
+			return () => {
+				observer.disconnect();
+				delete connectorPositions[connector.id];
+			};
 		}
 	});
 </script>
