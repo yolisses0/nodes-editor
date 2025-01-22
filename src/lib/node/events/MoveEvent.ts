@@ -1,9 +1,6 @@
 import type { Vector } from '$lib/space/Vector.js';
-import type { Node } from '../Node.js';
 
-export type MoveNodeEvent = {
-	node: Node;
-	initialNodePosition: Vector;
+export type MoveEvent = {
 	mouseRelativePosition: Vector;
 	initialMouseRelativePosition: Vector;
 };
