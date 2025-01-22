@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { NodeItem, NodeMover } from '$lib/index.js';
-	import type { MoveNodeEvent } from '$lib/node/events/MoveNodeEvent.js';
+	import { NodeItem, NodeMover, Vector } from '$lib/index.js';
+	import type { MoveEvent } from '$lib/node/events/MoveEvent.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
@@ -10,12 +10,14 @@
 	}
 
 	const { node }: Props = $props();
+	// This initial value should not matter
+	let initialNodePosition = $state(Vector.zero());
 
-	function onMove({
-		initialNodePosition,
-		mouseRelativePosition,
-		initialMouseRelativePosition,
-	}: MoveNodeEvent) {
+	function onStartMove() {
+		initialNodePosition = node.position;
+	}
+
+	function onMove({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
 		node.position = initialNodePosition
 			.add(mouseRelativePosition)
 			.subtract(initialMouseRelativePosition);
@@ -24,7 +26,7 @@
 
 <NodeItem position={node.position}>
 	<div class="custom-node-item">
-		<NodeMover {node} {onMove}>
+		<NodeMover {onMove} {onStartMove}>
 			<div>
 				{node.id}
 			</div>
