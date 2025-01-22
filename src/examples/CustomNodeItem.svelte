@@ -12,12 +12,13 @@
 	const { node }: Props = $props();
 
 	function onMove({
-		node,
-		mousePosition,
 		initialNodePosition,
-		initialMousePosition,
+		mouseRelativePosition,
+		initialMouseRelativePosition,
 	}: MoveNodeEvent) {
-		node.position = initialNodePosition.add(mousePosition).subtract(initialMousePosition);
+		node.position = initialNodePosition
+			.add(mouseRelativePosition)
+			.subtract(initialMouseRelativePosition);
 	}
 </script>
 

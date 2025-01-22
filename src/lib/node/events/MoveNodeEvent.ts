@@ -3,9 +3,7 @@ import type { Node } from '../Node.js';
 
 export type MoveNodeEvent = {
 	node: Node;
-	position: Vector;
-	mousePosition: Vector;
-	initialPosition: Vector;
 	initialNodePosition: Vector;
-	initialMousePosition: Vector;
+	mouseRelativePosition: Vector;
+	initialMouseRelativePosition: Vector;
 };

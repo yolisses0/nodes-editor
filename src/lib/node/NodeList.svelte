@@ -6,7 +6,7 @@
 	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 	import { Vector } from '$lib/space/Vector.js';
-	import { getMousePosition } from '$lib/ui/getMousePosition.js';
+	import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
@@ -27,7 +27,7 @@
 	setNodeListContext(nodeListContext);
 
 	const previewConnection: PreviewConnectionContext = $state({
-		mousePosition: new Vector(0, 0),
+		mouseRelativePosition: new Vector(0, 0),
 	});
 	setPreviewConnectionContext(previewConnection);
 
@@ -37,7 +37,7 @@
 		if (onEndPreview) {
 			onEndPreview({
 				endConnector: previewConnection.endConnector,
-				mousePosition: previewConnection.mousePosition,
+				mousePosition: previewConnection.mouseRelativePosition,
 				startConnector: previewConnection.startConnector,
 			});
 		}
@@ -57,7 +57,7 @@
 		const mousePosition = new Vector(e.clientX, e.clientY).subtract(
 			new Vector(rect.left, rect.top),
 		);
-		previewConnection.mousePosition = mousePosition;
+		previewConnection.mouseRelativePosition = mousePosition;
 
 		// If isOutside, but still fires onpointermove, check if the cursor
 		// entered the node list area. If it does, change isOutside and release
@@ -81,7 +81,7 @@
 		isOutside = false;
 
 		// Prevents connection from starting with the previous mouse position
-		previewConnection.mousePosition = getMousePosition(e, nodeListContext.nodeList);
+		previewConnection.mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
 	}
 
 	let isOutside = $state(true);
