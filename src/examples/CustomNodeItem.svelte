@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { NodeItem, NodeMover, Vector } from '$lib/index.js';
+	import { NodeItem, Vector } from '$lib/index.js';
 	import type { MoveEvent } from '$lib/node/events/MoveEvent.js';
+	import Mover from '$lib/node/Mover.svelte';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
@@ -26,11 +27,11 @@
 
 <NodeItem position={node.position}>
 	<div class="custom-node-item">
-		<NodeMover {onMove} {onStartMove}>
+		<Mover {onMove} {onStartMove}>
 			<div>
 				{node.id}
 			</div>
-		</NodeMover>
+		</Mover>
 		<VariableSizeComponent />
 		{#if node.id !== 'devNode3'}
 			<div>some options not related to the core node structure</div>
