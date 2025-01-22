@@ -16,9 +16,9 @@ import ConnectionItem from './connection/ConnectionItem.svelte';
 import PreviewConnectionWire from './connection/PreviewConnectionWire.svelte';
 import ConnectorArea from './connector/ConnectorArea.svelte';
 import ConnectorItem from './connector/ConnectorItem.svelte';
+import Mover from './node/Mover.svelte';
 import NodeItem from './node/NodeItem.svelte';
 import NodeList from './node/NodeList.svelte';
-import NodeMover from './node/NodeMover.svelte';
 import WirePath from './wire/WirePath.svelte';
 import WireSvg from './wire/WireSvg.svelte';
 
@@ -32,9 +32,9 @@ export {
 	getNodeListContext,
 	getVectorsString,
 	getVectorString,
+	Mover,
 	NodeItem,
 	NodeList,
-	NodeMover,
 	PreviewConnectionWire,
 	setNodeListContext,
 	Vector,
