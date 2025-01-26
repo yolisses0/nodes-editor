@@ -43,7 +43,6 @@
 		if (!nodeListContext.nodeList) return;
 
 		moved = true;
-		console.log(moved);
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
 		onMove?.({ mouseRelativePosition, initialMouseRelativePosition });
 	}
