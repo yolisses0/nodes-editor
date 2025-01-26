@@ -22,7 +22,8 @@
 			() => {
 				if (!nodeListContext.nodeList) return;
 				const rootPosition = getElementPosition(nodeListContext.nodeList);
-				connectorPositions[connector.id] = getElementCenter(element).subtract(rootPosition);
+				const position = getElementCenter(element).subtract(rootPosition);
+				connectorPositions[connector.id] = position;
 			},
 			{ root: nodeList },
 		);
