@@ -5,6 +5,7 @@
 	} from '$lib/connection/previewConnectionContext.js';
 	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
+	import { setMouseContext, type MouseContext } from '$lib/mouse/mouseContext.js';
 	import { Vector } from '$lib/space/Vector.js';
 	import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 	import type { Snippet } from 'svelte';
@@ -26,10 +27,11 @@
 	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
 	setNodeListContext(nodeListContext);
 
-	const previewConnection: PreviewConnectionContext = $state({
-		mouseRelativePosition: new Vector(0, 0),
-	});
+	const previewConnection: PreviewConnectionContext = $state({});
 	setPreviewConnectionContext(previewConnection);
+
+	const mouseContext: MouseContext = $state({ mouseRelativePosition: new Vector(0, 0) });
+	setMouseContext(mouseContext);
 
 	function endPreview() {
 		if (!previewConnection.startConnector) return;
@@ -37,8 +39,8 @@
 		if (onEndPreview) {
 			onEndPreview({
 				endConnector: previewConnection.endConnector,
-				mousePosition: previewConnection.mouseRelativePosition,
 				startConnector: previewConnection.startConnector,
+				mousePosition: mouseContext.mouseRelativePosition,
 			});
 		}
 
@@ -57,7 +59,7 @@
 		const mousePosition = new Vector(e.clientX, e.clientY).subtract(
 			new Vector(rect.left, rect.top),
 		);
-		previewConnection.mouseRelativePosition = mousePosition;
+		mouseContext.mouseRelativePosition = mousePosition;
 
 		// If isOutside, but still fires onpointermove, check if the cursor
 		// entered the node list area. If it does, change isOutside and release
@@ -81,7 +83,7 @@
 		isOutside = false;
 
 		// Prevents connection from starting with the previous mouse position
-		previewConnection.mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
+		mouseContext.mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
 	}
 
 	let isOutside = $state(true);
