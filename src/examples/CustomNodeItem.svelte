@@ -29,7 +29,7 @@
 	}
 </script>
 
-<NodeItem position={node.position}>
+<NodeItem {node} position={node.position}>
 	<div class="custom-node-item" class:selected={isSelected}>
 		<Selector id={node.id}>
 			<Mover {onMove} {onStartMove}>
