@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
+	import { getMouseContext } from '$lib/mouse/mouseContext.js';
 	import type { Vector } from '$lib/space/Vector.js';
 	import type { Snippet } from 'svelte';
 	import {
@@ -21,8 +22,10 @@
 
 	const { children }: Props = $props();
 
-	const previewConnectionContext = getPreviewConnectionContext();
+	const mouseContext = getMouseContext();
 	const connectorPositions = getConnectorPositionsContext();
+	const previewConnectionContext = getPreviewConnectionContext();
+
 	const startPosition = $derived(
 		previewConnectionContext.startConnector?.id
 			? connectorPositions[previewConnectionContext.startConnector.id]
@@ -31,7 +34,7 @@
 	const endPosition = $derived(
 		previewConnectionContext.endConnector?.id
 			? connectorPositions[previewConnectionContext.endConnector.id]
-			: previewConnectionContext.mouseRelativePosition,
+			: mouseContext.mouseRelativePosition,
 	);
 </script>
 
