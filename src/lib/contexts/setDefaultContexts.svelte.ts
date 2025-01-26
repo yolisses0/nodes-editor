@@ -18,7 +18,7 @@ export function setDefaultContexts() {
 	const connectorPositions: ConnectorPositions = $state({});
 	const previewConnection: PreviewConnectionContext = $state({});
 	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
-	const selectedNodesContext: SelectedNodesContext = $state({ selectedNodes: {} });
+	const selectedNodesContext: SelectedNodesContext = $state({ selectedNodes: { devNode2: true } });
 	const mouseContext: MouseContext = $state({ mouseRelativePosition: new Vector(0, 0) });
 
 	setMouseContext(mouseContext);

@@ -2,6 +2,7 @@
 	import { NodeItem, Vector } from '$lib/index.js';
 	import type { MoveEvent } from '$lib/node/events/MoveEvent.js';
 	import Mover from '$lib/node/Mover.svelte';
+	import { getSelectedNodesContext } from '$lib/node/selectedNodesContext.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
@@ -13,6 +14,8 @@
 	const { node }: Props = $props();
 	// This initial value should not matter
 	let initialNodePosition = $state(Vector.zero());
+	const selectedNodesContext = getSelectedNodesContext();
+	const isSelected = $derived(!!selectedNodesContext.selectedNodes[node.id]);
 
 	function onStartMove() {
 		initialNodePosition = node.position;
@@ -26,7 +29,7 @@
 </script>
 
 <NodeItem position={node.position}>
-	<div class="custom-node-item">
+	<div class="custom-node-item" class:selected={isSelected}>
 		<Mover {onMove} {onStartMove}>
 			<div>
 				{node.id}
@@ -49,5 +52,9 @@
 		user-select: none;
 		background-color: gray;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
+
+	.selected {
+		outline: 2px red solid;
 	}
 </style>
