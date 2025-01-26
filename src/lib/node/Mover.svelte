@@ -14,6 +14,7 @@
 		onContextMenu?: (e: MouseEvent) => void;
 	}
 
+	let moved = false;
 	let element: Element;
 	let isMoving = $state(false);
 	let initialMouseRelativePosition: Vector;
@@ -27,6 +28,8 @@
 		if (!nodeListContext.nodeList) return;
 
 		element.setPointerCapture(e.pointerId);
+
+		moved = false;
 		isMoving = true;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
@@ -39,6 +42,8 @@
 		if (e.pointerType !== 'mouse' || e.button === 1) return;
 		if (!nodeListContext.nodeList) return;
 
+		moved = true;
+		console.log(moved);
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
 		onMove?.({ mouseRelativePosition, initialMouseRelativePosition });
 	}
@@ -50,6 +55,11 @@
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
 		onEndMove?.({ mouseRelativePosition, initialMouseRelativePosition });
 
+		if (moved) {
+			e.stopPropagation();
+		}
+
+		moved = false;
 		isMoving = false;
 		element.releasePointerCapture(e.pointerId);
 	}
