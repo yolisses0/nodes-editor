@@ -12,10 +12,14 @@
 </div>
 
 <style>
+	:global(html) {
+		color: white;
+		background-color: black;
+	}
+
 	.container {
 		height: 500px;
 		display: flex;
 		flex-direction: column;
-		background-color: black;
 	}
 </style>
