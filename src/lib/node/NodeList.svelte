@@ -68,6 +68,7 @@
 
 		selectionContext.endPosition = undefined;
 		selectionContext.startPosition = undefined;
+		nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
 	}
 
 	function handlePointerDown(e: PointerEvent) {
@@ -77,7 +78,11 @@
 
 		// Prevents connection from starting with the previous mouse position
 		mouseContext.mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
-		selectionContext.startPosition = mouseContext.mouseRelativePosition;
+
+		if (e.target === nodeListContext.nodeList) {
+			nodeListContext.nodeList.setPointerCapture(e.pointerId);
+			selectionContext.startPosition = mouseContext.mouseRelativePosition;
+		}
 	}
 
 	let isOutside = $state(true);
