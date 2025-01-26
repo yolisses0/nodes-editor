@@ -31,3 +31,9 @@
 	</PreviewConnectionWire>
 	<CustomSelectionBox />
 </NodeList>
+
+<style>
+	:global(.node-list) {
+		user-select: none;
+	}
+</style>
