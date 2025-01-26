@@ -3,6 +3,7 @@
 	import type { MoveEvent } from '$lib/node/events/MoveEvent.js';
 	import Mover from '$lib/node/Mover.svelte';
 	import { getSelectedNodesContext } from '$lib/node/selectedNodesContext.js';
+	import Selector from '$lib/node/Selector.svelte';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
@@ -30,11 +31,13 @@
 
 <NodeItem position={node.position}>
 	<div class="custom-node-item" class:selected={isSelected}>
-		<Mover {onMove} {onStartMove}>
-			<div>
-				{node.id}
-			</div>
-		</Mover>
+		<Selector id={node.id}>
+			<Mover {onMove} {onStartMove}>
+				<div>
+					{node.id}
+				</div>
+			</Mover>
+		</Selector>
 		<VariableSizeComponent />
 		{#if node.id !== 'devNode3'}
 			<div>some options not related to the core node structure</div>
