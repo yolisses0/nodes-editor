@@ -1,19 +1,22 @@
-import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
-import { getMouseContext } from '$lib/mouse/mouseContext.js';
+import {
+	getPreviewConnectionContext,
+	type PreviewConnectionContext,
+} from '$lib/connection/previewConnectionContext.js';
+import { getMouseContext, type MouseContext } from '$lib/mouse/mouseContext.js';
 import { Vector } from '$lib/space/Vector.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
 import { getRectContainsPoint } from './getRectContainsPoint.js';
-import { getNodeListContext } from './nodeListContext.js';
+import { getNodeListContext, type NodeListContext } from './nodeListContext.js';
 import type { PointerStrategy } from './PointerStrategy.js';
 
 export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	isOutside = false;
-	mouseContext = getMouseContext();
-	nodeListContext = getNodeListContext();
-	previewConnectionContext = getPreviewConnectionContext();
+	public nodeListContext: NodeListContext = getNodeListContext();
+	public mouseContext: MouseContext = getMouseContext();
+	public previewConnectionContext: PreviewConnectionContext = getPreviewConnectionContext();
 
-	constructor(public onEndPreview?: (e: EndPreviewConnectionEvent) => void) {}
+	constructor(public onEndPreview: (e: EndPreviewConnectionEvent) => void) {}
 
 	endPreview() {
 		const { startConnector, endConnector } = this.previewConnectionContext;
@@ -30,7 +33,19 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 		this.previewConnectionContext.startConnector = undefined;
 	}
 
-	handlePointerMove(e: PointerEvent) {
+	onpointerdown = (e: PointerEvent) => {
+		if (!this.nodeListContext.nodeList) return;
+
+		this.isOutside = false;
+
+		// Prevents connection from starting with the previous mouse position
+		this.mouseContext.mouseRelativePosition = getMouseRelativePosition(
+			e,
+			this.nodeListContext.nodeList,
+		);
+	};
+
+	onpointermove = (e: PointerEvent) => {
 		if (!this.nodeListContext.nodeList) return;
 
 		const rect = this.nodeListContext.nodeList.getBoundingClientRect();
@@ -52,33 +67,21 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 				}
 			}
 		}
-	}
+	};
 
-	handlePointerUp(e: PointerEvent) {
+	onpointerup = (e: PointerEvent) => {
 		this.nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
 		this.endPreview();
 		this.isOutside = false;
-	}
+	};
 
-	handlePointerDown(e: PointerEvent) {
-		if (!this.nodeListContext.nodeList) return;
-
-		this.isOutside = false;
-
-		// Prevents connection from starting with the previous mouse position
-		this.mouseContext.mouseRelativePosition = getMouseRelativePosition(
-			e,
-			this.nodeListContext.nodeList,
-		);
-	}
-
-	handlePointerLeave(e: PointerEvent) {
+	onpointerleave = (e: PointerEvent) => {
 		this.isOutside = true;
 		this.nodeListContext.nodeList?.setPointerCapture(e.pointerId);
-	}
+	};
 
-	handleContextMenu() {
+	oncontextmenu = () => {
 		this.endPreview();
 		this.isOutside = false;
-	}
+	};
 }

@@ -8,13 +8,23 @@
 		children: Snippet;
 		pointerStrategy: PointerStrategy;
 	}
+
 	const props: Props = $props();
-	const nodeListContext = getNodeListContext();
 	const { children, pointerStrategy } = props;
+	const nodeListContext = getNodeListContext();
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class:node-list={true} bind:this={nodeListContext.nodeList} {...pointerStrategy} {...props}>
+<div
+	class:node-list={true}
+	bind:this={nodeListContext.nodeList}
+	onpointerup={pointerStrategy.onpointerup}
+	onpointermove={pointerStrategy.onpointermove}
+	oncontextmenu={pointerStrategy.oncontextmenu}
+	onpointerdown={pointerStrategy.onpointerdown}
+	onpointerleave={pointerStrategy.onpointerleave}
+	{...props}
+>
 	{@render children()}
 </div>
 
