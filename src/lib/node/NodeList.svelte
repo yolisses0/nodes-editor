@@ -1,18 +1,13 @@
 <script lang="ts">
-	import {
-		setPreviewConnectionContext,
-		type PreviewConnectionContext,
-	} from '$lib/connection/previewConnectionContext.js';
-	import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
-	import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
-	import { setMouseContext, type MouseContext } from '$lib/mouse/mouseContext.js';
+	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
+	import { getMouseContext } from '$lib/mouse/mouseContext.js';
 	import { Vector } from '$lib/space/Vector.js';
 	import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
 	import { getRectContainsPoint } from './getRectContainsPoint.js';
-	import { setNodeListContext, type NodeListContext } from './nodeListContext.js';
+	import { getNodeListContext } from './nodeListContext.js';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
@@ -21,17 +16,9 @@
 	const props: Props = $props();
 	const { children, onEndPreview } = props;
 
-	const connectorPositions: ConnectorPositions = $state({});
-	setConnectorPositionsContext(connectorPositions);
-
-	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
-	setNodeListContext(nodeListContext);
-
-	const previewConnection: PreviewConnectionContext = $state({});
-	setPreviewConnectionContext(previewConnection);
-
-	const mouseContext: MouseContext = $state({ mouseRelativePosition: new Vector(0, 0) });
-	setMouseContext(mouseContext);
+	const mouseContext = getMouseContext();
+	const nodeListContext = getNodeListContext();
+	const previewConnection = getPreviewConnectionContext();
 
 	function endPreview() {
 		if (!previewConnection.startConnector) return;
