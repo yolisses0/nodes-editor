@@ -1,8 +1,6 @@
 <script lang="ts">
 	class DevPointerStrategy {
-		onpointerdown() {
-			console.log('hello');
-		}
+		onpointerdown() {}
 	}
 	const devPointerStrategy = new DevPointerStrategy();
 </script>
