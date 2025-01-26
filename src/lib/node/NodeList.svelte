@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 	import { getMouseContext } from '$lib/mouse/mouseContext.js';
+	import { getSelectionContext } from '$lib/selection/selectionContext.js';
 	import { Vector } from '$lib/space/Vector.js';
 	import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 	import type { Snippet } from 'svelte';
@@ -18,6 +19,7 @@
 
 	const mouseContext = getMouseContext();
 	const nodeListContext = getNodeListContext();
+	const selectionContext = getSelectionContext();
 	const previewConnection = getPreviewConnectionContext();
 
 	function endPreview() {
@@ -36,10 +38,6 @@
 	}
 
 	function handlePointerMove(e: PointerEvent) {
-		// For performance reasons the values are updated in every mouse
-		// movement. Remove this optimization if needed
-		if (!previewConnection.startConnector) return;
-
 		if (!nodeListContext.nodeList) return;
 
 		const rect = nodeListContext.nodeList.getBoundingClientRect();
@@ -47,14 +45,19 @@
 			new Vector(rect.left, rect.top),
 		);
 		mouseContext.mouseRelativePosition = mousePosition;
+		selectionContext.endPosition = mouseContext.mouseRelativePosition;
 
-		// If isOutside, but still fires onpointermove, check if the cursor
-		// entered the node list area. If it does, change isOutside and release
-		// the pointer capture
-		if (isOutside) {
-			if (getRectContainsPoint(rect, mousePosition)) {
-				isOutside = false;
-				nodeListContext.nodeList.releasePointerCapture(e.pointerId);
+		// For performance reasons the values are updated in every mouse
+		// movement. Remove this optimization if needed
+		if (previewConnection.startConnector) {
+			// If isOutside, but still fires onpointermove, check if the cursor
+			// entered the node list area. If it does, change isOutside and release
+			// the pointer capture
+			if (isOutside) {
+				if (getRectContainsPoint(rect, mousePosition)) {
+					isOutside = false;
+					nodeListContext.nodeList.releasePointerCapture(e.pointerId);
+				}
 			}
 		}
 	}
@@ -62,6 +65,9 @@
 	function handlePointerUp(e: PointerEvent) {
 		nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
 		endPreview();
+
+		selectionContext.endPosition = undefined;
+		selectionContext.startPosition = undefined;
 	}
 
 	function handlePointerDown(e: PointerEvent) {
@@ -71,6 +77,7 @@
 
 		// Prevents connection from starting with the previous mouse position
 		mouseContext.mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
+		selectionContext.startPosition = mouseContext.mouseRelativePosition;
 	}
 
 	let isOutside = $state(true);

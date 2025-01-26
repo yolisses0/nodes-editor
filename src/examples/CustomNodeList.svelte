@@ -2,6 +2,7 @@
 	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
+	import CustomSelectionBox from './CustomSelectionBox.svelte';
 	import CustomWire from './CustomWire.svelte';
 
 	interface Props {
@@ -28,4 +29,5 @@
 			<CustomWire {startPosition} {endPosition} />
 		{/snippet}
 	</PreviewConnectionWire>
+	<CustomSelectionBox />
 </NodeList>
