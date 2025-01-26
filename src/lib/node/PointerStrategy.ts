@@ -1,7 +1,7 @@
 export interface PointerStrategy {
-	handlePointerUp(e: PointerEvent): void;
-	handleContextMenu(e: MouseEvent): void;
-	handlePointerLeave(e: MouseEvent): void;
-	handlePointerMove(e: PointerEvent): void;
-	handlePointerDown(e: PointerEvent): void;
+	onpointerup(e: PointerEvent): void;
+	oncontextmenu(e: MouseEvent): void;
+	onpointerleave(e: MouseEvent): void;
+	onpointermove(e: PointerEvent): void;
+	onpointerdown(e: PointerEvent): void;
 }

@@ -1,5 +1,10 @@
-<script>
-	import Parent from './Parent.svelte';
+<script lang="ts">
+	class DevPointerStrategy {
+		onpointerdown() {
+			console.log('hello');
+		}
+	}
+	const devPointerStrategy = new DevPointerStrategy();
 </script>
 
-<Parent />
+<button onpointerdown={devPointerStrategy.onpointerdown}> click me </button>
