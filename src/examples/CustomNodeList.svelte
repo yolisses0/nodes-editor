@@ -24,6 +24,7 @@
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy,
 	);
+	// const pointerStrategy = previewConnectionPointerStrategy;
 </script>
 
 <NodeList {pointerStrategy}>
