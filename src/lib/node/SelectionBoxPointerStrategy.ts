@@ -37,4 +37,9 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		this.selectionContext.endPosition = mouseRelativePosition;
 		this.selectionContext.startPosition = mouseRelativePosition;
 	};
+
+	cleanup? = () => {
+		this.selectionContext.endPosition = undefined;
+		this.selectionContext.startPosition = undefined;
+	};
 }
