@@ -31,7 +31,6 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	}
 
 	onpointerdown = (e: PointerEvent) => {
-		console.log('PreviewConnectionPointerStrategy.onpointerdown');
 		const { nodeList } = this.nodeListContext;
 		if (!nodeList) return;
 
