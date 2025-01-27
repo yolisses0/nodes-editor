@@ -9,19 +9,18 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	nodeListContext = getNodeListContext();
 	selectionContext = getSelectionContext();
 
-	onpointerup(e: PointerEvent): void {
+	onpointerup = (e: PointerEvent) => {
 		this.selectionContext.endPosition = undefined;
 		this.selectionContext.startPosition = undefined;
 		this.nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
-	}
+	};
 
-	onpointermove(e: PointerEvent): void {
-		console.log(this.nodeListContext);
+	onpointermove = (e: PointerEvent) => {
 		this.nodeListContext.nodeList?.setPointerCapture(e.pointerId);
 		this.selectionContext.startPosition = this.mouseContext.mouseRelativePosition;
-	}
+	};
 
-	onpointerdown(e: PointerEvent): void {
+	onpointerdown = (e: PointerEvent) => {
 		if (!this.nodeListContext.nodeList) return;
 
 		const rect = this.nodeListContext.nodeList.getBoundingClientRect();
@@ -30,5 +29,5 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		);
 		this.mouseContext.mouseRelativePosition = mousePosition;
 		this.selectionContext.endPosition = this.mouseContext.mouseRelativePosition;
-	}
+	};
 }
