@@ -26,17 +26,20 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 			});
 		}
 
+		this.previewConnectionContext.endConnector = undefined;
 		this.previewConnectionContext.startConnector = undefined;
 	}
 
 	onpointerdown = (e: PointerEvent) => {
+		console.log('PreviewConnectionPointerStrategy.onpointerdown');
 		const { nodeList } = this.nodeListContext;
 		if (!nodeList) return;
 
 		this.isOutside = false;
 
 		// Prevents connection from starting with the previous mouse position
-		this.mouseContext.mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		this.mouseContext.mouseRelativePosition = mouseRelativePosition;
 	};
 
 	onpointermove = (e: PointerEvent) => {
