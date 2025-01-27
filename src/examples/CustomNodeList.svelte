@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
 	import { PreviewConnectionPointerStrategy } from '$lib/node/PreviewConnectionPointerStrategy.js';
 	import { SelectionBoxPointerStrategy } from '$lib/node/SelectionBoxPointerStrategy.js';
@@ -15,8 +16,14 @@
 	const { customNodes, connections }: Props = $props();
 
 	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
-	const selectionBoxPointerStrategy = $derived(new SelectionBoxPointerStrategy());
-	const pointerStrategy = $derived(selectionBoxPointerStrategy);
+	const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy();
+
+	const previewConnectionContext = getPreviewConnectionContext();
+	const pointerStrategy = $derived(
+		previewConnectionContext.startConnector
+			? previewConnectionPointerStrategy
+			: selectionBoxPointerStrategy,
+	);
 </script>
 
 <NodeList {pointerStrategy}>
