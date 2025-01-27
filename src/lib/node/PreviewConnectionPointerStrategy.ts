@@ -1,20 +1,17 @@
-import {
-	getPreviewConnectionContext,
-	type PreviewConnectionContext,
-} from '$lib/connection/previewConnectionContext.js';
-import { getMouseContext, type MouseContext } from '$lib/mouse/mouseContext.js';
+import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
+import { getMouseContext } from '$lib/mouse/mouseContext.js';
 import { Vector } from '$lib/space/Vector.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
 import { getRectContainsPoint } from './getRectContainsPoint.js';
-import { getNodeListContext, type NodeListContext } from './nodeListContext.js';
+import { getNodeListContext } from './nodeListContext.js';
 import type { PointerStrategy } from './PointerStrategy.js';
 
 export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	isOutside = false;
-	public nodeListContext: NodeListContext = getNodeListContext();
-	public mouseContext: MouseContext = getMouseContext();
-	public previewConnectionContext: PreviewConnectionContext = getPreviewConnectionContext();
+	mouseContext = getMouseContext();
+	nodeListContext = getNodeListContext();
+	previewConnectionContext = getPreviewConnectionContext();
 
 	constructor(public onEndPreview: (e: EndPreviewConnectionEvent) => void) {}
 
