@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
 	import { PreviewConnectionPointerStrategy } from '$lib/node/PreviewConnectionPointerStrategy.js';
+	import { SelectionBoxPointerStrategy } from '$lib/node/SelectionBoxPointerStrategy.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
 	import CustomSelectionBox from './CustomSelectionBox.svelte';
@@ -13,10 +14,12 @@
 
 	const { customNodes, connections }: Props = $props();
 
-	const previewConnectionPointerStrategy = $derived(new PreviewConnectionPointerStrategy(() => {}));
+	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
+	const selectionBoxPointerStrategy = $derived(new SelectionBoxPointerStrategy());
+	const pointerStrategy = $derived(selectionBoxPointerStrategy);
 </script>
 
-<NodeList pointerStrategy={previewConnectionPointerStrategy}>
+<NodeList {pointerStrategy}>
 	{#each customNodes as node (node.id)}
 		<CustomNodeItem {node} />
 	{/each}
