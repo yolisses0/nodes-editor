@@ -1,6 +1,5 @@
 import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 import { getMouseContext } from '$lib/mouse/mouseContext.js';
-import { Vector } from '$lib/space/Vector.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
 import { getRectContainsPoint } from './getRectContainsPoint.js';
@@ -31,25 +30,21 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	}
 
 	onpointerdown = (e: PointerEvent) => {
-		if (!this.nodeListContext.nodeList) return;
+		const { nodeList } = this.nodeListContext;
+		if (!nodeList) return;
 
 		this.isOutside = false;
 
 		// Prevents connection from starting with the previous mouse position
-		this.mouseContext.mouseRelativePosition = getMouseRelativePosition(
-			e,
-			this.nodeListContext.nodeList,
-		);
+		this.mouseContext.mouseRelativePosition = getMouseRelativePosition(e, nodeList);
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		if (!this.nodeListContext.nodeList) return;
+		const { nodeList } = this.nodeListContext;
+		if (!nodeList) return;
 
-		const rect = this.nodeListContext.nodeList.getBoundingClientRect();
-		const mousePosition = new Vector(e.clientX, e.clientY).subtract(
-			new Vector(rect.left, rect.top),
-		);
-		this.mouseContext.mouseRelativePosition = mousePosition;
+		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		this.mouseContext.mouseRelativePosition = mouseRelativePosition;
 
 		// For performance reasons the values are updated in every mouse
 		// movement. Remove this optimization if needed
@@ -58,9 +53,10 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 			// entered the node list area. If it does, change isOutside and release
 			// the pointer capture
 			if (this.isOutside) {
-				if (getRectContainsPoint(rect, mousePosition)) {
+				const rect = nodeList.getBoundingClientRect();
+				if (getRectContainsPoint(rect, mouseRelativePosition)) {
 					this.isOutside = false;
-					this.nodeListContext.nodeList.releasePointerCapture(e.pointerId);
+					nodeList.releasePointerCapture(e.pointerId);
 				}
 			}
 		}
