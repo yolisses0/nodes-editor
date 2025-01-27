@@ -28,6 +28,7 @@
 		if (!nodeListContext.nodeList) return;
 
 		element.setPointerCapture(e.pointerId);
+		e.stopPropagation();
 
 		moved = false;
 		isMoving = true;
