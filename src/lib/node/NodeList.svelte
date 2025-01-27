@@ -10,7 +10,7 @@
 	}
 
 	const props: Props = $props();
-	const { children, pointerStrategy } = props;
+	const { children, pointerStrategy } = $derived(props);
 	const nodeListContext = getNodeListContext();
 </script>
 
