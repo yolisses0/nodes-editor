@@ -30,8 +30,6 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	onpointerdown = (e: PointerEvent) => {
-		console.log('SelectionBoxPointerStrategy.onpointerdown');
-
 		const { nodeList } = this.nodeListContext;
 		if (!nodeList) return;
 
