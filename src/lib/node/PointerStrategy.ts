@@ -1,4 +1,5 @@
 export interface PointerStrategy {
+	cleanup?: () => void;
 	onpointerup?: (e: PointerEvent) => void;
 	oncontextmenu?: (e: MouseEvent) => void;
 	onpointermove?: (e: PointerEvent) => void;

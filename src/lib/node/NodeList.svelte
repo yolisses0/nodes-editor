@@ -12,6 +12,15 @@
 	const props: Props = $props();
 	const { children, pointerStrategy } = $derived(props);
 	const nodeListContext = getNodeListContext();
+
+	let previousPointerStrategy = $state<PointerStrategy>();
+
+	$effect(() => {
+		if (pointerStrategy !== previousPointerStrategy) {
+			previousPointerStrategy?.cleanup?.();
+			previousPointerStrategy = pointerStrategy;
+		}
+	});
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
