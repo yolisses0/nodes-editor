@@ -32,6 +32,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	onpointerdown = (e: PointerEvent) => {
 		const { nodeList } = this.nodeListContext;
 		if (!nodeList) return;
+		if (nodeList !== e.target) return;
 
 		nodeList.setPointerCapture(e.pointerId);
 		this.pointerId = e.pointerId;
