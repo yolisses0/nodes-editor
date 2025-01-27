@@ -5,6 +5,7 @@ import { getNodeListContext } from './nodeListContext.js';
 import type { PointerStrategy } from './PointerStrategy.js';
 
 export class SelectionBoxPointerStrategy implements PointerStrategy {
+	pointerId?: number;
 	mouseContext = getMouseContext();
 	nodeListContext = getNodeListContext();
 	selectionContext = getSelectionContext();
@@ -17,6 +18,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		this.selectionContext.startPosition = undefined;
 
 		nodeList.releasePointerCapture(e.pointerId);
+		this.pointerId = undefined;
 	};
 
 	onpointermove = (e: PointerEvent) => {
@@ -32,6 +34,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		if (!nodeList) return;
 
 		nodeList.setPointerCapture(e.pointerId);
+		this.pointerId = e.pointerId;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
 		this.selectionContext.endPosition = mouseRelativePosition;
@@ -41,5 +44,10 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	cleanup? = () => {
 		this.selectionContext.endPosition = undefined;
 		this.selectionContext.startPosition = undefined;
+
+		const { nodeList } = this.nodeListContext;
+		if (!nodeList) return;
+		if (this.pointerId === undefined) return;
+		nodeList.releasePointerCapture(this.pointerId);
 	};
 }
