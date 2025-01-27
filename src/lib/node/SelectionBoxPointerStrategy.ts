@@ -1,6 +1,6 @@
 import { getMouseContext } from '$lib/mouse/mouseContext.js';
 import { getSelectionContext } from '$lib/selection/selectionContext.js';
-import { Vector } from '$lib/space/Vector.js';
+import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import { getNodeListContext } from './nodeListContext.js';
 import type { PointerStrategy } from './PointerStrategy.js';
 
@@ -10,24 +10,31 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	selectionContext = getSelectionContext();
 
 	onpointerup = (e: PointerEvent) => {
+		const { nodeList } = this.nodeListContext;
+		if (!nodeList) return;
+
 		this.selectionContext.endPosition = undefined;
 		this.selectionContext.startPosition = undefined;
-		this.nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
+
+		nodeList.releasePointerCapture(e.pointerId);
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		this.nodeListContext.nodeList?.setPointerCapture(e.pointerId);
-		this.selectionContext.startPosition = this.mouseContext.mouseRelativePosition;
+		const { nodeList } = this.nodeListContext;
+		if (!nodeList) return;
+
+		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		this.selectionContext.endPosition = mouseRelativePosition;
 	};
 
 	onpointerdown = (e: PointerEvent) => {
-		if (!this.nodeListContext.nodeList) return;
+		const { nodeList } = this.nodeListContext;
+		if (!nodeList) return;
 
-		const rect = this.nodeListContext.nodeList.getBoundingClientRect();
-		const mousePosition = new Vector(e.clientX, e.clientY).subtract(
-			new Vector(rect.left, rect.top),
-		);
-		this.mouseContext.mouseRelativePosition = mousePosition;
-		this.selectionContext.endPosition = this.mouseContext.mouseRelativePosition;
+		nodeList.setPointerCapture(e.pointerId);
+
+		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		this.selectionContext.endPosition = mouseRelativePosition;
+		this.selectionContext.startPosition = mouseRelativePosition;
 	};
 }
