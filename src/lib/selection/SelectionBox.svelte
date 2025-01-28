@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { getSelectionBoxContext, type SelectionBoxContext } from './selectionBoxContext.js';
+	import { getRectFromPositions } from './getRectFromPositions.js';
+	import { getSelectionBoxContext } from './selectionBoxContext.js';
 
 	interface Props {
 		children?: Snippet;
@@ -10,32 +11,22 @@
 
 	const selectionBoxContext = getSelectionBoxContext();
 
-	const size = $derived(getSize(selectionBoxContext));
-	const position = $derived(getPosition(selectionBoxContext));
-
-	function getSize(selectionBoxContext: SelectionBoxContext) {
-		if (!selectionBoxContext.startPosition) return;
-		if (!selectionBoxContext.endPosition) return;
-
-		return selectionBoxContext.endPosition.subtract(selectionBoxContext.startPosition).absolute();
-	}
-
-	function getPosition(selectionBoxContext: SelectionBoxContext) {
-		if (!selectionBoxContext.startPosition) return;
-		if (!selectionBoxContext.endPosition) return;
-
-		return selectionBoxContext.endPosition.min(selectionBoxContext.startPosition);
-	}
+	const rect = $derived.by(() => {
+		const { endPosition, startPosition } = selectionBoxContext;
+		if (!endPosition) return;
+		if (!startPosition) return;
+		return getRectFromPositions(startPosition, endPosition);
+	});
 </script>
 
-{#if position && size}
+{#if rect}
 	<div
 		style:position="absolute"
 		class:selection-box={true}
-		style:width={size.x + 'px'}
-		style:height={size.y + 'px'}
-		style:top={position.y + 'px'}
-		style:left={position.x + 'px'}
+		style:width={rect.size.x + 'px'}
+		style:height={rect.size.y + 'px'}
+		style:top={rect.position.y + 'px'}
+		style:left={rect.position.x + 'px'}
 	>
 		{@render children?.()}
 	</div>
