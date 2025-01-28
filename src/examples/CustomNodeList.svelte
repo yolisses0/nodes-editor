@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
+	import { PreviewConnectionPointerStrategy } from '$lib/connection/PreviewConnectionPointerStrategy.js';
 	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
-	import { PreviewConnectionPointerStrategy } from '$lib/node/PreviewConnectionPointerStrategy.js';
-	import { SelectionBoxPointerStrategy } from '$lib/node/SelectionBoxPointerStrategy.js';
+	import { SelectionBoxPointerStrategy } from '$lib/selection/SelectionBoxPointerStrategy.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
 	import CustomSelectionBox from './CustomSelectionBox.svelte';

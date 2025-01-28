@@ -1,10 +1,10 @@
-import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 import { getMouseContext } from '$lib/mouse/mouseContext.js';
+import type { EndPreviewConnectionEvent } from '$lib/node/events/EndPreviewConnectionEvent.js';
+import { getRectContainsPoint } from '$lib/node/getRectContainsPoint.js';
+import { getNodeListContext } from '$lib/node/nodeListContext.js';
+import type { PointerStrategy } from '$lib/node/PointerStrategy.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
-import type { EndPreviewConnectionEvent } from './events/EndPreviewConnectionEvent.js';
-import { getRectContainsPoint } from './getRectContainsPoint.js';
-import { getNodeListContext } from './nodeListContext.js';
-import type { PointerStrategy } from './PointerStrategy.js';
+import { getPreviewConnectionContext } from './previewConnectionContext.js';
 
 export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	isOutside = false;

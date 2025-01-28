@@ -10,7 +10,7 @@ import { type NodeRectsContext, setNodeRectsContext } from '$lib/node/nodeRectsC
 import {
 	type SelectedNodesContext,
 	setSelectedNodesContext,
-} from '$lib/node/selectedNodesContext.js';
+} from '$lib/selection/selectedNodesContext.js';
 import {
 	type SelectionBoxContext,
 	setSelectionBoxContext,

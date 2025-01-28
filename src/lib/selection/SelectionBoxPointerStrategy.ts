@@ -2,10 +2,10 @@ import { getMouseContext } from '$lib/mouse/mouseContext.js';
 import { getRectFromPositions } from '$lib/selection/getRectFromPositions.js';
 import { getSelectionBoxContext } from '$lib/selection/selectionBoxContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
+import { getNodeListContext } from '../node/nodeListContext.js';
+import { getNodeRectsContext } from '../node/nodeRectsContext.js';
+import type { PointerStrategy } from '../node/PointerStrategy.js';
 import { getRectsTouch } from './getRectsTouch.js';
-import { getNodeListContext } from './nodeListContext.js';
-import { getNodeRectsContext } from './nodeRectsContext.js';
-import type { PointerStrategy } from './PointerStrategy.js';
 import { getSelectedNodesContext } from './selectedNodesContext.js';
 
 export class SelectionBoxPointerStrategy implements PointerStrategy {

@@ -2,8 +2,8 @@
 	import { NodeItem, Vector } from '$lib/index.js';
 	import type { MoveEvent } from '$lib/node/events/MoveEvent.js';
 	import Mover from '$lib/node/Mover.svelte';
-	import { getSelectedNodesContext } from '$lib/node/selectedNodesContext.js';
-	import Selector from '$lib/node/Selector.svelte';
+	import { getSelectedNodesContext } from '$lib/selection/selectedNodesContext.js';
+	import Selector from '$lib/selection/Selector.svelte';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
