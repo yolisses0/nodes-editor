@@ -11,12 +11,15 @@ import {
 	type SelectedNodesContext,
 	setSelectedNodesContext,
 } from '$lib/node/selectedNodesContext.js';
-import { type SelectionContext, setSelectionContext } from '$lib/selection/selectionContext.js';
+import {
+	type SelectionBoxContext,
+	setSelectionBoxContext,
+} from '$lib/selection/selectionBoxContext.js';
 import { Vector } from '$lib/space/Vector.js';
 
 export function setDefaultContexts() {
-	const selectionContext: SelectionContext = $state({});
 	const connectorPositions: ConnectorPositions = $state({});
+	const selectionBoxContext: SelectionBoxContext = $state({});
 	const previewConnection: PreviewConnectionContext = $state({});
 	const nodeRectsContext: NodeRectsContext = $state({ nodeRects: {} });
 	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
@@ -26,7 +29,7 @@ export function setDefaultContexts() {
 	setMouseContext(mouseContext);
 	setNodeListContext(nodeListContext);
 	setNodeRectsContext(nodeRectsContext);
-	setSelectionContext(selectionContext);
+	setSelectionBoxContext(selectionBoxContext);
 	setSelectedNodesContext(selectedNodesContext);
 	setPreviewConnectionContext(previewConnection);
 	setConnectorPositionsContext(connectorPositions);
