@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { getSelectionContext, type SelectionContext } from './selectionContext.js';
+	import { getSelectionBoxContext, type SelectionBoxContext } from './selectionBoxContext.js';
 
 	interface Props {
 		children?: Snippet;
@@ -8,23 +8,23 @@
 
 	const { children }: Props = $props();
 
-	const selectionContext = getSelectionContext();
+	const selectionBoxContext = getSelectionBoxContext();
 
-	const size = $derived(getSize(selectionContext));
-	const position = $derived(getPosition(selectionContext));
+	const size = $derived(getSize(selectionBoxContext));
+	const position = $derived(getPosition(selectionBoxContext));
 
-	function getSize(selectionContext: SelectionContext) {
-		if (!selectionContext.startPosition) return;
-		if (!selectionContext.endPosition) return;
+	function getSize(selectionBoxContext: SelectionBoxContext) {
+		if (!selectionBoxContext.startPosition) return;
+		if (!selectionBoxContext.endPosition) return;
 
-		return selectionContext.endPosition.subtract(selectionContext.startPosition).absolute();
+		return selectionBoxContext.endPosition.subtract(selectionBoxContext.startPosition).absolute();
 	}
 
-	function getPosition(selectionContext: SelectionContext) {
-		if (!selectionContext.startPosition) return;
-		if (!selectionContext.endPosition) return;
+	function getPosition(selectionBoxContext: SelectionBoxContext) {
+		if (!selectionBoxContext.startPosition) return;
+		if (!selectionBoxContext.endPosition) return;
 
-		return selectionContext.endPosition.min(selectionContext.startPosition);
+		return selectionBoxContext.endPosition.min(selectionBoxContext.startPosition);
 	}
 </script>
 

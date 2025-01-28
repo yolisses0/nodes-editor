@@ -1,5 +1,5 @@
 import { getMouseContext } from '$lib/mouse/mouseContext.js';
-import { getSelectionContext } from '$lib/selection/selectionContext.js';
+import { getSelectionBoxContext } from '$lib/selection/selectionBoxContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import { getNodeListContext } from './nodeListContext.js';
 import type { PointerStrategy } from './PointerStrategy.js';
@@ -8,14 +8,14 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	pointerId?: number;
 	mouseContext = getMouseContext();
 	nodeListContext = getNodeListContext();
-	selectionContext = getSelectionContext();
+	selectionBoxContext = getSelectionBoxContext();
 
 	onpointerup = (e: PointerEvent) => {
 		const { nodeList } = this.nodeListContext;
 		if (!nodeList) return;
 
-		this.selectionContext.endPosition = undefined;
-		this.selectionContext.startPosition = undefined;
+		this.selectionBoxContext.endPosition = undefined;
+		this.selectionBoxContext.startPosition = undefined;
 
 		nodeList.releasePointerCapture(e.pointerId);
 		this.pointerId = undefined;
@@ -26,7 +26,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		if (!nodeList) return;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
-		this.selectionContext.endPosition = mouseRelativePosition;
+		this.selectionBoxContext.endPosition = mouseRelativePosition;
 	};
 
 	onpointerdown = (e: PointerEvent) => {
@@ -38,13 +38,13 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		this.pointerId = e.pointerId;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
-		this.selectionContext.endPosition = mouseRelativePosition;
-		this.selectionContext.startPosition = mouseRelativePosition;
+		this.selectionBoxContext.endPosition = mouseRelativePosition;
+		this.selectionBoxContext.startPosition = mouseRelativePosition;
 	};
 
 	cleanup? = () => {
-		this.selectionContext.endPosition = undefined;
-		this.selectionContext.startPosition = undefined;
+		this.selectionBoxContext.endPosition = undefined;
+		this.selectionBoxContext.startPosition = undefined;
 
 		const { nodeList } = this.nodeListContext;
 		if (!nodeList) return;
