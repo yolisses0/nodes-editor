@@ -38,17 +38,17 @@
 <div
 	class:node-list={true}
 	bind:this={nodeListContext.nodeList}
+	onpointermove={pointerStrategy.onpointermove}
+	oncontextmenu={pointerStrategy.oncontextmenu}
+	onpointerleave={pointerStrategy.onpointerleave}
 	onpointerup={(e) => {
 		pointerStrategy.onpointerup?.(e);
 		pointerDownEvent = undefined;
 	}}
-	onpointermove={pointerStrategy.onpointermove}
-	oncontextmenu={pointerStrategy.oncontextmenu}
 	onpointerdown={(e) => {
 		pointerStrategy.onpointerdown?.(e);
 		pointerDownEvent = e;
 	}}
-	onpointerleave={pointerStrategy.onpointerleave}
 	{...props}
 >
 	{@render children()}
