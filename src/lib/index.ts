@@ -27,8 +27,10 @@ import {
 	getSelectedNodesContext,
 	setSelectedNodesContext,
 } from './selection/selectedNodesContext.js';
+import SelectionBox from './selection/SelectionBox.svelte';
 import { getSelectionBoxContext, setSelectionBoxContext } from './selection/selectionBoxContext.js';
 import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.js';
+import Selector from './selection/Selector.svelte';
 import { Vector } from './space/Vector.js';
 import { getElementPosition } from './ui/getElementPosition.js';
 import { getMouseRelativePosition } from './ui/getMouseRelativePosition.js';
@@ -59,7 +61,9 @@ export {
 	NodeList,
 	PreviewConnectionPointerStrategy,
 	PreviewConnectionWire,
+	SelectionBox,
 	SelectionBoxPointerStrategy,
+	Selector,
 	setConnectorPositionsContext,
 	setDefaultContexts,
 	setMouseContext,
