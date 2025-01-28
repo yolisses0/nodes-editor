@@ -56,6 +56,8 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 		this.selectionBoxContext.startPosition = mouseRelativePosition;
+
+		this.selectedNodesContext.selectedNodes = {};
 	};
 
 	cleanup? = () => {
