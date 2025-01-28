@@ -1,5 +1,6 @@
+import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
 import type { Vector } from '$lib/space/Vector.js';
-import { getContext, setContext } from 'svelte';
+import { setContext } from 'svelte';
 
 export type SelectionBoxContext = {
 	endPosition?: Vector;
@@ -13,5 +14,5 @@ export function setSelectionBoxContext(selectionBoxContext: SelectionBoxContext)
 }
 
 export function getSelectionBoxContext() {
-	return getContext(selectionBoxContextKey) as SelectionBoxContext;
+	return getContextOrThrow<SelectionBoxContext>(selectionBoxContextKey);
 }

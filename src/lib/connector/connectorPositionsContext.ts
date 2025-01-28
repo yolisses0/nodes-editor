@@ -1,12 +1,13 @@
-import { getContext, setContext } from 'svelte';
+import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
+import { setContext } from 'svelte';
 import type { ConnectorPositions } from './ConnectorPositions.js';
-
-const connectorPositionsKey = 'connectorPositionsKey';
 
 export function setConnectorPositionsContext(connectorPositions: ConnectorPositions) {
 	return setContext(connectorPositionsKey, connectorPositions);
 }
 
+const connectorPositionsKey = Symbol('connectorPositionsKey');
+
 export function getConnectorPositionsContext() {
-	return getContext(connectorPositionsKey) as ConnectorPositions;
+	return getContextOrThrow<ConnectorPositions>(connectorPositionsKey);
 }

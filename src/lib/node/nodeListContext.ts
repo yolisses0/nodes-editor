@@ -1,4 +1,5 @@
-import { getContext, setContext } from 'svelte';
+import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
+import { setContext } from 'svelte';
 
 export type NodeListContext = {
 	nodeList: Element | undefined;
@@ -11,5 +12,5 @@ export function setNodeListContext(nodeListContext: NodeListContext) {
 }
 
 export function getNodeListContext() {
-	return getContext(nodeListContextKey) as NodeListContext;
+	return getContextOrThrow<NodeListContext>(nodeListContextKey);
 }
