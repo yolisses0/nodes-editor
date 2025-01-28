@@ -1,4 +1,4 @@
-import type { Rect } from './Rect.js';
+import type { Rect } from '$lib/node/Rect.js';
 
 export function getRectsTouch(rect1: Rect, rect2: Rect): boolean {
 	const rect1Right = rect1.position.x + rect1.size.x;

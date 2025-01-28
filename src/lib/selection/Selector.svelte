@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { getSelectedNodesContext } from '$lib/selection/selectedNodesContext.js';
 	import type { Snippet } from 'svelte';
-	import { getSelectedNodesContext } from './selectedNodesContext.js';
 
 	interface Props {
 		id: string;
