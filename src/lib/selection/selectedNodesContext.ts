@@ -1,4 +1,5 @@
-import { getContext, setContext } from 'svelte';
+import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
+import { setContext } from 'svelte';
 
 export type SelectedNodesContext = {
 	selectedNodes: Record<string, boolean | undefined>;
@@ -11,5 +12,5 @@ export function setSelectedNodesContext(selectedNodesContext: SelectedNodesConte
 }
 
 export function getSelectedNodesContext() {
-	return getContext(selectedNodesContextKey) as SelectedNodesContext;
+	return getContextOrThrow<SelectedNodesContext>(selectedNodesContextKey);
 }

@@ -1,4 +1,5 @@
-import { getContext, setContext } from 'svelte';
+import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
+import { setContext } from 'svelte';
 import type { Rect } from './Rect.js';
 
 export type NodeRectsContext = {
@@ -12,5 +13,5 @@ export function setNodeRectsContext(nodeRectsContext: NodeRectsContext) {
 }
 
 export function getNodeRectsContext() {
-	return getContext(nodeRectsContextKey) as NodeRectsContext;
+	return getContextOrThrow<NodeRectsContext>(nodeRectsContextKey);
 }

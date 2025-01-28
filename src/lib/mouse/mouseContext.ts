@@ -1,5 +1,6 @@
+import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
 import type { Vector } from '$lib/space/Vector.js';
-import { getContext, setContext } from 'svelte';
+import { setContext } from 'svelte';
 
 export type MouseContext = {
 	mouseRelativePosition: Vector;
@@ -12,5 +13,5 @@ export function setMouseContext(mouseContext: MouseContext) {
 }
 
 export function getMouseContext() {
-	return getContext(mouseContextKey) as MouseContext;
+	return getContextOrThrow<MouseContext>(mouseContextKey);
 }
