@@ -24,9 +24,9 @@ import NodeList from './node/NodeList.svelte';
 import { getNodeListContext, setNodeListContext } from './node/nodeListContext.js';
 import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
 import {
-	getSelectedNodesContext,
-	setSelectedNodesContext,
-} from './selection/selectedNodesContext.js';
+	getSelectedNodeIdsContext,
+	setSelectedNodeIdsContext,
+} from './selection/selectedNodeIdsContext.js';
 import SelectionBox from './selection/SelectionBox.svelte';
 import { getSelectionBoxContext, setSelectionBoxContext } from './selection/selectionBoxContext.js';
 import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.js';
@@ -52,7 +52,7 @@ export {
 	getNodeListContext,
 	getNodeRectsContext,
 	getPreviewConnectionContext,
-	getSelectedNodesContext,
+	getSelectedNodeIdsContext,
 	getSelectionBoxContext,
 	getVectorsString,
 	getVectorString,
@@ -70,7 +70,7 @@ export {
 	setNodeListContext,
 	setNodeRectsContext,
 	setPreviewConnectionContext,
-	setSelectedNodesContext,
+	setSelectedNodeIdsContext,
 	setSelectionBoxContext,
 	Vector,
 	WirePath,

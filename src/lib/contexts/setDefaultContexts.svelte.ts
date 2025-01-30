@@ -8,14 +8,15 @@ import { type MouseContext, setMouseContext } from '$lib/mouse/mouseContext.js';
 import { type NodeListContext, setNodeListContext } from '$lib/node/nodeListContext.js';
 import { type NodeRectsContext, setNodeRectsContext } from '$lib/node/nodeRectsContext.js';
 import {
-	type SelectedNodesContext,
-	setSelectedNodesContext,
-} from '$lib/selection/selectedNodesContext.js';
+	type SelectedNodeIdsContext,
+	setSelectedNodeIdsContext,
+} from '$lib/selection/selectedNodeIdsContext.js';
 import {
 	type SelectionBoxContext,
 	setSelectionBoxContext,
 } from '$lib/selection/selectionBoxContext.js';
 import { Vector } from '$lib/space/Vector.js';
+import { SvelteSet } from 'svelte/reactivity';
 
 export function setDefaultContexts() {
 	const connectorPositions: ConnectorPositions = $state({});
@@ -24,13 +25,15 @@ export function setDefaultContexts() {
 	const nodeRectsContext: NodeRectsContext = $state({ nodeRects: {} });
 	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
 	const mouseContext: MouseContext = $state({ mouseRelativePosition: new Vector(0, 0) });
-	const selectedNodesContext: SelectedNodesContext = $state({ selectedNodes: { devNode2: true } });
+	const selectedNodeIdsContext: SelectedNodeIdsContext = $state({
+		selectedNodeIds: new SvelteSet(),
+	});
 
 	setMouseContext(mouseContext);
 	setNodeListContext(nodeListContext);
 	setNodeRectsContext(nodeRectsContext);
 	setSelectionBoxContext(selectionBoxContext);
-	setSelectedNodesContext(selectedNodesContext);
 	setPreviewConnectionContext(previewConnection);
 	setConnectorPositionsContext(connectorPositions);
+	setSelectedNodeIdsContext(selectedNodeIdsContext);
 }
