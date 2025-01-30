@@ -32,13 +32,13 @@
 <NodeItem {node} position={node.position}>
 	{'' + isSelected}
 	<div class="custom-node-item" class:selected={isSelected}>
-		<Selector id={node.id}>
-			<Mover {onMove} {onStartMove}>
+		<Mover {onMove} {onStartMove}>
+			<Selector id={node.id}>
 				<div>
 					{node.id}
 				</div>
-			</Mover>
-		</Selector>
+			</Selector>
+		</Mover>
 		<VariableSizeComponent />
 		{#if node.id !== 'devNode3'}
 			<div>some options not related to the core node structure</div>
