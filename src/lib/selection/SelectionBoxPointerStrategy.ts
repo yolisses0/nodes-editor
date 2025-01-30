@@ -2,11 +2,12 @@ import { getMouseContext } from '$lib/mouse/mouseContext.js';
 import { getRectFromPositions } from '$lib/selection/getRectFromPositions.js';
 import { getSelectionBoxContext } from '$lib/selection/selectionBoxContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
+import { SvelteSet } from 'svelte/reactivity';
 import { getNodeListContext } from '../node/nodeListContext.js';
 import { getNodeRectsContext } from '../node/nodeRectsContext.js';
 import type { PointerStrategy } from '../node/PointerStrategy.js';
 import { getRectsTouch } from './getRectsTouch.js';
-import { getSelectedNodesContext } from './selectedNodesContext.js';
+import { getSelectedNodeIdsContext } from './selectedNodeIdsContext.js';
 
 export class SelectionBoxPointerStrategy implements PointerStrategy {
 	pointerId?: number;
@@ -14,7 +15,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	nodeListContext = getNodeListContext();
 	nodeRectsContext = getNodeRectsContext();
 	selectionBoxContext = getSelectionBoxContext();
-	selectedNodesContext = getSelectedNodesContext();
+	selectedNodeIdsContext = getSelectedNodeIdsContext();
 
 	onpointerup = (e: PointerEvent) => {
 		const { nodeList } = this.nodeListContext;
@@ -37,11 +38,15 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		const { endPosition, startPosition } = this.selectionBoxContext;
 		if (startPosition && endPosition) {
 			const selectionRect = getRectFromPositions(startPosition, endPosition);
-			this.selectedNodesContext.selectedNodes = Object.fromEntries(
-				Object.entries(this.nodeRectsContext.nodeRects).map(([id, nodeRect]) => {
-					return [id, getRectsTouch(nodeRect, selectionRect)];
-				}),
-			);
+
+			const { selectedNodeIds } = this.selectedNodeIdsContext;
+			selectedNodeIds.clear();
+
+			Object.entries(this.nodeRectsContext.nodeRects).forEach(([id, nodeRect]) => {
+				if (getRectsTouch(nodeRect, selectionRect)) {
+					selectedNodeIds.add(id);
+				}
+			});
 		}
 	};
 
@@ -57,7 +62,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 		this.selectionBoxContext.startPosition = mouseRelativePosition;
 
-		this.selectedNodesContext.selectedNodes = {};
+		this.selectedNodeIdsContext.selectedNodeIds = new SvelteSet();
 	};
 
 	cleanup? = () => {

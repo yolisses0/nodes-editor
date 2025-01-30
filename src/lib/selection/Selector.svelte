@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { getSelectedNodesContext } from '$lib/selection/selectedNodesContext.js';
 	import type { Snippet } from 'svelte';
+	import { getSelectedNodeIdsContext } from './selectedNodeIdsContext.js';
 
 	interface Props {
 		id: string;
@@ -8,13 +8,18 @@
 	}
 
 	const { id, children }: Props = $props();
-	const selectedNodesContext = getSelectedNodesContext();
+	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 
 	function handlePointerUp(e: MouseEvent) {
+		const { selectedNodeIds } = selectedNodeIdsContext;
 		if (e.shiftKey) {
-			selectedNodesContext.selectedNodes[id] = !selectedNodesContext.selectedNodes[id];
+			if (selectedNodeIds.has(id)) {
+				selectedNodeIds.delete(id);
+			} else {
+				selectedNodeIds.add(id);
+			}
 		} else {
-			selectedNodesContext.selectedNodes = { [id]: true };
+			selectedNodeIds.add(id);
 		}
 	}
 </script>
