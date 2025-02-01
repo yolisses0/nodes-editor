@@ -36,7 +36,7 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class:node-list={true}
+	style:display="contents"
 	bind:this={nodeListContext.nodeList}
 	onpointermove={pointerStrategy.onpointermove}
 	oncontextmenu={pointerStrategy.oncontextmenu}
@@ -53,12 +53,3 @@
 >
 	{@render children()}
 </div>
-
-<style>
-	.node-list {
-		flex: 1;
-		display: flex;
-		overflow: hidden;
-		position: relative;
-	}
-</style>
