@@ -40,8 +40,13 @@
 		const nodeRects = Object.values(nodeRectsContext.nodeRects);
 		if (nodeRects.length === 0) return Vector.zero();
 
+		const step = 200;
 		const boundingRect = getRectsBoundingRect(nodeRects);
-		return boundingRect.size;
+		return boundingRect.size
+			.add(boundingRect.position)
+			.divideByNumber(step)
+			.ceil()
+			.multiplyByNumber(step);
 	});
 </script>
 
@@ -78,7 +83,7 @@
 		min-width: max-content;
 		min-height: max-content;
 		flex-shrink: 0;
-		overflow: hidden;
+		overflow: visible;
 		user-select: none;
 		position: relative;
 		background-color: cyan;
