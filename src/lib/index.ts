@@ -21,9 +21,9 @@ import { getRectsBoundingRect } from './node/getRectsBoundingRect.js';
 import Mover from './node/Mover.svelte';
 import type { Node } from './node/Node.js';
 import NodeItem from './node/NodeItem.svelte';
-import NodeList from './node/NodeList.svelte';
 import { getNodeListContext, setNodeListContext } from './node/nodeListContext.js';
 import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
+import PointerEventDispatcher from './node/PointerEventDispatcher.svelte';
 import {
 	getSelectedNodeIdsContext,
 	setSelectedNodeIdsContext,
@@ -60,7 +60,7 @@ export {
 	getVectorString,
 	Mover,
 	NodeItem,
-	NodeList,
+	PointerEventDispatcher,
 	PreviewConnectionPointerStrategy,
 	PreviewConnectionWire,
 	SelectionBox,

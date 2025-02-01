@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { getNodeListContext } from './nodeListContext.js';
 	import type { PointerStrategy } from './PointerStrategy.js';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -10,7 +9,6 @@
 	}
 
 	const props: Props = $props();
-	const nodeListContext = getNodeListContext();
 	const { children, pointerStrategy } = $derived(props);
 	let previousPointerStrategy = $state<PointerStrategy>();
 
@@ -36,7 +34,6 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	bind:this={nodeListContext.nodeList}
 	onpointermove={pointerStrategy.onpointermove}
 	oncontextmenu={pointerStrategy.oncontextmenu}
 	onpointerleave={pointerStrategy.onpointerleave}

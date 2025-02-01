@@ -3,9 +3,10 @@
 	import { PreviewConnectionPointerStrategy } from '$lib/connection/PreviewConnectionPointerStrategy.js';
 	import {
 		ConnectionItem,
+		getNodeListContext,
 		getNodeRectsContext,
 		getRectsBoundingRect,
-		NodeList,
+		PointerEventDispatcher,
 		PreviewConnectionWire,
 		Vector,
 		type Connection,
@@ -21,6 +22,7 @@
 		connections: Connection[];
 	}
 
+	const nodeListContext = getNodeListContext();
 	const { customNodes, connections }: Props = $props();
 
 	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
@@ -51,8 +53,13 @@
 </script>
 
 <div class="outer-div">
-	<NodeList {pointerStrategy}>
-		<div class="inner-div" style:min-width={minSize.x + 'px'} style:min-height={minSize.y + 'px'}>
+	<PointerEventDispatcher {pointerStrategy}>
+		<div
+			class="inner-div"
+			style:min-width={minSize.x + 'px'}
+			style:min-height={minSize.y + 'px'}
+			bind:this={nodeListContext.nodeList}
+		>
 			{#each customNodes as node (node.id)}
 				<CustomNodeItem {node} />
 			{/each}
@@ -70,7 +77,7 @@
 			</PreviewConnectionWire>
 			<CustomSelectionBox />
 		</div>
-	</NodeList>
+	</PointerEventDispatcher>
 </div>
 
 <style>
