@@ -46,6 +46,7 @@
 				{/snippet}
 			</PreviewConnectionWire>
 			<CustomSelectionBox />
+			hello
 		</div>
 	</NodeList>
 </div>
@@ -57,11 +58,12 @@
 
 	.inner-div {
 		display: flex;
-		width: 1000px;
-		height: 1000px;
+		min-width: max-content;
+		min-height: max-content;
 		flex-shrink: 0;
 		overflow: hidden;
 		user-select: none;
 		position: relative;
+		background-color: cyan;
 	}
 </style>
