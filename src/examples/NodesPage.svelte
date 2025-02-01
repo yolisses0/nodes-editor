@@ -7,8 +7,10 @@
 	setDefaultContexts();
 </script>
 
-<div class="container">
-	<CustomNodeList customNodes={devNodes} connections={devConnections} />
+<div class="container1">
+	<div class="container2">
+		<CustomNodeList customNodes={devNodes} connections={devConnections} />
+	</div>
 </div>
 
 <style>
@@ -17,9 +19,14 @@
 		background-color: black;
 	}
 
-	.container {
-		height: 500px;
+	.container1 {
 		display: flex;
-		flex-direction: column;
+		overflow: hidden;
+		max-height: 80dvh;
+	}
+
+	.container2 {
+		display: flex;
+		overflow: auto;
 	}
 </style>

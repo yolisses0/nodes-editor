@@ -27,27 +27,41 @@
 	// const pointerStrategy = previewConnectionPointerStrategy;
 </script>
 
-<NodeList {pointerStrategy}>
-	{#each customNodes as node (node.id)}
-		<CustomNodeItem {node} />
-	{/each}
-	{#each connections as connection (connection.id)}
-		<ConnectionItem {connection}>
-			{#snippet children({ startPosition, endPosition })}
-				<CustomWire {startPosition} {endPosition} />
-			{/snippet}
-		</ConnectionItem>
-	{/each}
-	<PreviewConnectionWire>
-		{#snippet children({ startPosition, endPosition })}
-			<CustomWire {startPosition} {endPosition} />
-		{/snippet}
-	</PreviewConnectionWire>
-	<CustomSelectionBox />
-</NodeList>
+<div class="outer-div">
+	<NodeList {pointerStrategy}>
+		<div class="inner-div">
+			{#each customNodes as node (node.id)}
+				<CustomNodeItem {node} />
+			{/each}
+			{#each connections as connection (connection.id)}
+				<ConnectionItem {connection}>
+					{#snippet children({ startPosition, endPosition })}
+						<CustomWire {startPosition} {endPosition} />
+					{/snippet}
+				</ConnectionItem>
+			{/each}
+			<PreviewConnectionWire>
+				{#snippet children({ startPosition, endPosition })}
+					<CustomWire {startPosition} {endPosition} />
+				{/snippet}
+			</PreviewConnectionWire>
+			<CustomSelectionBox />
+		</div>
+	</NodeList>
+</div>
 
 <style>
-	:global(.node-list) {
+	.outer-div {
+		flex-shrink: 0;
+	}
+
+	.inner-div {
+		display: flex;
+		width: 1000px;
+		height: 1000px;
+		flex-shrink: 0;
+		overflow: hidden;
 		user-select: none;
+		position: relative;
 	}
 </style>
