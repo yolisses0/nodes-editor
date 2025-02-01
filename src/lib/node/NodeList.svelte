@@ -36,7 +36,6 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	style:display="contents"
 	bind:this={nodeListContext.nodeList}
 	onpointermove={pointerStrategy.onpointermove}
 	oncontextmenu={pointerStrategy.oncontextmenu}

@@ -30,7 +30,6 @@
 </script>
 
 <NodeItem {node} position={node.position}>
-	{'' + isSelected}
 	<div class="custom-node-item" class:selected={isSelected}>
 		<Mover {onMove} {onStartMove}>
 			<Selector id={node.id}>
@@ -55,6 +54,7 @@
 		max-width: 200px;
 		user-select: none;
 		background-color: gray;
+		outline: solid 1px black;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}
 
