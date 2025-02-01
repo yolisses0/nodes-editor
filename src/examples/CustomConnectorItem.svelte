@@ -30,7 +30,6 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		background-color: aquamarine;
 	}
 
 	.custom-connector-item:hover {

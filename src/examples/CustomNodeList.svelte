@@ -1,7 +1,15 @@
 <script lang="ts">
 	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 	import { PreviewConnectionPointerStrategy } from '$lib/connection/PreviewConnectionPointerStrategy.js';
-	import { ConnectionItem, NodeList, PreviewConnectionWire, type Connection } from '$lib/index.js';
+	import {
+		ConnectionItem,
+		getNodeRectsContext,
+		getRectsBoundingRect,
+		NodeList,
+		PreviewConnectionWire,
+		Vector,
+		type Connection,
+	} from '$lib/index.js';
 	import { SelectionBoxPointerStrategy } from '$lib/selection/SelectionBoxPointerStrategy.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
@@ -25,11 +33,21 @@
 			: selectionBoxPointerStrategy,
 	);
 	// const pointerStrategy = previewConnectionPointerStrategy;
+
+	const nodeRectsContext = getNodeRectsContext();
+
+	const minSize = $derived.by(() => {
+		const nodeRects = Object.values(nodeRectsContext.nodeRects);
+		if (nodeRects.length === 0) return Vector.zero();
+
+		const boundingRect = getRectsBoundingRect(nodeRects);
+		return boundingRect.size;
+	});
 </script>
 
 <div class="outer-div">
 	<NodeList {pointerStrategy}>
-		<div class="inner-div">
+		<div class="inner-div" style:min-width={minSize.x + 'px'} style:min-height={minSize.y + 'px'}>
 			{#each customNodes as node (node.id)}
 				<CustomNodeItem {node} />
 			{/each}
@@ -46,7 +64,6 @@
 				{/snippet}
 			</PreviewConnectionWire>
 			<CustomSelectionBox />
-			hello
 		</div>
 	</NodeList>
 </div>
