@@ -17,6 +17,7 @@ import { setDefaultContexts } from './contexts/setDefaultContexts.svelte.js';
 import { getMouseContext, setMouseContext } from './mouse/mouseContext.js';
 import type { EndPreviewConnectionEvent } from './node/events/EndPreviewConnectionEvent.js';
 import type { MoveEvent } from './node/events/MoveEvent.js';
+import { getRectsBoundingRect } from './node/getRectsBoundingRect.js';
 import Mover from './node/Mover.svelte';
 import type { Node } from './node/Node.js';
 import NodeItem from './node/NodeItem.svelte';
@@ -52,6 +53,7 @@ export {
 	getNodeListContext,
 	getNodeRectsContext,
 	getPreviewConnectionContext,
+	getRectsBoundingRect,
 	getSelectedNodeIdsContext,
 	getSelectionBoxContext,
 	getVectorsString,
