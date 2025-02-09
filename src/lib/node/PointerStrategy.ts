@@ -5,4 +5,7 @@ export interface PointerStrategy {
 	onpointermove?: (e: PointerEvent) => void;
 	onpointerdown?: (e: PointerEvent) => void;
 	onpointerleave?: (e: PointerEvent) => void;
+	onmousedown?: (e: MouseEvent) => void;
+	onmouseenter?: (e: MouseEvent) => void;
+	onmouseleave?: (e: MouseEvent) => void;
 }
