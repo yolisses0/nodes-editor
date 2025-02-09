@@ -14,7 +14,7 @@
 		<ConnectorJoint connectorId={connector.id}>
 			<div class="joint-circle"></div>
 		</ConnectorJoint>
-		<div>{connector}</div>
+		<div>{connector.id}</div>
 	</div>
 </ConnectorArea>
 
