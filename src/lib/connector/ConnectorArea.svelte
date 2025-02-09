@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 	import type { Snippet } from 'svelte';
 	import type { Connector } from './Connector.js';
+	import { ConnectorAreaPointerStrategy } from './ConnectorAreaPointerStrategy.js';
 	import type { EndConnectorCondition } from './EndConnectorCondition.js';
 
 	interface Props {
@@ -11,39 +11,18 @@
 	}
 
 	const { children, connector, endConnectorCondition }: Props = $props();
-
-	const previewConnection = getPreviewConnectionContext();
-
-	function handleMouseDown() {
-		previewConnection.startConnector = connector;
-	}
-
-	function handleMouseEnter() {
-		if (!previewConnection.startConnector) return;
-
-		if (
-			endConnectorCondition &&
-			!endConnectorCondition(connector, previewConnection.startConnector)
-		) {
-			return;
-		}
-
-		previewConnection.endConnector = connector;
-	}
-
-	function handleMouseLeave() {
-		if (previewConnection.endConnector?.id === connector.id) {
-			previewConnection.endConnector = undefined;
-		}
-	}
+	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
+		connector,
+		endConnectorCondition,
+	);
 </script>
 
 <button
 	style:display="contents"
-	onblur={handleMouseLeave}
-	onmousedown={handleMouseDown}
-	onmouseenter={handleMouseEnter}
-	onmouseleave={handleMouseLeave}
+	onblur={connectorAreaPointerStrategy.onmouseleave}
+	onmousedown={connectorAreaPointerStrategy.onmousedown}
+	onmouseenter={connectorAreaPointerStrategy.onmouseenter}
+	onmouseleave={connectorAreaPointerStrategy.onmouseleave}
 >
 	{@render children()}
 </button>
