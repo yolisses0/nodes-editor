@@ -42,8 +42,8 @@
 		{#if node.id !== 'devNode3'}
 			<div>some options not related to the core node structure</div>
 		{/if}
-		{#each node.connectors as connector (connector.id)}
-			<CustomConnectorItem {connector} />
+		{#each node.connectors as connectorId (connectorId)}
+			<CustomConnectorItem connector={connectorId} />
 		{/each}
 	</div>
 </NodeItem>

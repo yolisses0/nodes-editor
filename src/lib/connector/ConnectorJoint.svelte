@@ -3,18 +3,17 @@
 	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import { RectObserver } from 'rect-observer';
 	import type { Snippet } from 'svelte';
-	import type { Connector } from './Connector.js';
 	import { getConnectorPositionsContext } from './connectorPositionsContext.js';
 	import { getElementCenter } from './getElementCenter.js';
 
 	interface Props {
 		children?: Snippet;
-		connector: Connector;
+		connectorId: string;
 	}
 
 	let element: Element;
 	const nodeListContext = getNodeListContext();
-	const { children, connector }: Props = $props();
+	const { children, connectorId }: Props = $props();
 	const connectorPositions = getConnectorPositionsContext();
 
 	function createObserver(nodeList: Element, element: Element) {
@@ -23,7 +22,7 @@
 				if (!nodeListContext.nodeList) return;
 				const rootPosition = getElementPosition(nodeListContext.nodeList);
 				const position = getElementCenter(element).subtract(rootPosition);
-				connectorPositions[connector.id] = position;
+				connectorPositions[connectorId] = position;
 			},
 			{ root: nodeList },
 		);
@@ -36,7 +35,7 @@
 			const observer = createObserver(nodeListContext.nodeList, element);
 			return () => {
 				observer.disconnect();
-				delete connectorPositions[connector.id];
+				delete connectorPositions[connectorId];
 			};
 		}
 	});
