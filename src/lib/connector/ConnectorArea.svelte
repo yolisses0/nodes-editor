@@ -1,18 +1,17 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { Connector } from './Connector.js';
 	import { ConnectorAreaPointerStrategy } from './ConnectorAreaPointerStrategy.js';
 	import type { EndConnectorCondition } from './EndConnectorCondition.js';
 
 	interface Props {
 		children: Snippet;
-		connector: Connector;
+		connectorId: string;
 		endConnectorCondition?: EndConnectorCondition;
 	}
 
-	const { children, connector, endConnectorCondition }: Props = $props();
+	const { children, connectorId, endConnectorCondition }: Props = $props();
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		connector,
+		connectorId,
 		endConnectorCondition,
 	);
 </script>

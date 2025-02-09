@@ -1,10 +1,9 @@
-import type { Connector } from '$lib/connector/Connector.js';
 import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
 import { setContext } from 'svelte';
 
 export type PreviewConnectionContext = {
-	endConnector?: Connector;
-	startConnector?: Connector;
+	endConnectorId?: string;
+	startConnectorId?: string;
 };
 
 const previewConnectionContextKey = Symbol('previewConnectionContextKey');

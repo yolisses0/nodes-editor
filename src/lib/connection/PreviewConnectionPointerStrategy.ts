@@ -15,19 +15,19 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	constructor(public onEndPreview: (e: EndPreviewConnectionEvent) => void) {}
 
 	endPreview() {
-		const { startConnector, endConnector } = this.previewConnectionContext;
-		if (!startConnector) return;
+		const { startConnectorId, endConnectorId } = this.previewConnectionContext;
+		if (!startConnectorId) return;
 
 		if (this.onEndPreview) {
 			this.onEndPreview({
-				endConnector,
-				startConnector,
+				endConnectorId: endConnectorId,
+				startConnectorId: startConnectorId,
 				mousePosition: this.mouseContext.mouseRelativePosition,
 			});
 		}
 
-		this.previewConnectionContext.endConnector = undefined;
-		this.previewConnectionContext.startConnector = undefined;
+		this.previewConnectionContext.endConnectorId = undefined;
+		this.previewConnectionContext.startConnectorId = undefined;
 	}
 
 	onpointerdown = (e: PointerEvent) => {
@@ -50,7 +50,7 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 
 		// For performance reasons the values are updated in every mouse
 		// movement. Remove this optimization if needed
-		if (this.previewConnectionContext.startConnector) {
+		if (this.previewConnectionContext.startConnectorId) {
 			// If isOutside, but still fires onpointermove, check if the cursor
 			// entered the node list area. If it does, change isOutside and release
 			// the pointer capture

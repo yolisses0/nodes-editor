@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { type Connector, ConnectorArea, ConnectorItem } from '$lib/index.js';
+	import { ConnectorArea, ConnectorJoint } from '$lib/index.js';
+	import type { CustomConnector } from './CustomConnector.js';
 
 	interface Props {
-		connector: Connector;
+		connector: CustomConnector;
 	}
 
 	const { connector }: Props = $props();
 </script>
 
-<ConnectorArea {connector}>
+<ConnectorArea connectorId={connector.id}>
 	<div class="custom-connector-item">
-		<ConnectorItem {connector}>
+		<ConnectorJoint connectorId={connector.id}>
 			<div class="joint-circle"></div>
-		</ConnectorItem>
-		<div>{connector.id}</div>
+		</ConnectorJoint>
+		<div>{connector}</div>
 	</div>
 </ConnectorArea>
 
