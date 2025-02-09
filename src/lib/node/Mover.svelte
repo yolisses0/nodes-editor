@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { Vector } from '$lib/space/Vector.js';
-	import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 	import { type Snippet } from 'svelte';
-	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import type { MoveEvent } from './events/MoveEvent.js';
-	import { getNodeListContext } from './nodeListContext.js';
+	import { MoverPointerStrategy } from './MovePointerStrategy.js';
 
-	interface Props extends HTMLButtonAttributes {
+	interface Props extends HTMLAttributes<HTMLDivElement> {
 		children: Snippet;
 		onMove?: (e: MoveEvent) => void;
 		onEndMove?: (e: MoveEvent) => void;
@@ -14,71 +12,27 @@
 		onContextMenu?: (e: MouseEvent) => void;
 	}
 
-	let moved = false;
-	let element: Element;
-	let isMoving = $state(false);
-	let initialMouseRelativePosition: Vector;
-	const nodeListContext = getNodeListContext();
-
+	let element = $state<Element>();
 	const props: Props = $props();
 	const { children, onMove, onEndMove, onStartMove, onContextMenu } = props;
 
-	function handlePointerDown(e: PointerEvent) {
-		if (e.pointerType !== 'mouse' || e.button === 1) return;
-		if (!nodeListContext.nodeList) return;
-
-		element.setPointerCapture(e.pointerId);
-		e.stopPropagation();
-
-		moved = false;
-		isMoving = true;
-
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
-		initialMouseRelativePosition = mouseRelativePosition;
-
-		onStartMove?.({ mouseRelativePosition, initialMouseRelativePosition });
-	}
-
-	function handlePointerMove(e: PointerEvent) {
-		if (e.pointerType !== 'mouse' || e.button === 1) return;
-		if (!nodeListContext.nodeList) return;
-
-		moved = true;
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
-		onMove?.({ mouseRelativePosition, initialMouseRelativePosition });
-	}
-
-	function handlePointerUp(e: PointerEvent) {
-		if (e.pointerType !== 'mouse' || e.button === 1) return;
-		if (!nodeListContext.nodeList) return;
-
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeListContext.nodeList);
-		onEndMove?.({ mouseRelativePosition, initialMouseRelativePosition });
-
-		if (moved) {
-			e.stopPropagation();
-		}
-
-		moved = false;
-		isMoving = false;
-		element.releasePointerCapture(e.pointerId);
-	}
+	const moverPointerStrategy = $derived(
+		new MoverPointerStrategy(element!, {
+			onMove,
+			onEndMove,
+			onStartMove,
+		}),
+	);
 </script>
 
-<button
-	class="node-mover"
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
 	bind:this={element}
-	onpointerup={handlePointerUp}
 	oncontextmenu={onContextMenu}
-	onpointerdown={handlePointerDown}
-	onpointermove={isMoving ? handlePointerMove : undefined}
+	onpointerup={moverPointerStrategy.onpointerup}
+	onpointerdown={moverPointerStrategy.onpointerdown}
+	onpointermove={moverPointerStrategy.onpointermove}
 	{...props}
 >
 	{@render children()}
-</button>
-
-<style>
-	.node-mover {
-		display: contents;
-	}
-</style>
+</div>
