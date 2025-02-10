@@ -7,6 +7,7 @@ import {
 import { PreviewConnectionPointerStrategy } from './connection/PreviewConnectionPointerStrategy.js';
 import PreviewConnectionWire from './connection/PreviewConnectionWire.svelte';
 import ConnectorArea from './connector/ConnectorArea.svelte';
+import { ConnectorAreaPointerStrategy } from './connector/ConnectorAreaPointerStrategy.js';
 import ConnectorJoint from './connector/ConnectorJoint.svelte';
 import {
 	getConnectorPositionsContext,
@@ -17,12 +18,14 @@ import { getMouseContext, setMouseContext } from './mouse/mouseContext.js';
 import type { EndPreviewConnectionEvent } from './node/events/EndPreviewConnectionEvent.js';
 import type { MoveEvent } from './node/events/MoveEvent.js';
 import { getRectsBoundingRect } from './node/getRectsBoundingRect.js';
+import { MoverPointerStrategy } from './node/MovePointerStrategy.js';
 import Mover from './node/Mover.svelte';
 import type { Node } from './node/Node.js';
 import NodeItem from './node/NodeItem.svelte';
 import { getNodeListContext, setNodeListContext } from './node/nodeListContext.js';
 import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
 import PointerEventDispatcher from './node/PointerEventDispatcher.svelte';
+import type { PointerStrategy } from './node/PointerStrategy.js';
 import {
 	getSelectedNodeIdsContext,
 	setSelectedNodeIdsContext,
@@ -43,6 +46,7 @@ import WireSvg from './wire/WireSvg.svelte';
 export {
 	ConnectionItem,
 	ConnectorArea,
+	ConnectorAreaPointerStrategy,
 	ConnectorJoint,
 	getConnectorPositionsContext,
 	getElementPosition,
@@ -58,6 +62,7 @@ export {
 	getVectorsString,
 	getVectorString,
 	Mover,
+	MoverPointerStrategy,
 	NodeItem,
 	PointerEventDispatcher,
 	PreviewConnectionPointerStrategy,
@@ -78,4 +83,4 @@ export {
 	WireSvg,
 };
 
-export type { Connection, EndPreviewConnectionEvent, MoveEvent, Node };
+export type { Connection, EndPreviewConnectionEvent, MoveEvent, Node, PointerStrategy };
