@@ -19,7 +19,6 @@ import type { EndPreviewConnectionEvent } from './node/events/EndPreviewConnecti
 import type { MoveEvent } from './node/events/MoveEvent.js';
 import { getRectsBoundingRect } from './node/getRectsBoundingRect.js';
 import { MoverPointerStrategy } from './node/MovePointerStrategy.js';
-import Mover from './node/Mover.svelte';
 import type { Node } from './node/Node.js';
 import NodeItem from './node/NodeItem.svelte';
 import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
@@ -33,7 +32,7 @@ import {
 import SelectionBox from './selection/SelectionBox.svelte';
 import { getSelectionBoxContext, setSelectionBoxContext } from './selection/selectionBoxContext.js';
 import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.js';
-import Selector from './selection/Selector.svelte';
+import { SelectOnClickPointerStrategy } from './selection/SelectOnClickPointerStrategy.js';
 import { Vector } from './space/Vector.js';
 import { getElementPosition } from './ui/getElementPosition.js';
 import { getMouseRelativePosition } from './ui/getMouseRelativePosition.js';
@@ -61,7 +60,6 @@ export {
 	getSelectionBoxContext,
 	getVectorsString,
 	getVectorString,
-	Mover,
 	MoverPointerStrategy,
 	NodeItem,
 	PointerEventDispatcher,
@@ -69,7 +67,7 @@ export {
 	PreviewConnectionWire,
 	SelectionBox,
 	SelectionBoxPointerStrategy,
-	Selector,
+	SelectOnClickPointerStrategy,
 	setConnectorPositionsContext,
 	setDefaultContexts,
 	setMouseContext,
