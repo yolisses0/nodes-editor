@@ -34,6 +34,9 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
+	onmouseup={pointerStrategy.onmouseup}
+	onmousedown={pointerStrategy.onmousedown}
+	onmouseleave={pointerStrategy.onmouseleave}
 	onpointermove={pointerStrategy.onpointermove}
 	oncontextmenu={pointerStrategy.oncontextmenu}
 	onpointerleave={pointerStrategy.onpointerleave}
