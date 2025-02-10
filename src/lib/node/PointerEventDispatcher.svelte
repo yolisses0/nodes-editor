@@ -32,23 +32,25 @@
 	});
 </script>
 
+<!-- These arrow function bindings seems to be necessary, but the cause is
+unknown -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	onmousedown={pointerStrategy.onmousedown}
-	onmousemove={pointerStrategy.onmousemove}
-	onmouseenter={pointerStrategy.onmouseenter}
-	onmouseleave={pointerStrategy.onmouseleave}
-	oncontextmenu={pointerStrategy.oncontextmenu}
-	onpointermove={pointerStrategy.onpointermove}
-	onpointerenter={pointerStrategy.onpointerenter}
-	onpointerleave={pointerStrategy.onpointerleave}
+	onmousedown={(e) => pointerStrategy.onmousedown?.(e)}
+	onmousemove={(e) => pointerStrategy.onmousemove?.(e)}
+	onmouseenter={(e) => pointerStrategy.onmouseenter?.(e)}
+	onmouseleave={(e) => pointerStrategy.onmouseleave?.(e)}
+	oncontextmenu={(e) => pointerStrategy.oncontextmenu?.(e)}
+	onpointermove={(e) => pointerStrategy.onpointermove?.(e)}
+	onpointerenter={(e) => pointerStrategy.onpointerenter?.(e)}
+	onpointerleave={(e) => pointerStrategy.onpointerleave?.(e)}
 	onpointerup={(e) => {
 		pointerStrategy.onpointerup?.(e);
-		pointerDownEvent = undefined;
+		// pointerDownEvent = undefined;
 	}}
 	onpointerdown={(e) => {
 		pointerStrategy.onpointerdown?.(e);
-		pointerDownEvent = e;
+		// pointerDownEvent = e;
 	}}
 	{...props}
 >
