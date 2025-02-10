@@ -34,11 +34,13 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	onmouseup={pointerStrategy.onmouseup}
 	onmousedown={pointerStrategy.onmousedown}
+	onmousemove={pointerStrategy.onmousemove}
+	onmouseenter={pointerStrategy.onmouseenter}
 	onmouseleave={pointerStrategy.onmouseleave}
-	onpointermove={pointerStrategy.onpointermove}
 	oncontextmenu={pointerStrategy.oncontextmenu}
+	onpointermove={pointerStrategy.onpointermove}
+	onpointerenter={pointerStrategy.onpointerenter}
 	onpointerleave={pointerStrategy.onpointerleave}
 	onpointerup={(e) => {
 		pointerStrategy.onpointerup?.(e);
