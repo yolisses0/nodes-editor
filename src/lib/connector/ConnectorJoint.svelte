@@ -41,6 +41,6 @@
 	});
 </script>
 
-<div class="connector-item" bind:this={element}>
+<div class="connector-item" style="border: 2px red solid;" bind:this={element}>
 	{@render children?.()}
 </div>
