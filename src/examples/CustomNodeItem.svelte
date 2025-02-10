@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ConnectorArea, NodeItem } from '$lib/index.js';
+	import { ConnectorAreaPointerStrategy, NodeItem } from '$lib/index.js';
+	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
 	import { getSelectedNodeIdsContext } from '$lib/selection/selectedNodeIdsContext.js';
 	import { customConnectionCondition } from './customConnectionCondition.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
@@ -14,9 +15,14 @@
 	const { node }: Props = $props();
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
+
+	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
+		node.id,
+		customConnectionCondition,
+	);
 </script>
 
-<ConnectorArea connectorId={node.id} connectionCondition={customConnectionCondition}>
+<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
 	<NodeItem {node} position={node.position}>
 		<div class="custom-node-item" class:selected={isSelected}>
 			<CustomNodeItemHeader {node} />
@@ -29,7 +35,7 @@
 			{/each}
 		</div>
 	</NodeItem>
-</ConnectorArea>
+</PointerEventDispatcher>
 
 <style>
 	.custom-node-item {
