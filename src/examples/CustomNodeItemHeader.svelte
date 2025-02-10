@@ -24,9 +24,17 @@
 
 <Mover {onMove} {onStartMove}>
 	<Selector id={node.id}>
-		<div>
+		<div class="horizontal">
 			{node.id}
 			<JointCircle />
 		</div>
 	</Selector>
 </Mover>
+
+<style>
+	.horizontal {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+</style>
