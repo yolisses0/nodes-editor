@@ -52,7 +52,13 @@
 	});
 </script>
 
-<PointerEventDispatcher {pointerStrategy}>
+<PointerEventDispatcher
+	{pointerStrategy}
+	onpointerdown={(e) => {
+		selectOnClickPointerStrategy.onpointerdown(e);
+		moverPointerStrategy?.onpointerdown(e);
+	}}
+>
 	<div class="custom-node-item-header" bind:this={element}>
 		{node.id}
 		<ConnectorJoint connectorId={node.id}>
