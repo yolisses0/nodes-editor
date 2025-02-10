@@ -29,10 +29,10 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		const { rootElement: nodeList } = this.rootElementContext;
-		if (!nodeList) return;
+		const { rootElement } = this.rootElementContext;
+		if (!rootElement) return;
 
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
 		// TODO change only if selecting (when startPosition is defined)
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 
@@ -52,14 +52,14 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	onpointerdown = (e: PointerEvent) => {
-		const { rootElement: nodeList } = this.rootElementContext;
-		if (!nodeList) return;
-		if (nodeList !== e.target) return;
+		const { rootElement } = this.rootElementContext;
+		if (!rootElement) return;
+		if (rootElement !== e.target) return;
 
-		nodeList.setPointerCapture(e.pointerId);
+		rootElement.setPointerCapture(e.pointerId);
 		this.pointerId = e.pointerId;
 
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 		this.selectionBoxContext.startPosition = mouseRelativePosition;
 
@@ -70,9 +70,9 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
 
-		const { rootElement: nodeList } = this.rootElementContext;
-		if (!nodeList) return;
+		const { rootElement } = this.rootElementContext;
+		if (!rootElement) return;
 		if (this.pointerId === undefined) return;
-		nodeList.releasePointerCapture(this.pointerId);
+		rootElement.releasePointerCapture(this.pointerId);
 	};
 }

@@ -31,21 +31,21 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	}
 
 	onpointerdown = (e: PointerEvent) => {
-		const { rootElement: nodeList } = this.nodeListContext;
-		if (!nodeList) return;
+		const { rootElement } = this.nodeListContext;
+		if (!rootElement) return;
 
 		this.isOutside = false;
 
 		// Prevents connection from starting with the previous mouse position
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
 		this.mouseContext.mouseRelativePosition = mouseRelativePosition;
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		const { rootElement: nodeList } = this.nodeListContext;
-		if (!nodeList) return;
+		const { rootElement } = this.nodeListContext;
+		if (!rootElement) return;
 
-		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
+		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
 		this.mouseContext.mouseRelativePosition = mouseRelativePosition;
 
 		// For performance reasons the values are updated in every mouse
@@ -55,10 +55,10 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 			// entered the node list area. If it does, change isOutside and release
 			// the pointer capture
 			if (this.isOutside) {
-				const rect = nodeList.getBoundingClientRect();
+				const rect = rootElement.getBoundingClientRect();
 				if (getRectContainsPoint(rect, mouseRelativePosition)) {
 					this.isOutside = false;
-					nodeList.releasePointerCapture(e.pointerId);
+					rootElement.releasePointerCapture(e.pointerId);
 				}
 			}
 		}
