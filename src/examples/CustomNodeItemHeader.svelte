@@ -1,5 +1,14 @@
 <script lang="ts">
-	import { ConnectorJoint, Mover, Selector, Vector, type MoveEvent } from '$lib/index.js';
+	import {
+		ConnectorJoint,
+		getPreviewConnectionContext,
+		MoverPointerStrategy,
+		Vector,
+		type MoveEvent,
+	} from '$lib/index.js';
+	import { EmptyPointerStrategy } from '$lib/node/EmptyPointerStrategy.js';
+	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
+	import { SelectOnClickPointerStrategy } from '$lib/selection/SelectOnClickPointerStrategy.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import JointCircle from './JointCircle.svelte';
 
@@ -7,6 +16,7 @@
 		node: CustomNode;
 	}
 
+	let element = $state<Element>();
 	const { node }: Props = $props();
 	// This initial value should not matter
 	let initialNodePosition = $state(Vector.zero());
@@ -20,23 +30,48 @@
 			.add(mouseRelativePosition)
 			.subtract(initialMouseRelativePosition);
 	}
+
+	const previewConnectionContext = getPreviewConnectionContext();
+	const emptyPointerStrategy = new EmptyPointerStrategy();
+	const selectOnClickPointerStrategy = new SelectOnClickPointerStrategy(node.id);
+	const moverPointerStrategy = $derived(
+		element ? new MoverPointerStrategy(element, { onMove, onStartMove }) : undefined,
+	);
+
+	const pointerStrategy = $derived.by(() => {
+		// If connecting
+		if (previewConnectionContext.startConnectorId) {
+			return emptyPointerStrategy;
+		}
+
+		if (moverPointerStrategy) {
+			return moverPointerStrategy;
+		}
+
+		return emptyPointerStrategy;
+	});
 </script>
 
-<Mover {onMove} {onStartMove}>
-	<Selector id={node.id}>
-		<div class="horizontal">
-			{node.id}
-			<ConnectorJoint connectorId={node.id}>
-				<JointCircle />
-			</ConnectorJoint>
-		</div>
-	</Selector>
-</Mover>
+<PointerEventDispatcher {pointerStrategy}>
+	<div class="custom-node-item-header" bind:this={element}>
+		{node.id}
+		<ConnectorJoint connectorId={node.id}>
+			<JointCircle />
+		</ConnectorJoint>
+	</div>
+	<div>
+		{pointerStrategy.constructor.name}
+	</div>
+</PointerEventDispatcher>
 
 <style>
-	.horizontal {
+	.custom-node-item-header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+	}
+
+	.custom-node-item-header:hover {
+		background-color: #fff2;
 	}
 </style>
