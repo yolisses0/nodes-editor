@@ -16,7 +16,7 @@
 	const { children, connectorId }: Props = $props();
 	const connectorPositions = getConnectorPositionsContext();
 
-	function createObserver(rootElement: Element, element: Element) {
+	function createObserver({ rootElement, element }: { rootElement: Element; element: Element }) {
 		const callback = () => {
 			if (!rootElementContext.rootElement) return;
 			const rootPosition = getElementPosition(rootElementContext.rootElement);
@@ -26,13 +26,13 @@
 
 		const observer = new RectObserver(callback, { root: rootElement });
 		observer.observe(element);
-		callback();
 		return observer;
 	}
 
 	$effect(() => {
-		if (rootElementContext.rootElement) {
-			const observer = createObserver(rootElementContext.rootElement, element);
+		const { rootElement } = rootElementContext;
+		if (rootElement) {
+			const observer = createObserver({ element, rootElement });
 			return () => {
 				observer.disconnect();
 				delete connectorPositions[connectorId];
