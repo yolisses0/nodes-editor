@@ -1,4 +1,4 @@
-import type { ConnectionCondition } from '$lib/connector/ConnectionCondition.js';
+import type { ConnectionCondition } from '$lib/index.js';
 
 export const customConnectionCondition: ConnectionCondition = ({
 	endConnectorId,

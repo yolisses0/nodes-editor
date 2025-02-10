@@ -1,7 +1,5 @@
 <script lang="ts">
-	import type { Vector } from '$lib/index.js';
-	import type { GetPathD } from '$lib/wire/GetPathD.js';
-	import WirePath from '$lib/wire/WirePath.svelte';
+	import { type GetPathD, Vector, WirePath } from '$lib/index.js';
 
 	interface Props {
 		startPosition: Vector;

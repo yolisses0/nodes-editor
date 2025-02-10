@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { getLinePathD, Vector } from '$lib/index.js';
-	import WirePath from '$lib/wire/WirePath.svelte';
-	import WireSvg from '$lib/wire/WireSvg.svelte';
+	import { getLinePathD, Vector, WirePath, WireSvg } from '$lib/index.js';
 
 	interface Props {
 		endPosition: Vector;

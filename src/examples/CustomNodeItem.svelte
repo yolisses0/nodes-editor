@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { ConnectorAreaPointerStrategy, NodeItem } from '$lib/index.js';
-	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
-	import { getSelectedNodeIdsContext } from '$lib/selection/selectedNodeIdsContext.js';
+	import {
+		ConnectorAreaPointerStrategy,
+		NodeItem,
+		PointerEventDispatcher,
+		getSelectedNodeIdsContext,
+	} from '$lib/index.js';
 	import { customConnectionCondition } from './customConnectionCondition.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';

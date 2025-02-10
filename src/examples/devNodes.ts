@@ -1,4 +1,4 @@
-import { Vector } from '$lib/space/Vector.js';
+import { Vector } from '$lib/index.js';
 import { CustomConnector } from './CustomConnector.js';
 import { CustomNode } from './CustomNode.svelte.js';
 import { ZOOM } from './ZOOM.js';

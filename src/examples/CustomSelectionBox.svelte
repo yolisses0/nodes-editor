@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SelectionBox from '$lib/selection/SelectionBox.svelte';
+	import { SelectionBox } from '$lib/index.js';
 </script>
 
 <SelectionBox>
