@@ -22,10 +22,10 @@ import { MoverPointerStrategy } from './node/MovePointerStrategy.js';
 import Mover from './node/Mover.svelte';
 import type { Node } from './node/Node.js';
 import NodeItem from './node/NodeItem.svelte';
-import { getNodeListContext, setNodeListContext } from './node/nodeListContext.js';
 import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
 import PointerEventDispatcher from './node/PointerEventDispatcher.svelte';
 import type { PointerStrategy } from './node/PointerStrategy.js';
+import { getRootElementContext, setRootElementContext } from './node/rootElementContext.js';
 import {
 	getSelectedNodeIdsContext,
 	setSelectedNodeIdsContext,
@@ -53,10 +53,10 @@ export {
 	getLinePathD,
 	getMouseContext,
 	getMouseRelativePosition,
-	getNodeListContext,
 	getNodeRectsContext,
 	getPreviewConnectionContext,
 	getRectsBoundingRect,
+	getRootElementContext,
 	getSelectedNodeIdsContext,
 	getSelectionBoxContext,
 	getVectorsString,
@@ -73,9 +73,9 @@ export {
 	setConnectorPositionsContext,
 	setDefaultContexts,
 	setMouseContext,
-	setNodeListContext,
 	setNodeRectsContext,
 	setPreviewConnectionContext,
+	setRootElementContext,
 	setSelectedNodeIdsContext,
 	setSelectionBoxContext,
 	Vector,

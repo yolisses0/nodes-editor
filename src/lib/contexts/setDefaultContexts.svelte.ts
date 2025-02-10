@@ -5,8 +5,8 @@ import {
 import type { ConnectorPositions } from '$lib/connector/ConnectorPositions.js';
 import { setConnectorPositionsContext } from '$lib/connector/connectorPositionsContext.js';
 import { type MouseContext, setMouseContext } from '$lib/mouse/mouseContext.js';
-import { type NodeListContext, setNodeListContext } from '$lib/node/nodeListContext.js';
 import { type NodeRectsContext, setNodeRectsContext } from '$lib/node/nodeRectsContext.js';
+import { type RootElementContext, setRootElementContext } from '$lib/node/rootElementContext.js';
 import {
 	type SelectedNodeIdsContext,
 	setSelectedNodeIdsContext,
@@ -23,15 +23,15 @@ export function setDefaultContexts() {
 	const selectionBoxContext: SelectionBoxContext = $state({});
 	const previewConnection: PreviewConnectionContext = $state({});
 	const nodeRectsContext: NodeRectsContext = $state({ nodeRects: {} });
-	const nodeListContext: NodeListContext = $state({ nodeList: undefined });
+	const rootElementContext: RootElementContext = $state({});
 	const mouseContext: MouseContext = $state({ mouseRelativePosition: new Vector(0, 0) });
 	const selectedNodeIdsContext: SelectedNodeIdsContext = $state({
 		selectedNodeIds: new SvelteSet(),
 	});
 
 	setMouseContext(mouseContext);
-	setNodeListContext(nodeListContext);
 	setNodeRectsContext(nodeRectsContext);
+	setRootElementContext(rootElementContext);
 	setSelectionBoxContext(selectionBoxContext);
 	setPreviewConnectionContext(previewConnection);
 	setConnectorPositionsContext(connectorPositions);

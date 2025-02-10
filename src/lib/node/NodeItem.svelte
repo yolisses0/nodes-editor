@@ -5,8 +5,8 @@
 	import { RectObserver } from 'rect-observer';
 	import type { Snippet } from 'svelte';
 	import type { Node } from './Node.js';
-	import { getNodeListContext } from './nodeListContext.js';
 	import { getNodeRectsContext } from './nodeRectsContext.js';
+	import { getRootElementContext } from './rootElementContext.js';
 
 	interface Props {
 		node: Node;
@@ -15,15 +15,15 @@
 	}
 
 	let element: Element;
-	const nodeListContext = getNodeListContext();
+	const nodeListContext = getRootElementContext();
 	const { node, children, position }: Props = $props();
 	const nodeRectsContext = getNodeRectsContext();
 
 	function createObserver(nodeList: Element, element: Element) {
 		const observer = new RectObserver(
 			() => {
-				if (!nodeListContext.nodeList) return;
-				const rootPosition = getElementPosition(nodeListContext.nodeList);
+				if (!nodeListContext.rootElement) return;
+				const rootPosition = getElementPosition(nodeListContext.rootElement);
 				const rect = getElementRect(element);
 				rect.position = rect.position.subtract(rootPosition);
 				nodeRectsContext.nodeRects[node.id] = rect;
@@ -35,8 +35,8 @@
 	}
 
 	$effect(() => {
-		if (nodeListContext.nodeList) {
-			const observer = createObserver(nodeListContext.nodeList, element);
+		if (nodeListContext.rootElement) {
+			const observer = createObserver(nodeListContext.rootElement, element);
 			return () => {
 				observer.disconnect();
 				delete nodeRectsContext.nodeRects[node.id];

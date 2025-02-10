@@ -3,9 +3,9 @@
 	import { PreviewConnectionPointerStrategy } from '$lib/connection/PreviewConnectionPointerStrategy.js';
 	import {
 		ConnectionItem,
-		getNodeListContext,
 		getNodeRectsContext,
 		getRectsBoundingRect,
+		getRootElementContext,
 		PointerEventDispatcher,
 		PreviewConnectionWire,
 		Vector,
@@ -22,7 +22,7 @@
 		connections: Connection[];
 	}
 
-	const nodeListContext = getNodeListContext();
+	const rootElementContext = getRootElementContext();
 	const { customNodes, connections }: Props = $props();
 
 	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
@@ -58,7 +58,7 @@
 			class="inner-div"
 			style:min-width={minSize.x + 'px'}
 			style:min-height={minSize.y + 'px'}
-			bind:this={nodeListContext.nodeList}
+			bind:this={rootElementContext.rootElement}
 		>
 			{#each customNodes as node (node.id)}
 				<CustomNodeItem {node} />
