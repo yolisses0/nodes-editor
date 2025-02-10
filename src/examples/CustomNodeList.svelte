@@ -25,8 +25,8 @@
 	const rootElementContext = getRootElementContext();
 	const { customNodes, connections }: Props = $props();
 
-	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
 	const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy();
+	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
 
 	const previewConnectionContext = getPreviewConnectionContext();
 	const pointerStrategy = $derived(
@@ -34,7 +34,6 @@
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy,
 	);
-	// const pointerStrategy = previewConnectionPointerStrategy;
 
 	const nodeRectsContext = getNodeRectsContext();
 
