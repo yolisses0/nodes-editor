@@ -10,7 +10,8 @@ export class ConnectorAreaPointerStrategy implements PointerStrategy {
 	) {}
 	previewConnectionContext = getPreviewConnectionContext();
 
-	onmousedown = () => {
+	onmousedown = (e: MouseEvent) => {
+		e.stopPropagation();
 		this.previewConnectionContext.startConnectorId = this.connectorId;
 	};
 
