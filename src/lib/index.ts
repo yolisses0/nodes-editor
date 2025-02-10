@@ -1,4 +1,5 @@
 import type { Connection } from './connection/Connection.js';
+import type { ConnectionCondition } from './connection/ConnectionCondition.js';
 import ConnectionItem from './connection/ConnectionItem.svelte';
 import {
 	getPreviewConnectionContext,
@@ -14,6 +15,7 @@ import {
 } from './connector/connectorPositionsContext.js';
 import { setDefaultContexts } from './contexts/setDefaultContexts.svelte.js';
 import { getMouseContext, setMouseContext } from './mouse/mouseContext.js';
+import { EmptyPointerStrategy } from './node/EmptyPointerStrategy.js';
 import type { EndPreviewConnectionEvent } from './node/events/EndPreviewConnectionEvent.js';
 import type { MoveEvent } from './node/events/MoveEvent.js';
 import { getRectsBoundingRect } from './node/getRectsBoundingRect.js';
@@ -36,6 +38,7 @@ import { Vector } from './space/Vector.js';
 import { getElementPosition } from './ui/getElementPosition.js';
 import { getMouseRelativePosition } from './ui/getMouseRelativePosition.js';
 import { getLinePathD } from './wire/getLinePath.js';
+import { type GetPathD } from './wire/GetPathD.js';
 import { getVectorsString } from './wire/getVectorsString.js';
 import { getVectorString } from './wire/getVectorString.js';
 import WirePath from './wire/WirePath.svelte';
@@ -45,6 +48,7 @@ export {
 	ConnectionItem,
 	ConnectorAreaPointerStrategy,
 	ConnectorJoint,
+	EmptyPointerStrategy,
 	getConnectorPositionsContext,
 	getElementPosition,
 	getLinePathD,
@@ -79,4 +83,12 @@ export {
 	WireSvg,
 };
 
-export type { Connection, EndPreviewConnectionEvent, MoveEvent, Node, PointerStrategy };
+export type {
+	Connection,
+	ConnectionCondition,
+	EndPreviewConnectionEvent,
+	GetPathD,
+	MoveEvent,
+	Node,
+	PointerStrategy,
+};

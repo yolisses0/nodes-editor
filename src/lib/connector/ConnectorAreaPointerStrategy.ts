@@ -4,7 +4,7 @@ import type { PointerStrategy } from '$lib/node/PointerStrategy.js';
 import { getRootElementContext } from '$lib/node/rootElementContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 
-import type { ConnectionCondition } from './ConnectionCondition.js';
+import type { ConnectionCondition } from '../connection/ConnectionCondition.js';
 
 export class ConnectorAreaPointerStrategy implements PointerStrategy {
 	constructor(
