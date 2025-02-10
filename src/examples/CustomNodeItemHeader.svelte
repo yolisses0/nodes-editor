@@ -31,13 +31,13 @@
 			.subtract(initialMouseRelativePosition);
 	}
 
-	const previewConnectionContext = getPreviewConnectionContext();
 	const emptyPointerStrategy = new EmptyPointerStrategy();
 	const selectOnClickPointerStrategy = new SelectOnClickPointerStrategy(node.id);
 	const moverPointerStrategy = $derived(
 		element ? new MoverPointerStrategy(element, { onMove, onStartMove }) : undefined,
 	);
 
+	const previewConnectionContext = getPreviewConnectionContext();
 	const pointerStrategy = $derived.by(() => {
 		// If connecting
 		if (previewConnectionContext.startConnectorId) {
