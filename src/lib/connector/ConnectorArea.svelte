@@ -1,27 +1,22 @@
 <script lang="ts">
+	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
 	import type { Snippet } from 'svelte';
+	import type { ConnectionCondition } from './ConnectionCondition.js';
 	import { ConnectorAreaPointerStrategy } from './ConnectorAreaPointerStrategy.js';
-	import type { EndConnectorCondition } from './EndConnectorCondition.js';
 
 	interface Props {
 		children: Snippet;
 		connectorId: string;
-		endConnectorCondition?: EndConnectorCondition;
+		connectionCondition?: ConnectionCondition;
 	}
 
-	const { children, connectorId, endConnectorCondition }: Props = $props();
+	const { children, connectorId, connectionCondition }: Props = $props();
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
 		connectorId,
-		endConnectorCondition,
+		connectionCondition,
 	);
 </script>
 
-<button
-	style:display="contents"
-	onblur={connectorAreaPointerStrategy.onmouseleave}
-	onmousedown={connectorAreaPointerStrategy.onmousedown}
-	onmouseenter={connectorAreaPointerStrategy.onmouseenter}
-	onmouseleave={connectorAreaPointerStrategy.onmouseleave}
->
+<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
 	{@render children()}
-</button>
+</PointerEventDispatcher>

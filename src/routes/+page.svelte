@@ -1,6 +1,5 @@
 <script lang="ts">
-	import NodesPage from '$examples/NodesPage.svelte';
+	import CustomNodesPage from '$examples/CustomNodesPage.svelte';
 </script>
 
-<div>This is a height limited scroll. It's intentional.</div>
-<NodesPage />
+<CustomNodesPage />
