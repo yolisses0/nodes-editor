@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ConnectorArea, ConnectorJoint } from '$lib/index.js';
 	import type { CustomConnector } from './CustomConnector.js';
+	import JointCircle from './JointCircle.svelte';
 
 	interface Props {
 		connector: CustomConnector;
@@ -12,20 +13,13 @@
 <ConnectorArea connectorId={connector.id}>
 	<div class="custom-connector-item">
 		<ConnectorJoint connectorId={connector.id}>
-			<div class="joint-circle"></div>
+			<JointCircle />
 		</ConnectorJoint>
 		<div>{connector.id}</div>
 	</div>
 </ConnectorArea>
 
 <style>
-	.joint-circle {
-		background-color: green;
-		border-radius: 100%;
-		aspect-ratio: 1;
-		width: 10px;
-	}
-
 	.custom-connector-item {
 		gap: 10px;
 		display: flex;

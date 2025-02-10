@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { NodeItem } from '$lib/index.js';
+	import { NodeItem, Vector } from '$lib/index.js';
+	import type { MoveEvent } from '$lib/node/events/MoveEvent.js';
+	import Mover from '$lib/node/Mover.svelte';
 	import { getSelectedNodeIdsContext } from '$lib/selection/selectedNodeIdsContext.js';
+	import Selector from '$lib/selection/Selector.svelte';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
-	import CustomNodeItemHeader from './CustomNodeItemHeader.svelte';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
 	interface Props {
@@ -11,13 +13,31 @@
 	}
 
 	const { node }: Props = $props();
+	// This initial value should not matter
+	let initialNodePosition = $state(Vector.zero());
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
+
+	function onStartMove() {
+		initialNodePosition = node.position;
+	}
+
+	function onMove({ mouseRelativePosition, initialMouseRelativePosition }: MoveEvent) {
+		node.position = initialNodePosition
+			.add(mouseRelativePosition)
+			.subtract(initialMouseRelativePosition);
+	}
 </script>
 
 <NodeItem {node} position={node.position}>
 	<div class="custom-node-item" class:selected={isSelected}>
-		<CustomNodeItemHeader {node} />
+		<Mover {onMove} {onStartMove}>
+			<Selector id={node.id}>
+				<div>
+					{node.id}
+				</div>
+			</Selector>
+		</Mover>
 		<VariableSizeComponent />
 		{#if node.id !== 'devNode3'}
 			<div>some options not related to the core node structure</div>
