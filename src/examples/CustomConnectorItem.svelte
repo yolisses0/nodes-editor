@@ -1,6 +1,9 @@
 <script lang="ts">
-	import { ConnectorAreaPointerStrategy, ConnectorJoint } from '$lib/index.js';
-	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
+	import {
+		ConnectorAreaPointerStrategy,
+		ConnectorJoint,
+		PointerEventDispatcher,
+	} from '$lib/index.js';
 	import { customConnectionCondition } from './customConnectionCondition.js';
 	import type { CustomConnector } from './CustomConnector.js';
 	import JointCircle from './JointCircle.svelte';

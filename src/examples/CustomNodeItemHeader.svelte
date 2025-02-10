@@ -1,14 +1,14 @@
 <script lang="ts">
 	import {
 		ConnectorJoint,
+		EmptyPointerStrategy,
 		getPreviewConnectionContext,
 		MoverPointerStrategy,
+		PointerEventDispatcher,
+		SelectOnClickPointerStrategy,
 		Vector,
 		type MoveEvent,
 	} from '$lib/index.js';
-	import { EmptyPointerStrategy } from '$lib/node/EmptyPointerStrategy.js';
-	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
-	import { SelectOnClickPointerStrategy } from '$lib/selection/SelectOnClickPointerStrategy.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import JointCircle from './JointCircle.svelte';
 

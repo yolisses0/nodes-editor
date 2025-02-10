@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { setDefaultContexts } from '$lib/contexts/setDefaultContexts.svelte.js';
-	import { getPreviewConnectionContext } from '$lib/index.js';
+	import { getPreviewConnectionContext, setDefaultContexts } from '$lib/index.js';
 	import CustomNodeList from './CustomNodeList.svelte';
 	import { devConnections } from './devConnections.js';
 	import { devNodes } from './devNodes.js';

@@ -1,4 +1,4 @@
-import type { Connection } from '$lib/connection/Connection.js';
+import type { Connection } from '$lib/index.js';
 
 export const devConnections: Connection[] = [
 	{ id: 'connection1', startConnectorId: 'connector2.1', endConnectorId: 'connector1.1' },
