@@ -30,17 +30,6 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 		this.previewConnectionContext.startConnectorId = undefined;
 	}
 
-	onpointerdown = (e: PointerEvent) => {
-		const { rootElement } = this.nodeListContext;
-		if (!rootElement) return;
-
-		this.isOutside = false;
-
-		// Prevents connection from starting with the previous mouse position
-		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
-		this.mouseContext.mouseRelativePosition = mouseRelativePosition;
-	};
-
 	onpointermove = (e: PointerEvent) => {
 		const { rootElement } = this.nodeListContext;
 		if (!rootElement) return;
