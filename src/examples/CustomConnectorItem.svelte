@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ConnectorArea, ConnectorJoint } from '$lib/index.js';
+	import { customConnectionCondition } from './customConnectionCondition.js';
 	import type { CustomConnector } from './CustomConnector.js';
 	import JointCircle from './JointCircle.svelte';
 
@@ -10,7 +11,7 @@
 	const { connector }: Props = $props();
 </script>
 
-<ConnectorArea connectorId={connector.id}>
+<ConnectorArea connectorId={connector.id} connectionCondition={customConnectionCondition}>
 	<div class="custom-connector-item">
 		<ConnectorJoint connectorId={connector.id}>
 			<JointCircle />

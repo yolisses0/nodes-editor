@@ -1,12 +1,12 @@
 import { getPreviewConnectionContext } from '$lib/connection/previewConnectionContext.js';
 import type { PointerStrategy } from '$lib/node/PointerStrategy.js';
 
-import type { EndConnectorCondition } from './EndConnectorCondition.js';
+import type { ConnectionCondition } from './ConnectionCondition.js';
 
 export class ConnectorAreaPointerStrategy implements PointerStrategy {
 	constructor(
 		public connectorId: string,
-		public endConnectorCondition?: EndConnectorCondition,
+		public connectionCondition?: ConnectionCondition,
 	) {}
 	previewConnectionContext = getPreviewConnectionContext();
 
@@ -16,11 +16,12 @@ export class ConnectorAreaPointerStrategy implements PointerStrategy {
 	};
 
 	onmouseenter = () => {
-		if (!this.previewConnectionContext.startConnectorId) return;
+		const { startConnectorId } = this.previewConnectionContext;
+		if (!startConnectorId) return;
 
 		if (
-			this.endConnectorCondition &&
-			!this.endConnectorCondition(this.connectorId, this.previewConnectionContext.startConnectorId)
+			this.connectionCondition &&
+			!this.connectionCondition({ startConnectorId, endConnectorId: this.connectorId })
 		) {
 			return;
 		}

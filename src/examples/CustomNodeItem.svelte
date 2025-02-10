@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { NodeItem } from '$lib/index.js';
+	import { ConnectorArea, NodeItem } from '$lib/index.js';
 	import { getSelectedNodeIdsContext } from '$lib/selection/selectedNodeIdsContext.js';
+	import { customConnectionCondition } from './customConnectionCondition.js';
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItemHeader from './CustomNodeItemHeader.svelte';
@@ -15,18 +16,20 @@
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 </script>
 
-<NodeItem {node} position={node.position}>
-	<div class="custom-node-item" class:selected={isSelected}>
-		<CustomNodeItemHeader {node} />
-		<VariableSizeComponent />
-		{#if node.id !== 'devNode3'}
-			<div>some options not related to the core node structure</div>
-		{/if}
-		{#each node.connectors as connectorId (connectorId)}
-			<CustomConnectorItem connector={connectorId} />
-		{/each}
-	</div>
-</NodeItem>
+<ConnectorArea connectorId={node.id} connectionCondition={customConnectionCondition}>
+	<NodeItem {node} position={node.position}>
+		<div class="custom-node-item" class:selected={isSelected}>
+			<CustomNodeItemHeader {node} />
+			<VariableSizeComponent />
+			{#if node.id !== 'devNode3'}
+				<div>some options not related to the core node structure</div>
+			{/if}
+			{#each node.connectors as connectorId (connectorId)}
+				<CustomConnectorItem connector={connectorId} />
+			{/each}
+		</div>
+	</NodeItem>
+</ConnectorArea>
 
 <style>
 	.custom-node-item {

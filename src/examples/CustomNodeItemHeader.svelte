@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Mover, Selector, Vector, type MoveEvent } from '$lib/index.js';
+	import { ConnectorJoint, Mover, Selector, Vector, type MoveEvent } from '$lib/index.js';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import JointCircle from './JointCircle.svelte';
 
@@ -26,7 +26,9 @@
 	<Selector id={node.id}>
 		<div class="horizontal">
 			{node.id}
-			<JointCircle />
+			<ConnectorJoint connectorId={node.id}>
+				<JointCircle />
+			</ConnectorJoint>
 		</div>
 	</Selector>
 </Mover>
