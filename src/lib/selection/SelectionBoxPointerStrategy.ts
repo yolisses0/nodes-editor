@@ -3,33 +3,33 @@ import { getRectFromPositions } from '$lib/selection/getRectFromPositions.js';
 import { getSelectionBoxContext } from '$lib/selection/selectionBoxContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import { SvelteSet } from 'svelte/reactivity';
-import { getNodeListContext } from '../node/nodeListContext.js';
 import { getNodeRectsContext } from '../node/nodeRectsContext.js';
 import type { PointerStrategy } from '../node/PointerStrategy.js';
+import { getRootElementContext } from '../node/rootElementContext.js';
 import { getRectsTouch } from './getRectsTouch.js';
 import { getSelectedNodeIdsContext } from './selectedNodeIdsContext.js';
 
 export class SelectionBoxPointerStrategy implements PointerStrategy {
 	pointerId?: number;
 	mouseContext = getMouseContext();
-	nodeListContext = getNodeListContext();
 	nodeRectsContext = getNodeRectsContext();
+	rootElementContext = getRootElementContext();
 	selectionBoxContext = getSelectionBoxContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
 
 	onpointerup = (e: PointerEvent) => {
-		const { nodeList } = this.nodeListContext;
-		if (!nodeList) return;
+		const { rootElement } = this.rootElementContext;
+		if (!rootElement) return;
 
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
 
-		nodeList.releasePointerCapture(e.pointerId);
+		rootElement.releasePointerCapture(e.pointerId);
 		this.pointerId = undefined;
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		const { nodeList } = this.nodeListContext;
+		const { rootElement: nodeList } = this.rootElementContext;
 		if (!nodeList) return;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
@@ -52,7 +52,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	onpointerdown = (e: PointerEvent) => {
-		const { nodeList } = this.nodeListContext;
+		const { rootElement: nodeList } = this.rootElementContext;
 		if (!nodeList) return;
 		if (nodeList !== e.target) return;
 
@@ -70,7 +70,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
 
-		const { nodeList } = this.nodeListContext;
+		const { rootElement: nodeList } = this.rootElementContext;
 		if (!nodeList) return;
 		if (this.pointerId === undefined) return;
 		nodeList.releasePointerCapture(this.pointerId);

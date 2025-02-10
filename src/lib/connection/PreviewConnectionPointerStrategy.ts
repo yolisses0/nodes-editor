@@ -1,15 +1,15 @@
 import { getMouseContext } from '$lib/mouse/mouseContext.js';
 import type { EndPreviewConnectionEvent } from '$lib/node/events/EndPreviewConnectionEvent.js';
 import { getRectContainsPoint } from '$lib/node/getRectContainsPoint.js';
-import { getNodeListContext } from '$lib/node/nodeListContext.js';
 import type { PointerStrategy } from '$lib/node/PointerStrategy.js';
+import { getRootElementContext } from '$lib/node/rootElementContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import { getPreviewConnectionContext } from './previewConnectionContext.js';
 
 export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	isOutside = false;
 	mouseContext = getMouseContext();
-	nodeListContext = getNodeListContext();
+	nodeListContext = getRootElementContext();
 	previewConnectionContext = getPreviewConnectionContext();
 
 	constructor(public onEndPreview: (e: EndPreviewConnectionEvent) => void) {}
@@ -31,7 +31,7 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	}
 
 	onpointerdown = (e: PointerEvent) => {
-		const { nodeList } = this.nodeListContext;
+		const { rootElement: nodeList } = this.nodeListContext;
 		if (!nodeList) return;
 
 		this.isOutside = false;
@@ -42,7 +42,7 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		const { nodeList } = this.nodeListContext;
+		const { rootElement: nodeList } = this.nodeListContext;
 		if (!nodeList) return;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, nodeList);
@@ -65,14 +65,14 @@ export class PreviewConnectionPointerStrategy implements PointerStrategy {
 	};
 
 	onpointerup = (e: PointerEvent) => {
-		this.nodeListContext.nodeList?.releasePointerCapture(e.pointerId);
+		this.nodeListContext.rootElement?.releasePointerCapture(e.pointerId);
 		this.endPreview();
 		this.isOutside = false;
 	};
 
 	onpointerleave = (e: PointerEvent) => {
 		this.isOutside = true;
-		this.nodeListContext.nodeList?.setPointerCapture(e.pointerId);
+		this.nodeListContext.rootElement?.setPointerCapture(e.pointerId);
 	};
 
 	oncontextmenu = () => {

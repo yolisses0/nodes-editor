@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getNodeListContext } from '$lib/node/nodeListContext.js';
+	import { getRootElementContext } from '$lib/node/rootElementContext.js';
 	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import { RectObserver } from 'rect-observer';
 	import type { Snippet } from 'svelte';
@@ -12,15 +12,15 @@
 	}
 
 	let element: Element;
-	const nodeListContext = getNodeListContext();
+	const rootElementContext = getRootElementContext();
 	const { children, connectorId }: Props = $props();
 	const connectorPositions = getConnectorPositionsContext();
 
 	function createObserver(nodeList: Element, element: Element) {
 		const observer = new RectObserver(
 			() => {
-				if (!nodeListContext.nodeList) return;
-				const rootPosition = getElementPosition(nodeListContext.nodeList);
+				if (!rootElementContext.rootElement) return;
+				const rootPosition = getElementPosition(rootElementContext.rootElement);
 				const position = getElementCenter(element).subtract(rootPosition);
 				connectorPositions[connectorId] = position;
 			},
@@ -31,8 +31,8 @@
 	}
 
 	$effect(() => {
-		if (nodeListContext.nodeList) {
-			const observer = createObserver(nodeListContext.nodeList, element);
+		if (rootElementContext.rootElement) {
+			const observer = createObserver(rootElementContext.rootElement, element);
 			return () => {
 				observer.disconnect();
 				delete connectorPositions[connectorId];
