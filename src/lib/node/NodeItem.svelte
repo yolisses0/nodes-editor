@@ -19,7 +19,7 @@
 	const { node, children, position }: Props = $props();
 	const nodeRectsContext = getNodeRectsContext();
 
-	function createObserver(nodeList: Element, element: Element) {
+	function createObserver(rootElement: Element, element: Element) {
 		const observer = new RectObserver(
 			() => {
 				if (!nodeListContext.rootElement) return;
@@ -28,7 +28,7 @@
 				rect.position = rect.position.subtract(rootPosition);
 				nodeRectsContext.nodeRects[node.id] = rect;
 			},
-			{ root: nodeList },
+			{ root: rootElement },
 		);
 		observer.observe(element);
 		return observer;

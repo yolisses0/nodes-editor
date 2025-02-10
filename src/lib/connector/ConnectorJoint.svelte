@@ -16,17 +16,17 @@
 	const { children, connectorId }: Props = $props();
 	const connectorPositions = getConnectorPositionsContext();
 
-	function createObserver(nodeList: Element, element: Element) {
-		const observer = new RectObserver(
-			() => {
-				if (!rootElementContext.rootElement) return;
-				const rootPosition = getElementPosition(rootElementContext.rootElement);
-				const position = getElementCenter(element).subtract(rootPosition);
-				connectorPositions[connectorId] = position;
-			},
-			{ root: nodeList },
-		);
+	function createObserver(rootElement: Element, element: Element) {
+		const callback = () => {
+			if (!rootElementContext.rootElement) return;
+			const rootPosition = getElementPosition(rootElementContext.rootElement);
+			const position = getElementCenter(element).subtract(rootPosition);
+			connectorPositions[connectorId] = position;
+		};
+
+		const observer = new RectObserver(callback, { root: rootElement });
 		observer.observe(element);
+		callback();
 		return observer;
 	}
 
@@ -41,6 +41,6 @@
 	});
 </script>
 
-<div class="connector-item" style="border: 2px red solid;" bind:this={element}>
+<div class="connector-item" bind:this={element}>
 	{@render children?.()}
 </div>
