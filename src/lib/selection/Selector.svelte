@@ -1,7 +1,7 @@
 <script lang="ts">
+	import PointerEventDispatcher from '$lib/node/PointerEventDispatcher.svelte';
 	import type { Snippet } from 'svelte';
-	import { SvelteSet } from 'svelte/reactivity';
-	import { getSelectedNodeIdsContext } from './selectedNodeIdsContext.js';
+	import { SelectOnClickPointerStrategy } from './SelectOnClickPointerStrategy.js';
 
 	interface Props {
 		id: string;
@@ -9,22 +9,10 @@
 	}
 
 	const { id, children }: Props = $props();
-	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 
-	function handlePointerDown(e: MouseEvent) {
-		const { selectedNodeIds } = selectedNodeIdsContext;
-		if (e.shiftKey) {
-			if (selectedNodeIds.has(id)) {
-				selectedNodeIds.delete(id);
-			} else {
-				selectedNodeIds.add(id);
-			}
-		} else if (!selectedNodeIds.has(id)) {
-			selectedNodeIdsContext.selectedNodeIds = new SvelteSet([id]);
-		}
-	}
+	const selectOnClickPointerStrategy = new SelectOnClickPointerStrategy(id);
 </script>
 
-<div onpointerdown={handlePointerDown}>
+<PointerEventDispatcher pointerStrategy={selectOnClickPointerStrategy}>
 	{@render children?.()}
-</div>
+</PointerEventDispatcher>
