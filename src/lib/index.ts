@@ -6,7 +6,6 @@ import {
 } from './connection/previewConnectionContext.js';
 import { PreviewConnectionPointerStrategy } from './connection/PreviewConnectionPointerStrategy.js';
 import PreviewConnectionWire from './connection/PreviewConnectionWire.svelte';
-import ConnectorArea from './connector/ConnectorArea.svelte';
 import { ConnectorAreaPointerStrategy } from './connector/ConnectorAreaPointerStrategy.js';
 import ConnectorJoint from './connector/ConnectorJoint.svelte';
 import {
@@ -44,7 +43,6 @@ import WireSvg from './wire/WireSvg.svelte';
 
 export {
 	ConnectionItem,
-	ConnectorArea,
 	ConnectorAreaPointerStrategy,
 	ConnectorJoint,
 	getConnectorPositionsContext,
