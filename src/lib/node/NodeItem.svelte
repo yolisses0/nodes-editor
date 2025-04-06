@@ -15,28 +15,26 @@
 	}
 
 	let element: Element;
-	const nodeListContext = getRootElementContext();
-	const { node, children, position }: Props = $props();
 	const nodeRectsContext = getNodeRectsContext();
+	const rootElementContext = getRootElementContext();
+	const { node, children, position }: Props = $props();
 
 	function createObserver(rootElement: Element, element: Element) {
-		const observer = new RectObserver(
-			() => {
-				if (!nodeListContext.rootElement) return;
-				const rootPosition = getElementPosition(nodeListContext.rootElement);
-				const rect = getElementRect(element);
-				rect.position = rect.position.subtract(rootPosition);
-				nodeRectsContext.nodeRects[node.id] = rect;
-			},
-			{ root: rootElement },
-		);
+		const rectObserverCallback = () => {
+			if (!rootElementContext.rootElement) return;
+			const rootPosition = getElementPosition(rootElementContext.rootElement);
+			const rect = getElementRect(element);
+			rect.position = rect.position.subtract(rootPosition);
+			nodeRectsContext.nodeRects[node.id] = rect;
+		};
+		const observer = new RectObserver(rectObserverCallback, { root: rootElement });
 		observer.observe(element);
 		return observer;
 	}
 
 	$effect(() => {
-		if (nodeListContext.rootElement) {
-			const observer = createObserver(nodeListContext.rootElement, element);
+		if (rootElementContext.rootElement) {
+			const observer = createObserver(rootElementContext.rootElement, element);
 			return () => {
 				observer.disconnect();
 				delete nodeRectsContext.nodeRects[node.id];
