@@ -18,7 +18,6 @@
 	const connectorPositionsContext = getConnectorPositionsContext();
 
 	const callback = () => {
-		console.log('callback');
 		if (!element) return;
 		const { rootElement } = rootElementContext;
 		if (!rootElement) return;
