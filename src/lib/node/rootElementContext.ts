@@ -2,7 +2,7 @@ import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
 import { setContext } from 'svelte';
 
 export type RootElementContext = {
-	rootElement?: Element;
+	rootElement?: HTMLElement;
 };
 
 const rootElementContextKey = Symbol('rootElementContextKey');

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { Vector } from '$lib/space/Vector.js';
+	import { Vector } from '$lib/space/Vector.js';
 	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import { getElementRect } from '$lib/ui/getElementRect.js';
 	import { RectObserver } from 'rect-observer';
-	import type { Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import type { Node } from './Node.js';
 	import { getNodeRectsContext } from './nodeRectsContext.js';
 	import { getRootElementContext } from './rootElementContext.js';
@@ -14,32 +14,38 @@
 		children: Snippet;
 	}
 
-	let element: Element;
+	let element: HTMLElement;
+	let rectObserver: RectObserver;
 	const nodeRectsContext = getNodeRectsContext();
 	const rootElementContext = getRootElementContext();
 	const { node, children, position }: Props = $props();
 
-	function createObserver(rootElement: Element, element: Element) {
-		const rectObserverCallback = () => {
-			if (!rootElementContext.rootElement) return;
-			const rootPosition = getElementPosition(rootElementContext.rootElement);
-			const rect = getElementRect(element);
-			rect.position = rect.position.subtract(rootPosition);
-			nodeRectsContext.nodeRects[node.id] = rect;
-		};
-		const observer = new RectObserver(rectObserverCallback, { root: rootElement });
-		observer.observe(element);
-		return observer;
-	}
+	const callback = () => {
+		console.log('callback');
+		if (!element) return;
+		const { rootElement } = rootElementContext;
+		if (!rootElement) return;
+
+		const elementRect = getElementRect(element);
+		const rootPosition = getElementPosition(rootElement);
+		elementRect.position = elementRect.position.subtract(rootPosition);
+		nodeRectsContext.nodeRects[node.id] = elementRect;
+	};
 
 	$effect(() => {
-		if (rootElementContext.rootElement) {
-			const observer = createObserver(rootElementContext.rootElement, element);
-			return () => {
-				observer.disconnect();
-				delete nodeRectsContext.nodeRects[node.id];
-			};
-		}
+		if (!element) return;
+		const { rootElement } = rootElementContext;
+		if (!rootElement) return;
+
+		rectObserver = new RectObserver(callback, element, rootElement);
+		return () => rectObserver.disconnect();
+	});
+
+	onMount(() => {
+		return () => {
+			rectObserver?.disconnect();
+			delete nodeRectsContext.nodeRects[node.id];
+		};
 	});
 </script>
 
