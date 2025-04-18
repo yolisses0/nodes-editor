@@ -2,7 +2,7 @@
 	import { getRootElementContext } from '$lib/node/rootElementContext.js';
 	import { getElementPosition } from '$lib/ui/getElementPosition.js';
 	import { RectObserver } from 'rect-observer';
-	import type { Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import { getConnectorPositionsContext } from './connectorPositionsContext.js';
 	import { getElementCenter } from './getElementCenter.js';
 
@@ -11,33 +11,37 @@
 		connectorId: string;
 	}
 
-	let element: Element;
+	let rectObserver: RectObserver;
+	let element = $state.raw<HTMLElement>();
 	const rootElementContext = getRootElementContext();
 	const { children, connectorId }: Props = $props();
-	const connectorPositions = getConnectorPositionsContext();
+	const connectorPositionsContext = getConnectorPositionsContext();
 
-	function createObserver({ rootElement, element }: { rootElement: Element; element: Element }) {
-		const callback = () => {
-			if (!rootElementContext.rootElement) return;
-			const rootPosition = getElementPosition(rootElementContext.rootElement);
-			const position = getElementCenter(element).subtract(rootPosition);
-			connectorPositions[connectorId] = position;
-		};
+	const callback = () => {
+		console.log('callback');
+		if (!element) return;
+		const { rootElement } = rootElementContext;
+		if (!rootElement) return;
 
-		const observer = new RectObserver(callback, { root: rootElement });
-		observer.observe(element);
-		return observer;
-	}
+		const elementCenter = getElementCenter(element);
+		const rootPosition = getElementPosition(rootElement);
+		connectorPositionsContext[connectorId] = elementCenter.subtract(rootPosition);
+	};
 
 	$effect(() => {
+		if (!element) return;
 		const { rootElement } = rootElementContext;
-		if (rootElement) {
-			const observer = createObserver({ element, rootElement });
-			return () => {
-				observer.disconnect();
-				delete connectorPositions[connectorId];
-			};
-		}
+		if (!rootElement) return;
+
+		rectObserver = new RectObserver(callback, element, rootElement);
+		return () => rectObserver.disconnect();
+	});
+
+	onMount(() => {
+		return () => {
+			rectObserver?.disconnect();
+			delete connectorPositionsContext[connectorId];
+		};
 	});
 </script>
 
