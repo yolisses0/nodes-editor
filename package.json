@@ -58,6 +58,6 @@
 		"vitest": "^2.1.8"
 	},
 	"dependencies": {
-		"rect-observer": "^0.0.8"
+		"rect-observer": "^0.0.9"
 	}
 }
