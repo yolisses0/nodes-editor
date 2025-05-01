@@ -25,6 +25,7 @@ import NodeItem from './node/NodeItem.svelte';
 import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
 import PointerEventDispatcher from './node/PointerEventDispatcher.svelte';
 import type { PointerStrategy } from './node/PointerStrategy.js';
+import type { Rect } from './node/Rect.js';
 import { getRootElementContext, setRootElementContext } from './node/rootElementContext.js';
 import {
 	getSelectedNodeIdsContext,
@@ -91,4 +92,5 @@ export type {
 	MoveEvent,
 	Node,
 	PointerStrategy,
+	Rect,
 };
