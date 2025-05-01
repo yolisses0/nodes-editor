@@ -16,10 +16,12 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	rootElementContext = getRootElementContext();
 	selectionBoxContext = getSelectionBoxContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
+	constructor(public pointerCondition: (e: PointerEvent) => boolean) {}
 
 	onpointerup = (e: PointerEvent) => {
 		const { rootElement } = this.rootElementContext;
 		if (!rootElement) return;
+		if (this.pointerCondition && !this.pointerCondition(e)) return;
 
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
@@ -31,6 +33,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	onpointermove = (e: PointerEvent) => {
 		const { rootElement } = this.rootElementContext;
 		if (!rootElement) return;
+		if (this.pointerCondition && !this.pointerCondition(e)) return;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
 		// TODO change only if selecting (when startPosition is defined)
@@ -55,6 +58,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		const { rootElement } = this.rootElementContext;
 		if (!rootElement) return;
 		if (rootElement !== e.target) return;
+		if (this.pointerCondition && !this.pointerCondition(e)) return;
 
 		rootElement.setPointerCapture(e.pointerId);
 		this.pointerId = e.pointerId;
