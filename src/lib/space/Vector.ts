@@ -61,14 +61,14 @@ export class Vector {
 	}
 
 	/**
-	 * Returns the max `x` and `y` of two vectors
+	 * Returns the maximum `x` and `y` of two vectors
 	 */
 	max(vector: Vector) {
 		return new Vector(this.x > vector.x ? this.x : vector.x, this.y > vector.y ? this.y : vector.y);
 	}
 
 	/**
-	 * Returns the max `x` and `y` of two vectors
+	 * Returns the minimum `x` and `y` of two vectors
 	 */
 	min(vector: Vector) {
 		return new Vector(this.x < vector.x ? this.x : vector.x, this.y < vector.y ? this.y : vector.y);
