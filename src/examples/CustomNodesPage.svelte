@@ -1,10 +1,15 @@
 <script lang="ts">
-	import { getPreviewConnectionContext, setDefaultContexts } from '$lib/index.js';
+	import { getPreviewConnectionContext, setDefaultContexts, Vector } from '$lib/index.js';
+	import AddOffsetButton from './AddOffsetButton.svelte';
 	import CustomNodeList from './CustomNodeList.svelte';
 	import { devConnections } from './devConnections.js';
 	import { devNodes } from './devNodes.js';
+	import { setOffsetContext } from './offsetContext.js';
 
 	setDefaultContexts();
+
+	const offsetContext = $state({ offset: Vector.zero() });
+	setOffsetContext(offsetContext);
 
 	const previewConnectionContext = getPreviewConnectionContext();
 </script>
@@ -14,6 +19,7 @@
 	Text {previewConnectionContext.startConnectorId}
 	{previewConnectionContext.endConnectorId}
 </div>
+<AddOffsetButton />
 <div class="container1">
 	<div class="container2">
 		<CustomNodeList customNodes={devNodes} connections={devConnections} />
