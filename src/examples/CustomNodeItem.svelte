@@ -9,6 +9,7 @@
 	import CustomConnectorItem from './CustomConnectorItem.svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItemHeader from './CustomNodeItemHeader.svelte';
+	import { getOffsetContext } from './offsetContext.js';
 	import VariableSizeComponent from './VariableSizeComponent.svelte';
 
 	interface Props {
@@ -16,6 +17,7 @@
 	}
 
 	const { node }: Props = $props();
+	const offsetContext = getOffsetContext();
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 
@@ -26,7 +28,7 @@
 </script>
 
 <PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
-	<NodeItem {node} position={node.position}>
+	<NodeItem {node} position={node.position.add(offsetContext.offset)}>
 		<div class="custom-node-item" class:selected={isSelected}>
 			<CustomNodeItemHeader {node} />
 			<VariableSizeComponent />
