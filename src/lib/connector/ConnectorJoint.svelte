@@ -11,7 +11,6 @@
 		connectorId: string;
 	}
 
-	let rectObserver: RectObserver;
 	let element = $state.raw<HTMLElement>();
 	const rootElementContext = getRootElementContext();
 	const { children, connectorId }: Props = $props();
@@ -32,13 +31,12 @@
 		const { rootElement } = rootElementContext;
 		if (!rootElement) return;
 
-		rectObserver = new RectObserver(callback, element, rootElement);
+		const rectObserver = new RectObserver(callback, element, rootElement);
 		return () => rectObserver.disconnect();
 	});
 
 	onMount(() => {
 		return () => {
-			rectObserver?.disconnect();
 			delete connectorPositionsContext[connectorId];
 		};
 	});
