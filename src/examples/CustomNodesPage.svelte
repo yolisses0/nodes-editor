@@ -10,6 +10,7 @@
 
 	const offsetContext = $state({ offset: Vector.zero() });
 	setOffsetContext(offsetContext);
+	let element = $state<HTMLElement>();
 
 	const previewConnectionContext = getPreviewConnectionContext();
 </script>
@@ -19,9 +20,9 @@
 	Text {previewConnectionContext.startConnectorId}
 	{previewConnectionContext.endConnectorId}
 </div>
-<AddOffsetButton />
+<AddOffsetButton {element} />
 <div class="container1">
-	<div class="container2">
+	<div class="container2" bind:this={element}>
 		<CustomNodeList customNodes={devNodes} connections={devConnections} />
 	</div>
 </div>
