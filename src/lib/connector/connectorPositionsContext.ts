@@ -6,7 +6,7 @@ export function setConnectorPositionsContext(connectorPositions: ConnectorPositi
 	return setContext(connectorPositionsKey, connectorPositions);
 }
 
-const connectorPositionsKey = Symbol('connectorPositionsKey');
+export const connectorPositionsKey = Symbol('connectorPositionsKey');
 
 export function getConnectorPositionsContext() {
 	return getContextOrThrow<ConnectorPositions>(connectorPositionsKey);

@@ -7,7 +7,7 @@ export type SelectionBoxContext = {
 	startPosition?: Vector;
 };
 
-const selectionBoxContextKey = Symbol('selectionBoxContextKey');
+export const selectionBoxContextKey = Symbol('selectionBoxContextKey');
 
 export function setSelectionBoxContext(selectionBoxContext: SelectionBoxContext) {
 	setContext(selectionBoxContextKey, selectionBoxContext);

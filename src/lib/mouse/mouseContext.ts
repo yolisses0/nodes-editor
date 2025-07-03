@@ -6,7 +6,7 @@ export type MouseContext = {
 	mouseRelativePosition: Vector;
 };
 
-const mouseContextKey = Symbol('mouseContextKey');
+export const mouseContextKey = Symbol('mouseContextKey');
 
 export function setMouseContext(mouseContext: MouseContext) {
 	setContext(mouseContextKey, mouseContext);

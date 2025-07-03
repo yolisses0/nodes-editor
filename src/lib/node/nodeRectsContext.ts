@@ -6,7 +6,7 @@ export type NodeRectsContext = {
 	nodeRects: Record<string, Rect>;
 };
 
-const nodeRectsContextKey = Symbol('nodeRectsContextKey');
+export const nodeRectsContextKey = Symbol('nodeRectsContextKey');
 
 export function setNodeRectsContext(nodeRectsContext: NodeRectsContext) {
 	setContext(nodeRectsContextKey, nodeRectsContext);
