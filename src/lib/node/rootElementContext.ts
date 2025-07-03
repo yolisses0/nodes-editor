@@ -5,7 +5,7 @@ export type RootElementContext = {
 	rootElement?: HTMLElement;
 };
 
-const rootElementContextKey = Symbol('rootElementContextKey');
+export const rootElementContextKey = Symbol('rootElementContextKey');
 
 export function setRootElementContext(rootElementContext: RootElementContext) {
 	setContext(rootElementContextKey, rootElementContext);

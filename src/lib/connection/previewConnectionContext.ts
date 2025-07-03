@@ -6,7 +6,7 @@ export type PreviewConnectionContext = {
 	startConnectorId?: string;
 };
 
-const previewConnectionContextKey = Symbol('previewConnectionContextKey');
+export const previewConnectionContextKey = Symbol('previewConnectionContextKey');
 
 export function setPreviewConnectionContext(previewConnectionContext: PreviewConnectionContext) {
 	setContext(previewConnectionContextKey, previewConnectionContext);

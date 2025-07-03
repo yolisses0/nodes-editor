@@ -3,6 +3,7 @@ import type { ConnectionCondition } from './connection/ConnectionCondition.js';
 import ConnectionItem from './connection/ConnectionItem.svelte';
 import {
 	getPreviewConnectionContext,
+	previewConnectionContextKey,
 	setPreviewConnectionContext,
 } from './connection/previewConnectionContext.js';
 import { PreviewConnectionPointerStrategy } from './connection/PreviewConnectionPointerStrategy.js';
@@ -10,11 +11,12 @@ import PreviewConnectionWire from './connection/PreviewConnectionWire.svelte';
 import { ConnectorAreaPointerStrategy } from './connector/ConnectorAreaPointerStrategy.js';
 import ConnectorJoint from './connector/ConnectorJoint.svelte';
 import {
+	connectorPositionsKey,
 	getConnectorPositionsContext,
 	setConnectorPositionsContext,
 } from './connector/connectorPositionsContext.js';
 import { setDefaultContexts } from './contexts/setDefaultContexts.svelte.js';
-import { getMouseContext, setMouseContext } from './mouse/mouseContext.js';
+import { getMouseContext, mouseContextKey, setMouseContext } from './mouse/mouseContext.js';
 import { EmptyPointerStrategy } from './node/EmptyPointerStrategy.js';
 import type { EndPreviewConnectionEvent } from './node/events/EndPreviewConnectionEvent.js';
 import type { MoveEvent } from './node/events/MoveEvent.js';
@@ -22,17 +24,30 @@ import { getRectsBoundingRect } from './node/getRectsBoundingRect.js';
 import { MoverPointerStrategy } from './node/MovePointerStrategy.js';
 import type { Node } from './node/Node.js';
 import NodeItem from './node/NodeItem.svelte';
-import { getNodeRectsContext, setNodeRectsContext } from './node/nodeRectsContext.js';
+import {
+	getNodeRectsContext,
+	nodeRectsContextKey,
+	setNodeRectsContext,
+} from './node/nodeRectsContext.js';
 import PointerEventDispatcher from './node/PointerEventDispatcher.svelte';
 import type { PointerStrategy } from './node/PointerStrategy.js';
 import type { Rect } from './node/Rect.js';
-import { getRootElementContext, setRootElementContext } from './node/rootElementContext.js';
+import {
+	getRootElementContext,
+	rootElementContextKey,
+	setRootElementContext,
+} from './node/rootElementContext.js';
 import {
 	getSelectedNodeIdsContext,
+	selectedNodeIdsContextKey,
 	setSelectedNodeIdsContext,
 } from './selection/selectedNodeIdsContext.js';
 import SelectionBox from './selection/SelectionBox.svelte';
-import { getSelectionBoxContext, setSelectionBoxContext } from './selection/selectionBoxContext.js';
+import {
+	getSelectionBoxContext,
+	selectionBoxContextKey,
+	setSelectionBoxContext,
+} from './selection/selectionBoxContext.js';
 import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.js';
 import { SelectOnClickPointerStrategy } from './selection/SelectOnClickPointerStrategy.js';
 import { Vector } from './space/Vector.js';
@@ -49,6 +64,7 @@ export {
 	ConnectionItem,
 	ConnectorAreaPointerStrategy,
 	ConnectorJoint,
+	connectorPositionsKey,
 	EmptyPointerStrategy,
 	getConnectorPositionsContext,
 	getElementPosition,
@@ -63,12 +79,18 @@ export {
 	getSelectionBoxContext,
 	getVectorsString,
 	getVectorString,
+	mouseContextKey,
 	MoverPointerStrategy,
 	NodeItem,
+	nodeRectsContextKey,
 	PointerEventDispatcher,
+	previewConnectionContextKey,
 	PreviewConnectionPointerStrategy,
 	PreviewConnectionWire,
+	rootElementContextKey,
+	selectedNodeIdsContextKey,
 	SelectionBox,
+	selectionBoxContextKey,
 	SelectionBoxPointerStrategy,
 	SelectOnClickPointerStrategy,
 	setConnectorPositionsContext,

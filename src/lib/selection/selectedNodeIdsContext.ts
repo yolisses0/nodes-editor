@@ -6,7 +6,7 @@ export type SelectedNodeIdsContext = {
 	selectedNodeIds: SvelteSet<string>;
 };
 
-const selectedNodeIdsContextKey = Symbol('selectedNodeIdsContextKey');
+export const selectedNodeIdsContextKey = Symbol('selectedNodeIdsContextKey');
 
 export function setSelectedNodeIdsContext(selectedNodeIdsContext: SelectedNodeIdsContext) {
 	setContext(selectedNodeIdsContextKey, selectedNodeIdsContext);
