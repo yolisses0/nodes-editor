@@ -1,4 +1,3 @@
-import type { OffsetContext } from '$examples/offsetContext.js';
 import type { Connection } from './connection/Connection.js';
 import type { ConnectionCondition } from './connection/ConnectionCondition.js';
 import ConnectionItem from './connection/ConnectionItem.svelte';
@@ -126,7 +125,6 @@ export type {
 	MoveEvent,
 	Node,
 	NodeRectsContext,
-	OffsetContext,
 	PointerStrategy,
 	PreviewConnectionContext,
 	Rect,
