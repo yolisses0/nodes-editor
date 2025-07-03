@@ -1,3 +1,4 @@
+import type { OffsetContext } from '$examples/offsetContext.js';
 import type { Connection } from './connection/Connection.js';
 import type { ConnectionCondition } from './connection/ConnectionCondition.js';
 import ConnectionItem from './connection/ConnectionItem.svelte';
@@ -5,6 +6,7 @@ import {
 	getPreviewConnectionContext,
 	previewConnectionContextKey,
 	setPreviewConnectionContext,
+	type PreviewConnectionContext,
 } from './connection/previewConnectionContext.js';
 import { PreviewConnectionPointerStrategy } from './connection/PreviewConnectionPointerStrategy.js';
 import PreviewConnectionWire from './connection/PreviewConnectionWire.svelte';
@@ -16,7 +18,12 @@ import {
 	setConnectorPositionsContext,
 } from './connector/connectorPositionsContext.js';
 import { setDefaultContexts } from './contexts/setDefaultContexts.svelte.js';
-import { getMouseContext, mouseContextKey, setMouseContext } from './mouse/mouseContext.js';
+import {
+	getMouseContext,
+	mouseContextKey,
+	setMouseContext,
+	type MouseContext,
+} from './mouse/mouseContext.js';
 import { EmptyPointerStrategy } from './node/EmptyPointerStrategy.js';
 import type { EndPreviewConnectionEvent } from './node/events/EndPreviewConnectionEvent.js';
 import type { MoveEvent } from './node/events/MoveEvent.js';
@@ -28,6 +35,7 @@ import {
 	getNodeRectsContext,
 	nodeRectsContextKey,
 	setNodeRectsContext,
+	type NodeRectsContext,
 } from './node/nodeRectsContext.js';
 import PointerEventDispatcher from './node/PointerEventDispatcher.svelte';
 import type { PointerStrategy } from './node/PointerStrategy.js';
@@ -36,17 +44,20 @@ import {
 	getRootElementContext,
 	rootElementContextKey,
 	setRootElementContext,
+	type RootElementContext,
 } from './node/rootElementContext.js';
 import {
 	getSelectedNodeIdsContext,
 	selectedNodeIdsContextKey,
 	setSelectedNodeIdsContext,
+	type SelectedNodeIdsContext,
 } from './selection/selectedNodeIdsContext.js';
 import SelectionBox from './selection/SelectionBox.svelte';
 import {
 	getSelectionBoxContext,
 	selectionBoxContextKey,
 	setSelectionBoxContext,
+	type SelectionBoxContext,
 } from './selection/selectionBoxContext.js';
 import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.js';
 import { SelectOnClickPointerStrategy } from './selection/SelectOnClickPointerStrategy.js';
@@ -111,8 +122,15 @@ export type {
 	ConnectionCondition,
 	EndPreviewConnectionEvent,
 	GetPathD,
+	MouseContext,
 	MoveEvent,
 	Node,
+	NodeRectsContext,
+	OffsetContext,
 	PointerStrategy,
+	PreviewConnectionContext,
 	Rect,
+	RootElementContext,
+	SelectedNodeIdsContext,
+	SelectionBoxContext,
 };
