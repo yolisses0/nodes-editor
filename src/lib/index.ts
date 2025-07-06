@@ -63,6 +63,8 @@ import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStra
 import { SelectOnClickPointerStrategy } from './selection/SelectOnClickPointerStrategy.js';
 import { Vector } from './space/Vector.js';
 import { getElementPosition } from './ui/getElementPosition.js';
+import { getElementRect } from './ui/getElementRect.js';
+import { getEventClientPosition } from './ui/getEventClientPosition.js';
 import { getMouseRelativePosition } from './ui/getMouseRelativePosition.js';
 import { getLinePathD } from './wire/getLinePath.js';
 import { type GetPathD } from './wire/GetPathD.js';
@@ -79,6 +81,8 @@ export {
 	EmptyPointerStrategy,
 	getConnectorPositionsContext,
 	getElementPosition,
+	getElementRect,
+	getEventClientPosition,
 	getLinePathD,
 	getMouseContext,
 	getMouseRelativePosition,
