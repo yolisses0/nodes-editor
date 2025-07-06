@@ -9,6 +9,7 @@ import {
 } from './connection/previewConnectionContext.js';
 import { PreviewConnectionPointerStrategy } from './connection/PreviewConnectionPointerStrategy.js';
 import PreviewConnectionWire from './connection/PreviewConnectionWire.svelte';
+import type { Connector } from './connector/Connector.js';
 import { ConnectorAreaPointerStrategy } from './connector/ConnectorAreaPointerStrategy.js';
 import ConnectorJoint from './connector/ConnectorJoint.svelte';
 import {
@@ -119,6 +120,7 @@ export {
 export type {
 	Connection,
 	ConnectionCondition,
+	Connector,
 	EndPreviewConnectionEvent,
 	GetPathD,
 	MouseContext,

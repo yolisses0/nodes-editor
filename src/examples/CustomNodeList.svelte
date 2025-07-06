@@ -30,7 +30,7 @@
 
 	const previewConnectionContext = getPreviewConnectionContext();
 	const pointerStrategy = $derived(
-		previewConnectionContext.startConnectorId
+		previewConnectionContext.startConnector
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy,
 	);

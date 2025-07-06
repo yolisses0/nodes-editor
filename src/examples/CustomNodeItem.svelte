@@ -17,12 +17,14 @@
 	}
 
 	const { node }: Props = $props();
+
+	const outputConnector = { id: node.id };
 	const offsetContext = getOffsetContext();
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		node.id,
+		outputConnector,
 		customConnectionCondition,
 	);
 </script>

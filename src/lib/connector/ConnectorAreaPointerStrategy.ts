@@ -5,15 +5,18 @@ import { getRootElementContext } from '$lib/node/rootElementContext.js';
 import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 
 import type { ConnectionCondition } from '../connection/ConnectionCondition.js';
+import type { Connector } from './Connector.js';
 
-export class ConnectorAreaPointerStrategy implements PointerStrategy {
+export class ConnectorAreaPointerStrategy<T extends Connector = Connector>
+	implements PointerStrategy
+{
 	constructor(
-		public connectorId: string,
-		public connectionCondition?: ConnectionCondition,
+		public connector: T,
+		public connectionCondition?: ConnectionCondition<T>,
 	) {}
 	mouseContext = getMouseContext();
 	nodeListContext = getRootElementContext();
-	previewConnectionContext = getPreviewConnectionContext();
+	previewConnectionContext = getPreviewConnectionContext<T>();
 
 	onpointerdown = (e: PointerEvent) => {
 		const { rootElement } = this.nodeListContext;
@@ -21,7 +24,7 @@ export class ConnectorAreaPointerStrategy implements PointerStrategy {
 
 		e.stopPropagation();
 
-		this.previewConnectionContext.startConnectorId = this.connectorId;
+		this.previewConnectionContext.startConnector = this.connector;
 
 		// Prevents connection from starting with the previous mouse position
 		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
@@ -29,22 +32,22 @@ export class ConnectorAreaPointerStrategy implements PointerStrategy {
 	};
 
 	onmouseenter = () => {
-		const { startConnectorId } = this.previewConnectionContext;
-		if (!startConnectorId) return;
+		const { startConnector } = this.previewConnectionContext;
+		if (!startConnector) return;
 
 		if (
 			this.connectionCondition &&
-			!this.connectionCondition({ startConnectorId, endConnectorId: this.connectorId })
+			!this.connectionCondition({ startConnector, endConnector: this.connector })
 		) {
 			return;
 		}
 
-		this.previewConnectionContext.endConnectorId = this.connectorId;
+		this.previewConnectionContext.endConnector = this.connector;
 	};
 
 	onmouseleave = () => {
-		if (this.previewConnectionContext.endConnectorId === this.connectorId) {
-			this.previewConnectionContext.endConnectorId = undefined;
+		if (this.previewConnectionContext.endConnector === this.connector) {
+			this.previewConnectionContext.endConnector = undefined;
 		}
 	};
 }

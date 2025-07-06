@@ -1,17 +1,20 @@
+import type { Connector } from '$lib/connector/Connector.js';
 import { getContextOrThrow } from '$lib/contexts/getContextOrThrow.js';
 import { setContext } from 'svelte';
 
-export type PreviewConnectionContext = {
-	endConnectorId?: string;
-	startConnectorId?: string;
+export type PreviewConnectionContext<T extends Connector = Connector> = {
+	endConnector?: T;
+	startConnector?: T;
 };
 
 export const previewConnectionContextKey = Symbol('previewConnectionContextKey');
 
-export function setPreviewConnectionContext(previewConnectionContext: PreviewConnectionContext) {
+export function setPreviewConnectionContext<T extends Connector = Connector>(
+	previewConnectionContext: PreviewConnectionContext<T>,
+) {
 	setContext(previewConnectionContextKey, previewConnectionContext);
 }
 
-export function getPreviewConnectionContext() {
-	return getContextOrThrow<PreviewConnectionContext>(previewConnectionContextKey);
+export function getPreviewConnectionContext<T extends Connector = Connector>() {
+	return getContextOrThrow<PreviewConnectionContext<T>>(previewConnectionContextKey);
 }
