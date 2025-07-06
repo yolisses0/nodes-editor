@@ -17,10 +17,12 @@
 
 <div>This is a height limited scroll. It's intentional.</div>
 <div>
-	Text {previewConnectionContext.startConnectorId}
-	{previewConnectionContext.endConnectorId}
+	Text {previewConnectionContext.startConnector?.id}
+	{previewConnectionContext.endConnector?.id}
 </div>
-<AddOffsetButton {element} />
+{#if element}
+	<AddOffsetButton {element} />
+{/if}
 <div class="container1">
 	<div class="container2" bind:this={element}>
 		<CustomNodeList customNodes={devNodes} connections={devConnections} />

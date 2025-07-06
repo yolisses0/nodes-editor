@@ -40,7 +40,7 @@
 	const previewConnectionContext = getPreviewConnectionContext();
 	const pointerStrategy = $derived.by(() => {
 		// If connecting
-		if (previewConnectionContext.startConnectorId) {
+		if (previewConnectionContext.startConnector) {
 			return emptyPointerStrategy;
 		}
 

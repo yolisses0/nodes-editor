@@ -1,11 +1,11 @@
 import type { ConnectionCondition } from '$lib/index.js';
 
 export const customConnectionCondition: ConnectionCondition = ({
-	endConnectorId,
-	startConnectorId,
+	endConnector,
+	startConnector,
 }) => {
 	// this will probably be a more robust checking in your app
-	const isStartANode = startConnectorId.includes('Node');
-	const isEndANode = endConnectorId.includes('Node');
+	const isStartANode = startConnector.id.includes('Node');
+	const isEndANode = endConnector.id.includes('Node');
 	return isStartANode !== isEndANode;
 };

@@ -14,7 +14,7 @@
 
 	const { connector }: Props = $props();
 	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		connector.id,
+		connector,
 		customConnectionCondition,
 	);
 </script>

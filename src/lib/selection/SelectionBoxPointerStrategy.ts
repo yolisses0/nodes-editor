@@ -16,7 +16,7 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	rootElementContext = getRootElementContext();
 	selectionBoxContext = getSelectionBoxContext();
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
-	constructor(public pointerCondition: (e: PointerEvent) => boolean) {}
+	constructor(public pointerCondition?: (e: PointerEvent) => boolean) {}
 
 	onpointerup = (e: PointerEvent) => {
 		const { rootElement } = this.rootElementContext;
