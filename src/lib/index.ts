@@ -17,6 +17,8 @@ import {
 	getConnectorPositionsContext,
 	setConnectorPositionsContext,
 } from './connector/connectorPositionsContext.js';
+import { EndConnectorAreaPointerStrategy } from './connector/EndConnectorAreaPointerStrategy.js';
+import { StartConnectorAreaPointerStrategy } from './connector/StartConnectorAreaPointerStrategy.js';
 import { setDefaultContexts } from './contexts/setDefaultContexts.svelte.js';
 import {
 	getMouseContext,
@@ -79,6 +81,7 @@ export {
 	ConnectorJoint,
 	connectorPositionsKey,
 	EmptyPointerStrategy,
+	EndConnectorAreaPointerStrategy,
 	getConnectorPositionsContext,
 	getElementPosition,
 	getElementRect,
@@ -116,6 +119,7 @@ export {
 	setRootElementContext,
 	setSelectedNodeIdsContext,
 	setSelectionBoxContext,
+	StartConnectorAreaPointerStrategy,
 	Vector,
 	WirePath,
 	WireSvg,
