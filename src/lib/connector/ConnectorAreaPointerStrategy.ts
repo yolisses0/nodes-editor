@@ -1,5 +1,4 @@
 import type { PointerStrategy } from '$lib/node/PointerStrategy.js';
-
 import type { ConnectionCondition } from '../connection/ConnectionCondition.js';
 import type { Connector } from './Connector.js';
 import { EndConnectorAreaPointerStrategy } from './EndConnectorAreaPointerStrategy.js';
@@ -27,11 +26,11 @@ export class ConnectorAreaPointerStrategy<T extends Connector = Connector>
 		this.startConnectorAreaPointerStrategy.onpointerdown(e);
 	};
 
-	onmouseenter = () => {
-		this.endConnectorAreaPointerStrategy.onmouseenter();
+	onpointerenter = () => {
+		this.endConnectorAreaPointerStrategy.onpointerenter();
 	};
 
-	onmouseleave = () => {
-		this.endConnectorAreaPointerStrategy.onmouseleave();
+	onpointerleave = () => {
+		this.endConnectorAreaPointerStrategy.onpointerleave();
 	};
 }
