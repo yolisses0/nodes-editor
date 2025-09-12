@@ -12,7 +12,7 @@ export class EndConnectorAreaPointerStrategy<T extends Connector = Connector>
 	) {}
 	previewConnectionContext = getPreviewConnectionContext<T>();
 
-	onmouseenter = () => {
+	onpointerenter = () => {
 		const { startConnector } = this.previewConnectionContext;
 		if (!startConnector) return;
 
@@ -26,7 +26,7 @@ export class EndConnectorAreaPointerStrategy<T extends Connector = Connector>
 		this.previewConnectionContext.endConnector = this.connector;
 	};
 
-	onmouseleave = () => {
+	onpointerleave = () => {
 		if (this.previewConnectionContext.endConnector === this.connector) {
 			this.previewConnectionContext.endConnector = undefined;
 		}
