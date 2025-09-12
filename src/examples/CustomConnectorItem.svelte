@@ -1,10 +1,9 @@
 <script lang="ts">
 	import {
-		ConnectorAreaPointerStrategy,
 		ConnectorJoint,
 		PointerEventDispatcher,
+		StartConnectorAreaPointerStrategy,
 	} from '$lib/index.js';
-	import { customConnectionCondition } from './customConnectionCondition.js';
 	import type { CustomConnector } from './CustomConnector.js';
 	import JointCircle from './JointCircle.svelte';
 
@@ -13,13 +12,10 @@
 	}
 
 	const { connector }: Props = $props();
-	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
-		connector,
-		customConnectionCondition,
-	);
+	const startConnectorAreaPointerStrategy = new StartConnectorAreaPointerStrategy(connector);
 </script>
 
-<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
+<PointerEventDispatcher pointerStrategy={startConnectorAreaPointerStrategy}>
 	<div class="custom-connector-item">
 		<ConnectorJoint connectorId={connector.id}>
 			<JointCircle />
@@ -30,10 +26,10 @@
 
 <style>
 	.custom-connector-item {
-		gap: 10px;
+		align-items: center;
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		gap: 10px;
 	}
 
 	.custom-connector-item:hover {

@@ -72,8 +72,8 @@
 
 <style>
 	.custom-node-item-header {
-		display: flex;
 		align-items: center;
+		display: flex;
 		justify-content: space-between;
 	}
 
