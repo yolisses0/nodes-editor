@@ -21,7 +21,7 @@ export class MoverPointerStrategy implements PointerStrategy {
 	) {}
 
 	onpointerdown = (e: PointerEvent) => {
-		if (e.pointerType !== 'mouse' || e.button === 1) return;
+		if (e.button === 1) return;
 		if (!this.nodeListContext.rootElement) return;
 
 		this.element.setPointerCapture(e.pointerId);
@@ -42,7 +42,7 @@ export class MoverPointerStrategy implements PointerStrategy {
 
 	onpointermove = (e: PointerEvent) => {
 		if (!this.isMoving) return;
-		if (e.pointerType !== 'mouse' || e.button === 1) return;
+		if (e.button === 1) return;
 		if (!this.nodeListContext.rootElement) return;
 
 		this.moved = true;
@@ -56,7 +56,7 @@ export class MoverPointerStrategy implements PointerStrategy {
 	};
 
 	onpointerup = (e: PointerEvent) => {
-		if (e.pointerType !== 'mouse' || e.button === 1) return;
+		if (e.button === 1) return;
 		if (!this.nodeListContext.rootElement) return;
 
 		const mouseRelativePosition = getMouseRelativePosition(e, this.nodeListContext.rootElement);
