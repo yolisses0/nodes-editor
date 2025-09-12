@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {
-		ConnectorAreaPointerStrategy,
+		EndConnectorAreaPointerStrategy,
 		NodeItem,
 		PointerEventDispatcher,
 		getSelectedNodeIdsContext,
@@ -23,13 +23,13 @@
 	const selectedNodeIdsContext = getSelectedNodeIdsContext();
 	const isSelected = $derived(selectedNodeIdsContext.selectedNodeIds.has(node.id));
 
-	const connectorAreaPointerStrategy = new ConnectorAreaPointerStrategy(
+	const endConnectorAreaPointerStrategy = new EndConnectorAreaPointerStrategy(
 		outputConnector,
 		customConnectionCondition,
 	);
 </script>
 
-<PointerEventDispatcher pointerStrategy={connectorAreaPointerStrategy}>
+<PointerEventDispatcher pointerStrategy={endConnectorAreaPointerStrategy}>
 	<NodeItem {node} position={node.position.add(offsetContext.offset)}>
 		<div class="custom-node-item" class:selected={isSelected}>
 			<CustomNodeItemHeader {node} />
@@ -46,12 +46,13 @@
 
 <style>
 	.custom-node-item {
-		color: white;
-		max-width: 200px;
-		user-select: none;
 		background-color: gray;
-		outline: solid 1px black;
+		color: white;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		max-width: 200px;
+		outline: solid 1px black;
+		touch-action: none;
+		user-select: none;
 	}
 
 	.selected {
