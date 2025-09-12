@@ -18,6 +18,12 @@ export class StartConnectorAreaPointerStrategy<T extends Connector = Connector>
 		const { rootElement } = this.rootElementContext;
 		if (!rootElement) return;
 
+		// Prevents implicit pointer capture on mobile. It is required due to
+		// detection on pointerenter in other elements
+		if (e.target instanceof HTMLElement) {
+			e.target.releasePointerCapture(e.pointerId);
+		}
+
 		e.stopPropagation();
 
 		this.previewConnectionContext.startConnector = this.connector;
