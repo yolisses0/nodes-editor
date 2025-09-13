@@ -147,7 +147,6 @@
 		min-height: max-content;
 		min-width: max-content;
 		overflow: visible;
-		overscroll-behavior: contain;
 		position: relative;
 		user-select: none;
 	}
