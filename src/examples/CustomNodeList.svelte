@@ -85,13 +85,13 @@
 	}
 
 	.inner-div {
-		display: flex;
-		min-width: max-content;
-		min-height: max-content;
-		flex-shrink: 0;
-		overflow: visible;
-		user-select: none;
-		position: relative;
 		background-color: cyan;
+		display: flex;
+		flex-shrink: 0;
+		min-height: max-content;
+		min-width: max-content;
+		overflow: visible;
+		position: relative;
+		user-select: none;
 	}
 </style>
