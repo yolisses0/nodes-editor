@@ -57,19 +57,52 @@
 		isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 	});
 
+	function setIsOverscrollEnabled(isEnabled: boolean) {
+		document.getElementsByTagName('html').item(0)!.style.overscrollBehavior = isEnabled
+			? 'contain'
+			: '';
+		document.getElementsByTagName('body').item(0)!.style.overscrollBehavior = isEnabled
+			? 'contain'
+			: '';
+	}
+
 	function handleTouchStart(e: TouchEvent) {
+		setIsOverscrollEnabled(true);
+		if (selectionBoxPointerStrategy.isActive) {
+			e.preventDefault();
+		}
+	}
+
+	function handleTouchEnd(e: TouchEvent) {
+		setIsOverscrollEnabled(false);
+		if (selectionBoxPointerStrategy.isActive) {
+			e.preventDefault();
+		}
+	}
+
+	// Maybe it's not required
+	function handleTouchMove(e: TouchEvent) {
 		if (selectionBoxPointerStrategy.isActive) {
 			e.preventDefault();
 		}
 	}
 
 	$effect(() => {
+		// Sveltekit doesn't support passing `passive` in a declarative way,
+		// since it has super restrict use cases.
 		rootElementContext.rootElement?.addEventListener('touchstart', handleTouchStart, {
+			passive: false,
+		});
+		rootElementContext.rootElement?.addEventListener('touchend', handleTouchEnd, {
+			passive: false,
+		});
+		rootElementContext.rootElement?.addEventListener('touchmove', handleTouchMove, {
 			passive: false,
 		});
 
 		return () => {
 			rootElementContext.rootElement?.removeEventListener('touchstart', handleTouchStart);
+			rootElementContext.rootElement?.removeEventListener('touchmove', handleTouchMove);
 		};
 	});
 </script>
@@ -114,6 +147,7 @@
 		min-height: max-content;
 		min-width: max-content;
 		overflow: visible;
+		overscroll-behavior: contain;
 		position: relative;
 		user-select: none;
 	}
