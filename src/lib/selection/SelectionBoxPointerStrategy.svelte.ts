@@ -23,7 +23,6 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	) {}
 
 	onpointerup = (e: PointerEvent) => {
-		console.log('onpointerup');
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
 		this.element.releasePointerCapture(e.pointerId);
 		this.isActive = false;
@@ -32,7 +31,6 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		console.log('onpointermove');
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
 		if (!this.selectionBoxContext.startPosition) return;
 
@@ -65,7 +63,6 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	onpointerdown = (e: PointerEvent) => {
-		console.log('onpointerdown');
 		e.stopImmediatePropagation();
 		if (this.element !== e.target) return;
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
