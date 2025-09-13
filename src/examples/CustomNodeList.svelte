@@ -12,6 +12,7 @@
 		Vector,
 		type Connection,
 	} from '$lib/index.js';
+	import { onMount } from 'svelte';
 	import type { CustomNode } from './CustomNode.svelte.js';
 	import CustomNodeItem from './CustomNodeItem.svelte';
 	import CustomSelectionBox from './CustomSelectionBox.svelte';
@@ -22,20 +23,22 @@
 		connections: Connection[];
 	}
 
-	const rootElementContext = getRootElementContext();
+	let isTouchDevice = $state<boolean>();
+
 	const { customNodes, connections }: Props = $props();
-
-	const selectionBoxPointerStrategy = new SelectionBoxPointerStrategy();
-	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
-
+	const nodeRectsContext = getNodeRectsContext();
 	const previewConnectionContext = getPreviewConnectionContext();
+	const previewConnectionPointerStrategy = new PreviewConnectionPointerStrategy(() => {});
+	const rootElementContext = getRootElementContext();
+	const selectionBoxPointerStrategy = $derived(
+		new SelectionBoxPointerStrategy(rootElementContext.rootElement!, !!isTouchDevice),
+	);
+
 	const pointerStrategy = $derived(
 		previewConnectionContext.startConnector
 			? previewConnectionPointerStrategy
 			: selectionBoxPointerStrategy,
 	);
-
-	const nodeRectsContext = getNodeRectsContext();
 
 	const minSize = $derived.by(() => {
 		const nodeRects = Object.values(nodeRectsContext.nodeRects);
@@ -49,15 +52,20 @@
 			.ceil()
 			.multiplyByNumber(step);
 	});
+
+	onMount(() => {
+		isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+	});
 </script>
 
 <div class="outer-div">
 	<PointerEventDispatcher {pointerStrategy}>
 		<div
-			class="inner-div"
-			style:min-width={minSize.x + 'px'}
-			style:min-height={minSize.y + 'px'}
 			bind:this={rootElementContext.rootElement}
+			class="inner-div"
+			style:min-height={minSize.y + 'px'}
+			style:min-width={minSize.x + 'px'}
+			style:touch-action={selectionBoxPointerStrategy.isActive ? 'none' : undefined}
 		>
 			{#each customNodes as node (node.id)}
 				<CustomNodeItem {node} />

@@ -5,38 +5,44 @@ import { getMouseRelativePosition } from '$lib/ui/getMouseRelativePosition.js';
 import { SvelteSet } from 'svelte/reactivity';
 import { getNodeRectsContext } from '../node/nodeRectsContext.js';
 import type { PointerStrategy } from '../node/PointerStrategy.js';
-import { getRootElementContext } from '../node/rootElementContext.js';
 import { getRectsTouch } from './getRectsTouch.js';
 import { getSelectedNodeIdsContext } from './selectedNodeIdsContext.js';
 
 export class SelectionBoxPointerStrategy implements PointerStrategy {
-	pointerId?: number;
+	doubleClickTimeout?: number;
+	isActive = false; // TODO use $state
+	lastClickTime: number = 0;
 	mouseContext = getMouseContext();
 	nodeRectsContext = getNodeRectsContext();
-	rootElementContext = getRootElementContext();
-	selectionBoxContext = getSelectionBoxContext();
+	pointerId?: number;
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
-	constructor(public pointerCondition?: (e: PointerEvent) => boolean) {}
+	selectionBoxContext = getSelectionBoxContext();
+
+	constructor(
+		public element: HTMLElement,
+		public isTouchDevice: boolean,
+		public pointerCondition?: (e: PointerEvent) => boolean,
+	) {}
 
 	onpointerup = (e: PointerEvent) => {
-		const { rootElement } = this.rootElementContext;
-		if (!rootElement) return;
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
 
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
 
-		rootElement.releasePointerCapture(e.pointerId);
-		this.pointerId = undefined;
+		if (this.pointerId !== undefined) {
+			this.element.releasePointerCapture(this.pointerId);
+			this.pointerId = undefined;
+		}
+
+		this.isActive = false;
 	};
 
 	onpointermove = (e: PointerEvent) => {
-		const { rootElement } = this.rootElementContext;
-		if (!rootElement) return;
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
+		if (!this.selectionBoxContext.startPosition) return;
 
-		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
-		// TODO change only if selecting (when startPosition is defined)
+		const mouseRelativePosition = getMouseRelativePosition(e, this.element);
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 
 		const { endPosition, startPosition } = this.selectionBoxContext;
@@ -54,29 +60,41 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 		}
 	};
 
-	onpointerdown = (e: PointerEvent) => {
-		const { rootElement } = this.rootElementContext;
-		if (!rootElement) return;
-		if (rootElement !== e.target) return;
-		if (this.pointerCondition && !this.pointerCondition(e)) return;
-
-		rootElement.setPointerCapture(e.pointerId);
+	handlePointerDown = (e: PointerEvent) => {
+		this.element.setPointerCapture(e.pointerId);
+		const mouseRelativePosition = getMouseRelativePosition(e, this.element);
+		this.isActive = true;
 		this.pointerId = e.pointerId;
-
-		const mouseRelativePosition = getMouseRelativePosition(e, rootElement);
+		this.selectedNodeIdsContext.selectedNodeIds = new SvelteSet();
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 		this.selectionBoxContext.startPosition = mouseRelativePosition;
+	};
 
-		this.selectedNodeIdsContext.selectedNodeIds = new SvelteSet();
+	onpointerdown = (e: PointerEvent) => {
+		if (this.element !== e.target) return;
+		if (this.pointerCondition && !this.pointerCondition(e)) return;
+
+		if (this.isTouchDevice) {
+			const currentTime = Date.now();
+			const DOUBLE_CLICK_THRESHOLD = 300; // ms
+			if (currentTime - this.lastClickTime < DOUBLE_CLICK_THRESHOLD) {
+				// Double tap detected
+				this.handlePointerDown(e);
+			} else {
+				// Single tap, set up for potential double tap
+				this.lastClickTime = currentTime;
+			}
+		} else {
+			// Non-touch behavior
+			this.handlePointerDown(e);
+		}
 	};
 
 	cleanup? = () => {
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
 
-		const { rootElement } = this.rootElementContext;
-		if (!rootElement) return;
 		if (this.pointerId === undefined) return;
-		rootElement.releasePointerCapture(this.pointerId);
+		this.element.releasePointerCapture(this.pointerId);
 	};
 }
