@@ -9,12 +9,10 @@ import { getRectsTouch } from './getRectsTouch.js';
 import { getSelectedNodeIdsContext } from './selectedNodeIdsContext.js';
 
 export class SelectionBoxPointerStrategy implements PointerStrategy {
-	doubleClickTimeout?: number;
-	isActive = false; // TODO use $state
-	lastClickTime: number = 0;
+	isActive = $state(false);
+	lastClickTime = 0;
 	mouseContext = getMouseContext();
 	nodeRectsContext = getNodeRectsContext();
-	pointerId?: number;
 	selectedNodeIdsContext = getSelectedNodeIdsContext();
 	selectionBoxContext = getSelectionBoxContext();
 
@@ -25,20 +23,16 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	) {}
 
 	onpointerup = (e: PointerEvent) => {
+		console.log('onpointerup');
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
-
+		this.element.releasePointerCapture(e.pointerId);
+		this.isActive = false;
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
-
-		if (this.pointerId !== undefined) {
-			this.element.releasePointerCapture(this.pointerId);
-			this.pointerId = undefined;
-		}
-
-		this.isActive = false;
 	};
 
 	onpointermove = (e: PointerEvent) => {
+		console.log('onpointermove');
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
 		if (!this.selectionBoxContext.startPosition) return;
 
@@ -61,16 +55,18 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	};
 
 	handlePointerDown = (e: PointerEvent) => {
-		this.element.setPointerCapture(e.pointerId);
 		const mouseRelativePosition = getMouseRelativePosition(e, this.element);
+		this.element.setPointerCapture(e.pointerId);
+		e.stopPropagation();
 		this.isActive = true;
-		this.pointerId = e.pointerId;
 		this.selectedNodeIdsContext.selectedNodeIds = new SvelteSet();
 		this.selectionBoxContext.endPosition = mouseRelativePosition;
 		this.selectionBoxContext.startPosition = mouseRelativePosition;
 	};
 
 	onpointerdown = (e: PointerEvent) => {
+		console.log('onpointerdown');
+		e.stopImmediatePropagation();
 		if (this.element !== e.target) return;
 		if (this.pointerCondition && !this.pointerCondition(e)) return;
 
@@ -93,8 +89,5 @@ export class SelectionBoxPointerStrategy implements PointerStrategy {
 	cleanup? = () => {
 		this.selectionBoxContext.endPosition = undefined;
 		this.selectionBoxContext.startPosition = undefined;
-
-		if (this.pointerId === undefined) return;
-		this.element.releasePointerCapture(this.pointerId);
 	};
 }

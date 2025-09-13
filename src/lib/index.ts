@@ -61,7 +61,7 @@ import {
 	setSelectionBoxContext,
 	type SelectionBoxContext,
 } from './selection/selectionBoxContext.js';
-import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.js';
+import { SelectionBoxPointerStrategy } from './selection/SelectionBoxPointerStrategy.svelte.js';
 import { SelectOnClickPointerStrategy } from './selection/SelectOnClickPointerStrategy.js';
 import { Vector } from './space/Vector.js';
 import { getElementPosition } from './ui/getElementPosition.js';

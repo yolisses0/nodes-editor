@@ -56,6 +56,22 @@
 	onMount(() => {
 		isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 	});
+
+	function handleTouchStart(e: TouchEvent) {
+		if (selectionBoxPointerStrategy.isActive) {
+			e.preventDefault();
+		}
+	}
+
+	$effect(() => {
+		rootElementContext.rootElement?.addEventListener('touchstart', handleTouchStart, {
+			passive: false,
+		});
+
+		return () => {
+			rootElementContext.rootElement?.removeEventListener('touchstart', handleTouchStart);
+		};
+	});
 </script>
 
 <div class="outer-div">
@@ -65,7 +81,6 @@
 			class="inner-div"
 			style:min-height={minSize.y + 'px'}
 			style:min-width={minSize.x + 'px'}
-			style:touch-action={selectionBoxPointerStrategy.isActive ? 'none' : undefined}
 		>
 			{#each customNodes as node (node.id)}
 				<CustomNodeItem {node} />
